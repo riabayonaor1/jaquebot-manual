@@ -1,0 +1,30 @@
+{
+  "document": "EduSCARA_Ajedrez_R03",
+  "triangles": 83742,
+  "glbBytes": 3496764,
+  "skipped": [],
+  "units": "millimeters",
+  "up": "Y",
+  "conversion": "[CAD x,CAD z,-CAD y]",
+  "maxBboxDeviation_mm": 0.11727634817361832,
+  "method": "API oficial de Fusion: mallado de cuerpos visibles en contexto de ensamblaje, comparado con BRepBody.preciseBoundingBox. Colores y normales del CAD conservados.",
+  "tolerance_mm": 0.12,
+  "selectableMeshes": 205,
+  "cadBodies": 1278,
+  "source": "EduSCARA_Ajedrez_R03.f3d",
+  "sourceSHA256": "40a82eda47e5bbc77a28d054691ed3ab811e0ca1cc8cb60e0c735ae0ece0f0b0",
+  "originalRobotBodiesIdentifiedByConstructionOrderAndVolume": 111,
+  "bodyGrouping": "Los 1008 cuadros ArUco, 36 bases de etiquetas y 32 casillas oscuras se agrupan por conjunto; no se elimina geometría.",
+  "bounds": [
+    [
+      -181.6785888671875,
+      -50.0,
+      -75.32099151611328
+    ],
+    [
+      76.0,
+      375.0,
+      292.0
+    ]
+  ]
+}

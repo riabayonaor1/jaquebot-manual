@@ -1,0 +1,1218 @@
+{
+  "meta": {
+    "title": "JaqueBot · Manual interactivo",
+    "subtitle": "Conoce, construye y utiliza nuestro robot de ajedrez",
+    "language": "es-CO",
+    "version": "Manual R01 · documentación revisada el 12 de octubre de 2026",
+    "verifiedAt": "2026-10-12T18:34:58.459835-05:00",
+    "school": "Colegio Carlos Julio Torrado Peñaranda",
+    "class": "Proyecto Grado 11C · 2026",
+    "scope": "Manual educativo y de operación supervisada. Modelo CAD R03, aplicaciones vigentes y conexiones documentadas.",
+    "evidenceNote": "Se revisaron código, documentación y registros locales, y se consultó la Raspberry en modo de solo lectura. No se enviaron movimientos, no se conectó la sesión STM32 y no se modificó firmware."
+  },
+  "overview": {
+    "title": "Un robot que ve el tablero y mueve sus piezas",
+    "description": "JaqueBot une un brazo EduSCARA, un tablero con etiquetas ArUco, una cámara y dos aplicaciones. La Raspberry interpreta el tablero y coordina la secuencia; la NUCLEO controla el movimiento; un electroimán recoge cada pieza.",
+    "flow": [
+      "Cámara: captura el tablero",
+      "ArUco: identifica pieza y casilla",
+      "python-chess: valida reglas",
+      "Stockfish: elige la respuesta",
+      "Raspberry: coordina el traslado",
+      "STM32: controla motores e imán",
+      "Cámara: comprueba el resultado"
+    ],
+    "quickFacts": [
+      {
+        "label": "Eslabones",
+        "value": "125 + 100 mm"
+      },
+      {
+        "label": "Tablero",
+        "value": "108 × 108 mm"
+      },
+      {
+        "label": "Casillas",
+        "value": "64 · 13,5 mm"
+      },
+      {
+        "label": "Piezas identificadas",
+        "value": "32"
+      },
+      {
+        "label": "Apps",
+        "value": "Manual + Ajedrez"
+      },
+      {
+        "label": "Captura configurada",
+        "value": "4056 × 3040 · 5 fps"
+      }
+    ]
+  },
+  "currentStatus": {
+    "title": "Estado documentado del ejemplar",
+    "checkedAt": "2026-10-12T18:34:58.459835-05:00",
+    "summary": "Los dos servicios estaban activos. La cámara detectaba 32/32 piezas, con Stockfish 17.1 listo; ambas apps estaban desconectadas de la STM32 y el inicio físico seguía bloqueado.",
+    "facts": [
+      "La altura guardada en la Raspberry es 94,041° nominales / 1564 µs; el traslado usa 180°.",
+      "La cuadrícula aplicada usa a8, h8, a1 medidas y h1 calculada, sin comprobación física independiente.",
+      "Las capturas se entregan en base −90°, codo 90°; la jugada continúa y la retirada se confirma antes de otra captura.",
+      "El firmware almacenado en Raspberry mide 63.052 bytes y coincide con el manifiesto local vigente. Esta consulta no leyó nuevamente la flash."
+    ],
+    "pending": [
+      "Investigar la calibración motora incompleta y las lecturas no repetibles del codo documentadas el 12 de octubre.",
+      "Comprobar físicamente h1 y el centrado de las 64 casillas.",
+      "Validar tomas, depósitos y secuencias completas después de corregir o cambiar el montaje.",
+      "Fabricar y comprobar la PCB KiCad R03 si se decide sustituir la placa actual."
+    ]
+  },
+  "quickStart": [
+    {
+      "title": "Explora el robot",
+      "text": "Rota el modelo 3D y selecciona una pieza para conocer su función. El visor es educativo y no controla el brazo real.",
+      "body": "Rota el modelo 3D y selecciona una pieza para conocer su función. El visor es educativo y no controla el brazo real."
+    },
+    {
+      "title": "Identifica la app",
+      "text": "JaqueBot: control manual y diagnóstico. JaqueBot Ajedrez: cámara, preparación, partida y recuperación.",
+      "body": "JaqueBot: control manual y diagnóstico. JaqueBot Ajedrez: cámara, preparación, partida y recuperación."
+    },
+    {
+      "title": "Prepara con el docente",
+      "text": "Comprueba montaje, alimentación y sesión motora. Después confirma Z, estaciona y revisa la cámara.",
+      "body": "Comprueba montaje, alimentación y sesión motora. Después confirma Z, estaciona y revisa la cámara."
+    },
+    {
+      "title": "Juega y verifica",
+      "text": "Coloca 32/32 piezas. Mueve en tu turno y pulsa TERMINÉ MI JUGADA. Deja que la cámara confirme cada respuesta.",
+      "body": "Coloca 32/32 piezas. Mueve en tu turno y pulsa TERMINÉ MI JUGADA. Deja que la cámara confirme cada respuesta."
+    }
+  ],
+  "apps": [
+    {
+      "id": "manual",
+      "title": "JaqueBot",
+      "subtitle": "Control manual del brazo",
+      "port": 8766,
+      "localUrl": "http://127.0.0.1:8766",
+      "service": "jaquebot.service",
+      "purpose": "Mover por articulaciones o coordenadas, preparar motores, manejar Z y probar el electroimán.",
+      "sections": [
+        {
+          "title": "Conectar y preparar la sesión",
+          "body": "JaqueBot es el panel de movimiento manual. Se abre con el icono JaqueBot del escritorio de la Raspberry o en http://127.0.0.1:8766, desde esa misma Raspberry.",
+          "steps": [
+            "Desconecta la STM32 en JaqueBot Ajedrez si esa app tiene abierto el USB. Solo una app puede controlar la placa a la vez.",
+            "Conecta la NUCLEO a la Raspberry por el conector USB ST-LINK. Pulsa ↻ junto al puerto, elige el dispositivo encontrado y pulsa Conectar ↗.",
+            "Si la NUCLEO ya fue calibrada y sigue encendida, pulsa Usar calibración actual. Esa acción consulta la sesión motora; no realiza un barrido.",
+            "Si reiniciaste o apagaste la NUCLEO, pulsa Reinicié la placa. Revisa el recorrido libre y Z físicamente abajo a 90°. Con los 5 V de servos disponibles, confirma las dos casillas y pulsa Confirmado · iniciar calibración.",
+            "Espera a que termine y revisa el resultado. Si informa calibración incompleta, no puede habilitarse simplemente con Usar calibración actual. Hay que revisar la causa."
+          ],
+          "warnings": [
+            "La calibración recorre físicamente base y codo: despeja el espacio y mantén el corte de 5 V al alcance. La calibración no mueve Z ni mide su altura.",
+            "La calibración motora se pierde al reiniciar la NUCLEO. La calibración de los potenciómetros y la geometría del tablero son calibraciones diferentes."
+          ]
+        },
+        {
+          "title": "Mover base y codo",
+          "body": "El panel Base, codo y Z permite dar pasos o elegir un destino. Base admite −90° a 90° y codo 0° a 120°.",
+          "steps": [
+            "Elige Paso, en grados, y Velocidad, en grados por segundo. Empieza con un paso pequeño y velocidad baja.",
+            "Pulsa + o − en el eje elegido para enviar un paso. Para un destino concreto, escribe el ángulo y pulsa su botón ↗.",
+            "Las flechas ← → controlan base; ↓ ↑ controlan codo. Mantener una flecha pulsada no repite órdenes.",
+            "Observa las lecturas de Base y Codo; proceden de los potenciómetros. Para una lectura nueva, usa Actualizar ↻ en Posición actual."
+          ],
+          "warnings": [
+            "En esta app manual debes comprobar tú la separación vertical antes de mover horizontalmente. No presupongas la subida automática que ofrece el panel Mover robot de Ajedrez.",
+            "Una orden enviada a base o codo puede seguir hasta terminar aunque bloquees la interfaz."
+          ]
+        },
+        {
+          "title": "Elegir un punto en la vista superior",
+          "body": "La vista superior representa los dos eslabones. Arrastrar prepara un destino; el movimiento comienza al pulsar Mover.",
+          "steps": [
+            "Elige Punta para preparar X/Y en milímetros o Codo para preparar el giro de base.",
+            "Arrastra el punto correspondiente o escribe las coordenadas. Revisa la previsualización y la velocidad.",
+            "Pulsa Mover ↗ para ejecutar, o × para descartar el destino.",
+            "Comprueba la llegada en las lecturas. La trayectoria X/Y coordinada puede ser curva."
+          ],
+          "warnings": [
+            "El alcance geométrico máximo nominal es 225 mm; los límites articulares reducen los destinos permitidos. Un punto dibujado no acredita que el recorrido esté libre de cables u obstáculos."
+          ]
+        },
+        {
+          "title": "Subir y bajar Z",
+          "body": "Z es la elevación de la herramienta. Sus grados describen la orden electrónica del servo, no una altura medida.",
+          "steps": [
+            "Comprueba visualmente que Z está abajo a 90° y marca Z está abajo · servo a 90°. Confirmar registra la referencia sin moverlo.",
+            "Elige Paso Z y Velocidad Z: Suave, Intermedia o Máxima.",
+            "Pulsa Subir o Bajar. El intervalo de la app es 90°–180° nominales, correspondiente a 0°–90° de recorrido ordenado.",
+            "Detener Z o Escape interrumpen Z. Si moviste Z manualmente o perdiste su referencia, vuelve a confirmar únicamente cuando esté físicamente en la posición indicada."
+          ],
+          "warnings": [
+            "No existe un sensor de altura Z. La barra de progreso y el ángulo muestran una consigna; no demuestran contacto con una pieza ni posición real.",
+            "La referencia Z se pierde al desconectar."
+          ]
+        },
+        {
+          "title": "Probar el electroimán",
+          "body": "Con la NUCLEO conectada, la sección Electroimán permite Activar y Desactivar sin calibrar los motores.",
+          "steps": [
+            "Comprueba el montaje de la etapa MOSFET y la fuente independiente de 12 V. La señal USB por sí sola no alimenta la bobina.",
+            "Pulsa Activar para ordenar PB5 alto y Desactivar para ordenar PB5 bajo.",
+            "Comprueba físicamente que la pieza se sujeta y se libera. Si la placa se reinició, pulsa Actualizar ↻ para consultar otra vez.",
+            "Deja el electroimán desactivado al terminar la prueba."
+          ],
+          "warnings": [
+            "El indicador es la última lectura de PB5, no una medición de corriente, atracción ni liberación.",
+            "Un corte de USB no garantiza que se haya confirmado OFF."
+          ]
+        },
+        {
+          "title": "Bloquear y terminar",
+          "body": "Bloquear controles evita nuevas órdenes. No sustituye el corte físico de alimentación de servos.",
+          "steps": [
+            "Espera a que el movimiento termine y deja las piezas apoyadas.",
+            "Desactiva el electroimán y revisa el estado.",
+            "Pulsa Bloquear controles cuando debas impedir nuevos movimientos. Para detener físicamente base y codo, corta los 5 V de servos.",
+            "Usa Desconectar para liberar el USB antes de abrirlo desde JaqueBot Ajedrez."
+          ],
+          "warnings": [
+            "El firmware heredado puede estar ocupado mientras ejecuta XY; la petición de parada o imán OFF puede esperar al final de esa orden."
+          ]
+        },
+        {
+          "title": "Qué muestra cada dato",
+          "body": "Base y codo se calculan desde sus sensores. X/Y se calculan con esos ángulos y los eslabones de 125 y 100 mm. Z y PB5 tienen una interpretación diferente.",
+          "steps": [
+            "Base/Codo: lectura angular calculada desde los potenciómetros.",
+            "X/Y: posición calculada por cinemática; no medida por una cámara de seguimiento del imán.",
+            "Z: ángulo y pulso nominal de la orden, sin sensor de altura.",
+            "Electroimán: señal lógica leída; la sujeción se comprueba físicamente."
+          ],
+          "warnings": []
+        }
+      ],
+      "address": "http://127.0.0.1:8766"
+    },
+    {
+      "id": "chess",
+      "title": "JaqueBot Ajedrez",
+      "subtitle": "Visión, preparación y partida",
+      "port": 8770,
+      "localUrl": "http://127.0.0.1:8770",
+      "service": "jaquebot-chess.service",
+      "purpose": "Reconocer el tablero, validar jugadas, coordinar Stockfish y mover piezas con verificación por cámara.",
+      "sections": [
+        {
+          "title": "Abrir y reconocer la pantalla",
+          "body": "Abre JaqueBot Ajedrez en el escritorio de la Raspberry o http://127.0.0.1:8770 desde esa Raspberry. Al abrir, la app no conecta ni mueve automáticamente la STM32.",
+          "steps": [
+            "La pantalla principal reúne tablero digital, Cámara en vivo, Acomoda tus piezas, estado de preparación y actividad.",
+            "En la cámara puedes activar Etiquetas, Cuadrícula y Enfocar tablero. Las etiquetas muestran nombre, ID y casilla.",
+            "Ver guía de posición inicial muestra una ayuda de colocación. Las piezas con ? de esa guía no cuentan como detecciones.",
+            "Los accesos Mover robot, Diagnóstico y Calibración abren el Centro de control."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "Conectar la STM32 y cambiar de app",
+          "body": "Un único proceso debe poseer el USB.",
+          "steps": [
+            "Libera el USB con Desconectar en JaqueBot manual.",
+            "Abre Diagnóstico → STM32 / EduSCARA. Pulsa Detectar STM32, selecciona el puerto encontrado y pulsa Conectar.",
+            "Actualizar estado ↻ solicita lecturas nuevas cuando no hay partida u operación activa; no mueve el brazo ni cambia la señal del imán.",
+            "Para volver al control manual, usa Desconectar STM32. Se habilita cuando no hay una operación ni una partida activa; luego conecta desde JaqueBot manual."
+          ],
+          "warnings": [
+            "Detectar solo enumera dispositivos; encontrar una placa no significa que el puerto esté libre."
+          ]
+        },
+        {
+          "title": "Preparar robot antes de jugar",
+          "body": "Sigue la tarjeta Preparar robot; muestra el siguiente requisito pendiente.",
+          "steps": [
+            "Conecta STM32. Usa Usar calibración actual · sin mover solo si los motores ya se calibraron y la placa no se reinició.",
+            "Si hace falta calibrar, usa Calibrar motores como en la app manual. Confirma por separado recorrido despejado y Z físicamente abajo a 90°. El barrido necesita los 5 V de servos.",
+            "Al terminar, vuelve a comprobar Z y confirma su referencia física. En Mover robot puedes confirmar completamente abajo a 90° o completamente arriba a 180°.",
+            "Revisa en Diagnóstico la comprobación de agarre/liberación y las verificaciones del operador. Marca una comprobación únicamente después de realizarla.",
+            "Pulsa Estacionar robot. La posición configurada es base −90°, codo 90°, con Z arriba a 180° e imán apagado.",
+            "Comprueba que el tablero esté visible y confirma Robot estacionado y cámara despejada."
+          ],
+          "warnings": [
+            "Las lecturas angulares no comprueban por sí solas que la cámara esté despejada.",
+            "Si la calibración motora falla, revisa la causa con el docente. El diagnóstico del 12 de octubre mantiene una inspección mecánica/eléctrica pendiente."
+          ]
+        },
+        {
+          "title": "Mover robot y guardar la altura de toma",
+          "body": "Este panel permite ajustar base, codo y Z sin escribir coordenadas del tablero. Cada orden horizontal eleva primero Z a 180° y verifica la rampa antes de mover el eje elegido.",
+          "steps": [
+            "Elige un paso de base/codo o prepara un destino en grados. Editar el campo o el deslizador no mueve; pulsa Mover base → o Mover codo →.",
+            "Coloca el electroimán sobre una pieza. Usa pasos pequeños de Z y Velocidad de bajada: Lento 2°/s, Intermedio 10°/s o Rápido 20°/s nominales.",
+            "Pulsa Bajar Z o Subir Z para ajustar. Comprueba el contacto adecuado con el imán apagado y sin forzar la pieza.",
+            "Marca Comprobé que el electroimán queda sobre la pieza a esta altura y pulsa Guardar posición Z actual.",
+            "Bajar a la altura guardada prueba esa consigna. Subir completamente · 180° prepara el traslado.",
+            "Después de mover manualmente, estaciona otra vez y confirma la vista antes de jugar."
+          ],
+          "warnings": [
+            "La lectura real guardada en la Raspberry el 12 de octubre es 94,041° nominales y 1564 µs. Es una calibración de este ejemplar, no una altura universal. El README histórico menciona 106° y 98°; no copiar esos valores por rutina.",
+            "Cambiar la velocidad guarda la preferencia sin mover. La consigna máxima no es una velocidad física medida.",
+            "Detener operación cancela pasos siguientes y detiene Z; una orden XY ya enviada puede terminar."
+          ]
+        },
+        {
+          "title": "Enseñar las casillas al brazo",
+          "body": "La cámara identifica casillas; enseñar el tablero relaciona esas casillas con los ángulos del brazo. Son calibraciones distintas.",
+          "steps": [
+            "Abre Calibración → Enseña las cuatro esquinas. Mantén fijo tablero, robot y soporte de cámara.",
+            "Selecciona a8. Con Mover robot centra el electroimán sobre esa casilla; baja Z por pasos pequeños para comprobar el centrado real, con el imán apagado.",
+            "Vuelve a subir Z a 180°, marca la confirmación de centrado y pulsa Guardar esta posición · a8.",
+            "Repite para h8, a1 y h1. La aplicación toma las lecturas ADC y guarda un borrador.",
+            "Revisa los destinos de las 64 casillas aplicadas y los Centros del borrador; son vistas distintas. Usar ángulos en Mover robot solo prepara campos.",
+            "Con las cuatro comprobaciones físicas realizadas, confirma tablero fijo y centro verificado y pulsa Terminar calibración de casillas.",
+            "Para una comprobación supervisada, Verificar posiciones de calibración recorre a8 → h8 → a1 → h1 y baja Z con el imán apagado; requiere confirmar recorrido libre."
+          ],
+          "warnings": [
+            "La opción Guardar h1 calculada y aplicar cuadrícula usa una estimación obtenida desde a8, h8 y a1. No verifica físicamente h1.",
+            "En la configuración actualmente leída, h1 es calculada y no tiene comprobación independiente. Un error matemático de ajuste casi cero no demuestra precisión física.",
+            "Volver a medir las cuatro casillas descarta el borrador tras confirmación. Mover el tablero obliga a revisar la calibración."
+          ]
+        },
+        {
+          "title": "Preparar el tablero y empezar una partida",
+          "body": "Cada pieza lleva una identidad ArUco permanente. La aplicación exige 32/32 identidades correctas y diagnósticos listos.",
+          "steps": [
+            "Pulsa ACOMODAR TABLERO y coloca las piezas siguiendo la guía. El tablero usa fila 8 arriba y fila 1 abajo.",
+            "Comprueba que la cámara vea las cuatro referencias 100, 101, 102 y 103 y las etiquetas superiores de las 32 piezas.",
+            "Corrige las piezas indicadas: ✓ correcta, ✕ incorrecta, → destino y ? ausente.",
+            "Revisa Antes de iniciar. Con todos los requisitos cumplidos, se habilita INICIAR PARTIDA; la app vuelve a capturar antes de aceptar la posición."
+          ],
+          "warnings": [
+            "32/32 piezas no basta si faltan STM32, referencia Z, motores, calibración o estacionamiento.",
+            "Las etiquetas antiguas DICT_4X4_50 de los primeros planos no sirven para esta app. Usa el PDF actual de 40 etiquetas DICT_4X4_1000."
+          ]
+        },
+        {
+          "title": "Jugar tu turno y observar la respuesta",
+          "body": "La cámara comprueba tu jugada y Stockfish calcula la respuesta. La app no interpreta una pieza movida como turno completo hasta que lo confirmas.",
+          "steps": [
+            "Mueve una pieza en el tablero físico y aparta las manos.",
+            "Pulsa TERMINÉ MI JUGADA. La app busca varios fotogramas nuevos estables y una única jugada legal.",
+            "Si indica una jugada ilegal o una diferencia de piezas, restaura la posición que muestra y vuelve a verificar.",
+            "Una vez aceptada, Stockfish decide. El robot recoge con el electroimán, sube Z, traslada, baja, suelta, sube y se estaciona.",
+            "La cámara verifica la posición final antes de actualizar la partida lógica."
+          ],
+          "warnings": [
+            "No toques las piezas ni el brazo durante el turno del robot.",
+            "Ante un error no se repite automáticamente la transferencia: revisa primero la posición real."
+          ]
+        },
+        {
+          "title": "Capturas, enroque y promoción",
+          "body": "El robot puede retirar piezas capturadas y realizar los dos movimientos del enroque. La promoción necesita ayuda humana.",
+          "steps": [
+            "En una captura, el robot retira primero la pieza rival y la deposita fuera del tablero, en base −90° y codo 90°.",
+            "La versión actual continúa la jugada tras el depósito. Espera a que termine el movimiento, retira la pieza del punto de entrega y pulsa Retiré la pieza · liberar entrega antes de otra captura.",
+            "En captura al paso retira el peón de su casilla real. En enroque traslada rey y torre.",
+            "Cuando aparezca Elige la pieza de promoción, sigue la intervención manual indicada. Se conserva la identidad ArUco del peón y cambia su tipo lógico."
+          ],
+          "warnings": [
+            "La cámara no confirma por sí sola que retiraste la pieza del punto de entrega. Una entrega ocupada o desconocida bloquea otra captura.",
+            "No hay almacén automático de piezas de promoción."
+          ]
+        },
+        {
+          "title": "Recuperar un error sin duplicar movimientos",
+          "body": "Si la app se bloquea, conserva la posición lógica para poder comparar con el tablero.",
+          "steps": [
+            "Espera a que el brazo esté quieto. Identifica si sostiene una pieza y revisa el mensaje de error.",
+            "Leer y aceptar posición actual · sin mover consulta los motores, Z e imán después de tu inspección. No vuelve a ejecutar la orden que falló.",
+            "Si la transferencia quedó incompleta, sigue Recuperar sin repetir la transferencia: retira cualquier pieza sostenida y completa a mano la jugada indicada.",
+            "Conecta o prepara la sesión cuando se permita; confirma físicamente Z, despeja el recorrido y usa Estacionar para verificar.",
+            "Confirma cámara despejada y cualquier retirada pendiente, luego Verificar sin repetir el movimiento o Verificar piezas y continuar desde aquí según el caso."
+          ],
+          "warnings": [
+            "Aceptar una lectura no confirma automáticamente Z, la sujeción ni las piezas.",
+            "Usar calibración actual no recupera una calibración motora fallida. Si la STM32 se apagó, la recuperación de partida puede exigir Reiniciar partida y nueva calibración motora."
+          ]
+        },
+        {
+          "title": "Terminar, reiniciar y revisar la partida",
+          "body": "La finalización retira el robot para observar el tablero y guarda la partida y registros.",
+          "steps": [
+            "Puedes usar Rendirse o Reclamar tablas cuando corresponda. Al terminar se solicita imán OFF, Z arriba y estacionamiento antes de la vista final.",
+            "Para empezar de nuevo usa NUEVA PARTIDA o Reiniciar partida. Marca que volverás a colocar físicamente las 32 piezas y pulsa Reiniciar y acomodar tablero.",
+            "La app conserva calibraciones y altura Z guardada, pero descarta la partida actual. Las piezas físicas debes recolocarlas tú.",
+            "Los archivos de registro guardan FEN, PGN, eventos e imágenes inicial/final. El PGN permite estudiar las jugadas."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "Diagnóstico, visión y simulación",
+          "body": "Diagnóstico separa cámara, visión del tablero, Stockfish, STM32, Z, electroimán, calibración y capturas.",
+          "steps": [
+            "Si Cámara dice Captura en vivo pero hay piezas ausentes, revisa etiquetas, orientación, reflejos u oclusiones.",
+            "Cuatro referencias visibles permiten orientar el tablero. La homografía corrige la perspectiva; la lente y altura de etiquetas requieren su propia revisión para compensar distorsión y paralaje.",
+            "La AI Camera entrega imágenes RGB; OpenCV lee ArUco en la Raspberry. No se está usando una red neuronal del IMX500 para reconocer las piezas.",
+            "El modo Simulación está rotulado y trabaja con robot y tablero virtuales. Sirve para practicar el flujo sin USB ni GPIO; no calibra el montaje real."
+          ],
+          "warnings": []
+        }
+      ],
+      "address": "http://127.0.0.1:8770"
+    }
+  ],
+  "components": [
+    {
+      "id": "base",
+      "title": "Base y plataforma",
+      "summary": "El apoyo fijo del robot.",
+      "function": "Sostiene el conjunto y define el origen desde el que se calculan los movimientos.",
+      "use": "Colócala en una mesa estable y comprueba sus fijaciones antes de trabajar.",
+      "caution": "Si cambia la posición de la base respecto al tablero, hay que revisar las casillas enseñadas.",
+      "details": [
+        "Familia CAD BA_0…BA_6.",
+        "La articulación de base es Axis 0.",
+        "El giro usado en las apps es −90° a 90°."
+      ]
+    },
+    {
+      "id": "shoulder",
+      "title": "Brazo · primer eslabón",
+      "summary": "La primera parte del brazo móvil.",
+      "function": "Lleva el codo alrededor de la base y proporciona el primer tramo de alcance.",
+      "use": "Se controla con Base / brazo. El eslabón tiene longitud nominal de 125 mm entre ejes.",
+      "caution": "Mantén dedos y cables fuera de las uniones móviles.",
+      "details": [
+        "Familia CAD L1_0…L1_2.",
+        "Servo base B53DHS en el diseño original.",
+        "La posición se comprueba con el potenciómetro de base."
+      ]
+    },
+    {
+      "id": "elbow",
+      "title": "Codo · segundo eslabón",
+      "summary": "La articulación que pliega y extiende el brazo.",
+      "function": "Junto con la base lleva la herramienta sobre la casilla elegida.",
+      "use": "Se controla con Codo; los destinos permitidos son 0°–120°.",
+      "caution": "Una lectura angular no repetible requiere inspección de sensor, contacto, cableado y mecanismo.",
+      "details": [
+        "Axis 1. Longitud nominal del segundo eslabón: 100 mm.",
+        "Familia CAD L2_0…L2_4.",
+        "Servo codo B53DHS en el original; realimentación por PC1."
+      ]
+    },
+    {
+      "id": "z-axis",
+      "title": "Elevación Z y cremallera",
+      "summary": "La herramienta sube y baja.",
+      "function": "Separa la pieza del tablero durante el traslado y baja para tomarla o depositarla.",
+      "use": "Antes del traslado, JaqueBot Ajedrez ordena 180° nominales. La toma usa la altura guardada del ejemplar.",
+      "caution": "No hay sensor de altura. Confirmar una posición exige observar la posición mecánica real.",
+      "details": [
+        "Axis 3, señal PB1 / CN10-24.",
+        "Familia CAD ZP_0…ZP_4; servo B11DLS en el original.",
+        "Intervalo de uso 90°–180°. Toma guardada consultada: 94,041° / 1564 µs."
+      ]
+    },
+    {
+      "id": "wrist",
+      "title": "Giro de herramienta",
+      "summary": "El mecanismo de giro alrededor del eje vertical.",
+      "function": "Forma parte de los cuatro ejes del EduSCARA original.",
+      "use": "En JaqueBot Ajedrez no se envían órdenes de muñeca; la herramienta magnética trabaja coaxialmente con Z.",
+      "caution": "No intercambies Axis 2 con Axis 3: giro y altura usan señales diferentes.",
+      "details": [
+        "Axis 2, señal PC8 / CN10-2.",
+        "Familia CAD ZR_0…ZR_2.",
+        "Servo B11DLS y transmisión por engranajes del diseño original."
+      ]
+    },
+    {
+      "id": "magnet",
+      "title": "Electroimán y adaptador",
+      "summary": "La herramienta que sujeta cada pieza.",
+      "function": "Atrae el inserto de acero en la parte superior de la pieza cuando recibe alimentación.",
+      "use": "Se enciende después de llegar y bajar sobre el origen; se apaga al depositar. En manual se prueba con Activar/Desactivar.",
+      "caution": "La lectura PB5 confirma señal, no fuerza de sujeción. La bobina necesita su fuente de 12 V.",
+      "details": [
+        "Adaptador impreso alineado con Z.",
+        "Fijación trasera M3 del imán y unión al carro según plano R03.",
+        "Etapa MOSFET para separar señal de control y alimentación de bobina."
+      ]
+    },
+    {
+      "id": "board",
+      "title": "Tablero modular",
+      "summary": "La superficie con 64 casillas.",
+      "function": "Organiza la partida en coordenadas a1…h8 y se fija respecto al robot.",
+      "use": "Mantén tablero y base inmóviles después de enseñar las cuatro esquinas.",
+      "caution": "Mover el tablero invalida la relación entre casillas y ángulos del brazo.",
+      "details": [
+        "Campo nominal 108 × 108 mm; casilla 13,5 mm.",
+        "R03: cuatro módulos y orejas externas de fijación.",
+        "Fila 8 arriba; a8 arriba izquierda y h1 abajo derecha."
+      ]
+    },
+    {
+      "id": "pieces",
+      "title": "Piezas con inserto metálico",
+      "summary": "32 cuerpos impresos, cada uno con una identidad.",
+      "function": "El inserto de acero permite sujetarlas con el imán; la etiqueta superior permite reconocerlas.",
+      "use": "Usa la identidad de cada pieza y su casilla inicial, no solo su color.",
+      "caution": "No uses aluminio ni acero inoxidable no atraíble para el inserto. El espesor real y la adhesión deben comprobarse.",
+      "details": [
+        "Cuerpo nominal Ø12 mm y etiqueta circular Ø11 mm.",
+        "Plano de etiquetas de piezas a 22 mm sobre las referencias según configuración actual.",
+        "IDs 201–216 negras; IDs 301–316 blancas."
+      ]
+    },
+    {
+      "id": "markers",
+      "title": "Marcadores ArUco",
+      "summary": "Pequeños códigos de alto contraste.",
+      "function": "Identifican las piezas y las cuatro referencias fijas del tablero.",
+      "use": "Imprime el PDF actual al 100%, mide la regla y evita reflejos o etiquetas tapadas.",
+      "caution": "El QR del manual y los ArUco del robot cumplen funciones diferentes. No estilices ni redibujes los patrones de identificación.",
+      "details": [
+        "Diccionario actual DICT_4X4_1000.",
+        "100 superior izquierda; 101 superior derecha; 102 inferior derecha; 103 inferior izquierda.",
+        "104–107 reservados. Las antiguas etiquetas 0–35 no corresponden a la app vigente."
+      ]
+    },
+    {
+      "id": "mast",
+      "title": "Mástil y soporte superior",
+      "summary": "La estructura elevada sobre el tablero.",
+      "function": "Mantiene la cámara y el soporte de Raspberry en una posición estable.",
+      "use": "Monta siguiendo las láminas R03, nivela la cámara y deja los cables fuera del movimiento.",
+      "caution": "No hay que confundir holgura calculada en CAD con separación física comprobada.",
+      "details": [
+        "Dos tramos impresos nominales de 200 mm y manguito.",
+        "Cámara a 360 mm nominales sobre tablero en R03.",
+        "Unión pie-tablero con dos M4 × 12; no mezclar interfaces R02."
+      ]
+    },
+    {
+      "id": "camera",
+      "title": "Raspberry Pi AI Camera",
+      "summary": "Los ojos del sistema.",
+      "function": "Captura la imagen del tablero; OpenCV reconoce ArUco y asigna casillas.",
+      "use": "Comprueba imagen en vivo, enfoque, iluminación y cuatro referencias visibles.",
+      "caution": "Mover cámara, cambiar enfoque o resolución exige revisar calibración. Una imagen antigua no valida una jugada.",
+      "details": [
+        "Sensor IMX500.",
+        "Captura configurada 4056 × 3040, 5 fps.",
+        "ArUco se procesa en Raspberry; no requiere una API de inteligencia artificial en la nube."
+      ]
+    },
+    {
+      "id": "raspberry",
+      "title": "Raspberry Pi 5",
+      "summary": "El computador del proyecto.",
+      "function": "Ejecuta las dos apps, procesa cámara y reglas de ajedrez, consulta Stockfish y coordina el robot por USB.",
+      "use": "Abre JaqueBot para movimientos manuales o JaqueBot Ajedrez para jugar.",
+      "caution": "Solo una aplicación debe tener abierto el USB de la NUCLEO.",
+      "details": [
+        "JaqueBot: 8766. JaqueBot Ajedrez: 8770.",
+        "Servicios de usuario separados que arrancan al encender.",
+        "La Raspberry no genera directamente las señales de los servos."
+      ]
+    },
+    {
+      "id": "stm32",
+      "title": "NUCLEO-F446RE",
+      "summary": "La placa que controla el movimiento.",
+      "function": "Recibe órdenes USB y genera las señales de los cuatro servos; lee los potenciómetros y controla PB5.",
+      "use": "Conecta mediante USB ST-LINK. El puerto Linux habitual es ttyACM0, pero puede cambiar.",
+      "caution": "Reiniciar esta placa borra la calibración motora en RAM y obliga a preparar de nuevo la sesión.",
+      "details": [
+        "Microcontrolador STM32F446RE.",
+        "Enlace 115200 baudios y protocolo de 48 bytes.",
+        "Firmware verificado en registros; no se regrabó durante la creación de este manual."
+      ]
+    },
+    {
+      "id": "power",
+      "title": "Fuentes y etapa de potencia",
+      "summary": "La energía y los caminos de corriente.",
+      "function": "USB alimenta lógica; una fuente de 5 V alimenta servos y otra de 12 V la bobina.",
+      "use": "Revisa polaridades con equipo apagado y comparte la referencia de tierra según el esquema del montaje.",
+      "caution": "Nunca conectes 12 V a una señal de la NUCLEO ni unas los positivos de 5 V de servos y USB.",
+      "details": [
+        "Control de bobina mediante MOSFET.",
+        "PB5 lleva una señal de control, no la corriente de la bobina.",
+        "Corte físico de 5 V accesible para detener base/codo."
+      ]
+    },
+    {
+      "id": "pcb",
+      "title": "Placa de conexiones y PCB futura",
+      "summary": "El punto de unión entre control, sensores y potencia.",
+      "function": "Organiza las señales y alimentaciones. Existe además una PCB JaqueBot R03 diseñada en KiCad para integrar conexiones y potencia.",
+      "use": "Identifica si tienes la placa actual o el prototipo R03 antes de usar la tabla de bornes.",
+      "caution": "B8 cambia de función entre versiones: en la placa actual es control del MOSFET; en PCB R03 es entrada de 12 V.",
+      "details": [
+        "PCB R03 de 72 × 68 mm, dos capas.",
+        "Los archivos R03 pasaron DRC/ERC, pero no acreditan fabricación ni pruebas físicas.",
+        "El prototipo PCB se documenta como diseño pendiente de validación, no como placa instalada."
+      ]
+    }
+  ],
+  "wiring": {
+    "intro": "Identifica primero qué placa tienes. Los pines de la NUCLEO se documentan con componentes hacia ti, USB arriba, CN7 a la izquierda y CN10 a la derecha. Cablea con la alimentación desconectada.",
+    "power": [
+      {
+        "label": "USB",
+        "description": "Raspberry → ST-LINK de NUCLEO. Comunicación y alimentación lógica."
+      },
+      {
+        "label": "5 V externos",
+        "description": "Alimentan los servos. No unir su positivo al 5 V USB de NUCLEO."
+      },
+      {
+        "label": "12 V externos",
+        "description": "Alimentan el electroimán a través de su etapa MOSFET."
+      },
+      {
+        "label": "Tierras",
+        "description": "Las referencias GND se unen según el esquema. Las señales no transportan la corriente de bobina."
+      }
+    ],
+    "current": {
+      "title": "Montaje actual · señales hacia la NUCLEO",
+      "headers": [
+        "Elemento",
+        "Conexión",
+        "Señal",
+        "Pin físico",
+        "Nota"
+      ],
+      "rows": [
+        [
+          "Servo de base · Axis 0",
+          "B2 señal",
+          "PC7 / D9",
+          "CN10-19",
+          "Alimentación externa de 5 V; señal desde STM32."
+        ],
+        [
+          "Servo de codo · Axis 1",
+          "B3 señal",
+          "PA6 / D12",
+          "CN10-13",
+          "Alimentación externa de 5 V."
+        ],
+        [
+          "Servo de giro · Axis 2",
+          "B4 señal",
+          "PC8",
+          "CN10-2",
+          "No confundir con altura Z."
+        ],
+        [
+          "Servo de elevación · Axis 3",
+          "B5 señal",
+          "PB1",
+          "CN10-24",
+          "Controlador Z integrado."
+        ],
+        [
+          "Potenciómetro del codo",
+          "B6 cursor",
+          "PC1 / A4",
+          "CN7-36",
+          "Señal analógica, no alimentación."
+        ],
+        [
+          "Potenciómetro de base",
+          "B7 cursor",
+          "PC0 / A5",
+          "CN7-38",
+          "Señal analógica, no alimentación."
+        ],
+        [
+          "Alimentación potenciómetros",
+          "V de B6/B7",
+          "AREF / AVDD",
+          "CN10-7",
+          "Referencia aproximada 3,3 V; no salida de potencia."
+        ],
+        [
+          "Tierra potenciómetros",
+          "GND B6/B7",
+          "AGND",
+          "CN10-32",
+          "Referencia analógica."
+        ],
+        [
+          "Control MOSFET externo",
+          "SIG de B8",
+          "PB5 / D4",
+          "CN10-29",
+          "Entrada IN/PWM del módulo; no conectar 12 V aquí."
+        ],
+        [
+          "Tierra MOSFET externo",
+          "GND de B8",
+          "GND",
+          "CN10-9",
+          "Referencia de 0 V del control."
+        ]
+      ],
+      "notes": [
+        "Tabla trazada al mapa de pines del proyecto y firmware. Comprueba la orientación real de cada borne antes de conectar.",
+        "B8 del montaje actual lleva SIG/GND al módulo MOSFET externo; no es entrada de 12 V.",
+        "En el módulo externo conserva la protección de bobina y el cableado documentado. No supongas la posición física de bornes por el color del cable."
+      ]
+    },
+    "future": {
+      "title": "PCB JaqueBot R03 · prototipo propuesto, no instalado",
+      "headers": [
+        "Borne",
+        "Uso",
+        "Pin 1",
+        "Pin 2",
+        "Pin 3"
+      ],
+      "rows": [
+        [
+          "B1",
+          "Fuente servos",
+          "1: +5 V",
+          "2: GND",
+          "—"
+        ],
+        [
+          "B2",
+          "Base",
+          "1: GND",
+          "2: +5 V servo",
+          "3: PC7"
+        ],
+        [
+          "B3",
+          "Codo",
+          "1: GND",
+          "2: +5 V servo",
+          "3: PA6"
+        ],
+        [
+          "B4",
+          "Muñeca",
+          "1: GND",
+          "2: +5 V servo",
+          "3: PC8"
+        ],
+        [
+          "B5",
+          "Elevación Z",
+          "1: GND",
+          "2: +5 V servo",
+          "3: PB1"
+        ],
+        [
+          "B6",
+          "Potenciómetro codo",
+          "1: GND",
+          "2: PC1 cursor",
+          "3: AVDD"
+        ],
+        [
+          "B7",
+          "Potenciómetro base",
+          "1: GND",
+          "2: PC0 cursor",
+          "3: AVDD"
+        ],
+        [
+          "B8",
+          "Entrada 12 V imán",
+          "1: +12 V",
+          "2: GND",
+          "—"
+        ],
+        [
+          "B9",
+          "Bobina imán",
+          "1: +12 V protegido",
+          "2: MAG_SW",
+          "—"
+        ]
+      ],
+      "notes": [
+        "Esta tabla pertenece exclusivamente a la PCB R03 de KiCad. Cambia la función de B8 respecto a la placa anterior.",
+        "B9-2 es el negativo conmutado MAG_SW; no conectarlo permanentemente a GND.",
+        "CN6-5(5Vde NUCLEO) debe omitirse físicamente en el ensamblaje R03; el pad está aislado.",
+        "Diodo D1: cátodo/banda a +12V_MAG y ánodo a MAG_SW.",
+        "La PCB pasó DRC/ERC digitales; faltan encaje físico, continuidad, temperatura y prueba de primera unidad."
+      ]
+    },
+    "assets": [
+      {
+        "title": "Mapa de pines de la NUCLEO",
+        "path": "output/conexiones/NUCLEO_F446RE_pines_EduSCARA.png"
+      },
+      {
+        "title": "Etapa MOSFET externa y electroimán",
+        "path": "output/conexiones/electroiman_d4184_conexiones_v2.png"
+      },
+      {
+        "title": "PB5 para el electroimán",
+        "path": "output/conexiones/NUCLEO_F446RE_electroiman_PB5_marcado.png"
+      }
+    ]
+  },
+  "buildStory": [
+    {
+      "title": "01 · Partir de una plataforma abierta",
+      "body": "El proyecto usa EduSCARA como base mecánica y electrónica. Se recuperaron los archivos originales publicados, se conservaron sus nombres y se comprobaron sus huellas SHA-256. La adaptación a ajedrez y las aplicaciones son desarrollos del proyecto escolar.",
+      "steps": [
+        "Referencia original: Clark, Martinez-Hernandez y Assaf, HardwareX.",
+        "Datos originales: Mendeley Data v3, DOI 10.17632/m46jnn2cmb.3, licencia CC BY 4.0 documentada en el proyecto."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "02 · Diseñar los accesorios en 3D",
+      "body": "En Autodesk Fusion se construyó el conjunto AJEDREZ_R03 a partir del robot. Se añadieron tablero modular, piezas, soporte de cámara, mástil, soporte de Raspberry y adaptador del imán.",
+      "steps": [
+        "El F3D conserva sólidos editables, uniones y relaciones de movimiento.",
+        "La entrega R03 contiene 52 STL cerrados, vistas de ensamblaje y 17 láminas de planos.",
+        "Se comprobaron digitalmente las 64 casillas y transferencias muestreadas; esa comprobación no reemplaza ensayos físicos."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "03 · Imprimir, ensamblar y alinear",
+      "body": "Las piezas se prepararon individualmente para la Creality Hi Combo. La geometría define qué imprimir; los tornillos, tuercas, arandelas, servos y electrónica se compran.",
+      "steps": [
+        "Monta base y eslabones según los planos originales.",
+        "Fija tablero y mástil con las interfaces R03; no mezcles el pie y módulos modificados de R02.",
+        "Alinea el electroimán con el eje Z y comprueba salida de cables.",
+        "Nivela la cámara y verifica que las cuatro referencias del tablero queden visibles."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "04 · Conectar sensores y actuadores",
+      "body": "La NUCLEO lee los potenciómetros de base/codo y produce las señales para los cuatro servos. El electroimán necesita una etapa MOSFET y fuente de 12 V.",
+      "steps": [
+        "Lógica por USB, servos con 5 V, bobina con 12 V.",
+        "Las tablas de este manual distinguen la placa actual de la PCB KiCad R03 propuesta.",
+        "Se documentaron pinouts, protecciones y verificación digital del diseño de PCB."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "05 · Aprender dónde está el brazo",
+      "body": "Se midieron referencias de potenciómetros y se desarrolló la preparación motora. La posición de base/codo se comprueba con ADC; la elevación Z conserva una referencia visual del operador.",
+      "steps": [
+        "La calibración ADC convierte lectura eléctrica en ángulo.",
+        "La calibración motora encuentra el mapa de señales y permanece en RAM.",
+        "La calibración tablero→robot convierte casillas en destinos; guardar Z fija la consigna común de toma.",
+        "Son cuatro tareas distintas: una no sustituye a las otras."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "06 · Construir las dos aplicaciones",
+      "body": "Con Python y una interfaz web en español se creó JaqueBot para controlar y diagnosticar el brazo. Sobre el mismo controlador se construyó JaqueBot Ajedrez con estados de juego, visión y comprobaciones.",
+      "steps": [
+        "HTML/CSS/JavaScript forman las pantallas táctiles.",
+        "OpenCV y ArUco identifican piezas; python-chess verifica reglas; Stockfish calcula respuestas.",
+        "La Raspberry coordina; la STM32 ejecuta el control de motores.",
+        "El arranque de una app no mueve automáticamente el robot."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "07 · Trabajar con ChatGPT Codex",
+      "body": "ChatGPT Codex ayudó a explorar código y documentación, escribir y revisar Python, C y JavaScript, generar recursos CAD mediante scripts, producir planos y etiquetas, crear pruebas y registrar cambios. El docente y estudiantes aportaron objetivos, decisiones, mediciones y comprobaciones del equipo real.",
+      "steps": [
+        "Se conservaron respaldos y registros para distinguir versiones.",
+        "Las pruebas de software cubrieron visión, reglas, movimientos, errores y recuperación.",
+        "Las lecturas y simulaciones no sustituyen medir, inspeccionar o probar físicamente.",
+        "Codex se usó como asistente de diseño y programación; las jugadas de ajedrez las calcula Stockfish."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "08 · Probar, registrar y mejorar",
+      "body": "El desarrollo pasó por ajustes de Z, incorporación del imán, instalación en Raspberry, visión, calibración de casillas, capturas y recuperación de errores. El proyecto sigue necesitando verificación física tras cambios.",
+      "steps": [
+        "El 9 de octubre se incorporó el control de electroimán por STM32.",
+        "Entre el 10 y el 11 de octubre se ajustaron altura de toma, estacionamiento, capturas y centros calculados.",
+        "El 12 de octubre se añadió la liberación USB desde Ajedrez y se investigó una calibración motora incompleta.",
+        "Este manual documenta lo construido y también lo pendiente; no certifica una partida física completa sin fallos."
+      ],
+      "warnings": []
+    }
+  ],
+  "assembly": {
+    "title": "Construir y montar el conjunto R03",
+    "body": "Consulta el F3D y los planos con cotas para fabricar. Las ilustraciones artísticas explican el conjunto; no sustituyen las medidas ni los patrones ArUco.",
+    "steps": [
+      "Imprime cada archivo de STL_Impresion de forma individual; no escales el conjunto.",
+      "Monta el robot original conservando los designadores BA, L1, L2, ZR, ZP y SH.",
+      "Fija el tablero R03 sobre una superficie plana y une su pie mediante dos M4 × 12.",
+      "Inserta el tramo inferior del mástil, manguito y tramo superior; monta escuadras y travesaño.",
+      "Monta cámara y presillas, fija su placa y el bastidor desde arriba; verifica cables y nivelación.",
+      "Fija el imán al adaptador y el adaptador a ZP_0; revisa tornillería y alivio del cable.",
+      "Inserta y retén los discos de acero; pega las etiquetas actuales después de comprobar su escala.",
+      "Realiza las comprobaciones físicas y calibraciones antes de permitir partidas."
+    ],
+    "fasteners": [
+      {
+        "item": "M4 × 50",
+        "quantity": 8
+      },
+      {
+        "item": "M4 × 35",
+        "quantity": 2
+      },
+      {
+        "item": "M4 × 40",
+        "quantity": 2
+      },
+      {
+        "item": "M2 × 5",
+        "quantity": 2
+      },
+      {
+        "item": "M4 × 12",
+        "quantity": 2
+      },
+      {
+        "item": "Tuercas hexagonales M4",
+        "quantity": 14
+      },
+      {
+        "item": "Arandelas M4 DIN 433 · Ø8 × 0,5",
+        "quantity": 26
+      }
+    ],
+    "notes": [
+      "Cantidades para el soporte R03 documentado; no incluyen toda la tornillería del robot original.",
+      "La fijación de la carcasa real usa otros dos M3 de longitud por verificar; su envolvente inicial era provisional.",
+      "El perfil PETG propuesto: capa 0,20 mm, 6 paredes, 6 capas superior/inferior, 40% de relleno; no es un perfil ensayado ni una garantía de resistencia.",
+      "El ancho nominal de cama de la Hi Combo es 260 × 260 × 300 mm; comprueba el perfil real de la impresora y el laminado."
+    ]
+  },
+  "markerGuide": {
+    "dictionary": "DICT_4X4_1000",
+    "orientation": [
+      {
+        "id": 100,
+        "position": "Superior izquierda · a8"
+      },
+      {
+        "id": 101,
+        "position": "Superior derecha · h8"
+      },
+      {
+        "id": 102,
+        "position": "Inferior derecha · h1"
+      },
+      {
+        "id": 103,
+        "position": "Inferior izquierda · a1"
+      }
+    ],
+    "ranges": [
+      {
+        "range": "201–216",
+        "meaning": "16 piezas negras"
+      },
+      {
+        "range": "301–316",
+        "meaning": "16 piezas blancas"
+      },
+      {
+        "range": "104–107",
+        "meaning": "Reservados"
+      }
+    ],
+    "printSteps": [
+      "Usa la lámina actual de 40 etiquetas.",
+      "Imprime a 100% sin Ajustar a página.",
+      "Mide la regla de 50 mm antes de cortar.",
+      "Conserva intacto el patrón negro/blanco; evita reflejos y burbujas."
+    ],
+    "pieceLabel": "Círculo Ø11 mm; código negro 5,4 mm.",
+    "boardLabel": "Etiqueta 16 × 16 mm; código negro 12 mm."
+  },
+  "care": [
+    "Antes de cada sesión revisa tornillos, cables, etiquetas, tablero firme y campo de cámara.",
+    "No gires ni fuerces articulaciones alimentadas. Para inspecciones mecánicas, retira energía según el procedimiento del docente.",
+    "Mantén piezas y superficie limpias; evita líquidos sobre electrónica y etiquetas.",
+    "Revisa agarre y liberación con una pieza antes de una demostración después de cualquier cambio.",
+    "Conserva respaldos antes de cambiar código, firmware o calibraciones. Registra qué se cambió y qué se probó.",
+    "Al terminar, apoya cualquier pieza, apaga el imán, espera fin de movimiento y desconecta ordenadamente."
+  ],
+  "safety": [
+    "Trabaja con supervisión del docente y mantén manos, cabello y cables fuera del recorrido.",
+    "El corte físico de 5 V de los servos debe estar al alcance. Bloquear o Detener en pantalla no garantiza detener al instante un XY ya enviado.",
+    "No confirmes referencias Z, espacio libre o retirada de capturas sin comprobarlo físicamente.",
+    "No uses los demos históricos como prueba de conexión; pueden mover el brazo.",
+    "La calibración motora desplaza base/codo y exige recorrido despejado y Z abajo a 90° según el diálogo actual.",
+    "Los voltajes de señales, servos y bobina son diferentes. Consulta la tabla de la placa que realmente está instalada."
+  ],
+  "troubleshooting": [
+    {
+      "problem": "La app no encuentra la STM32",
+      "cause": "USB no conectado, puerto cambiado o detección pendiente.",
+      "solution": "Revisa el USB ST-LINK, pulsa Detectar STM32/↻ y vuelve a elegir el puerto. No lances demos históricos: algunos mueven motores."
+    },
+    {
+      "problem": "La placa aparece, pero no conecta",
+      "cause": "La otra app puede poseer el USB.",
+      "solution": "Desconecta desde la app que lo tiene abierto. En Ajedrez: Diagnóstico → Desconectar STM32. Después conecta en la app elegida."
+    },
+    {
+      "problem": "Los motores no se mueven aunque hay USB",
+      "cause": "USB alimenta lógica; los servos necesitan su fuente de 5 V y sesión motora preparada.",
+      "solution": "Revisa 5 V y diagnóstico. Si reiniciaste la NUCLEO, completa la calibración motora supervisada."
+    },
+    {
+      "problem": "Calibración motora incompleta",
+      "cause": "El eje no alcanzó o no estabilizó una referencia; el sistema deshabilita base y codo.",
+      "solution": "No eludas el bloqueo. Inspecciona alimentación, cableado, sensor y mecanismo con el docente. Los registros del 12 de octubre muestran lecturas de codo no repetibles y revisión física pendiente."
+    },
+    {
+      "problem": "Z muestra grados pero la altura no coincide",
+      "cause": "Los grados son consigna nominal; no existe sensor de altura.",
+      "solution": "Comprueba la posición física, recupera la referencia correcta y calibra la altura de toma en este montaje."
+    },
+    {
+      "problem": "El imán figura activo, pero no recoge",
+      "cause": "PB5 solo confirma señal; puede faltar 12 V, contacto, inserto atraíble o agarre.",
+      "solution": "Con robot quieto, revisa alimentación de bobina y prueba de agarre/liberación. No ajustes la fuerza suponiendo que la lectura lógica mide atracción."
+    },
+    {
+      "problem": "No se habilita INICIAR PARTIDA con 32/32",
+      "cause": "Falta algún requisito de robot, calibración, referencia Z, estacionamiento o cámara.",
+      "solution": "Lee Antes de iniciar y Diagnóstico. 32/32 solo valida identidades; completa cada requisito real."
+    },
+    {
+      "problem": "Una pieza no se reconoce o está en casilla errónea",
+      "cause": "Etiqueta oculta, familia equivocada, reflejo, referencia ausente o geometría pendiente.",
+      "solution": "Revisa los 40 marcadores actuales, las cuatro esquinas, luz difusa y cámara. Usa Etiquetas/Cuadrícula para ver la detección; no confundas guía con visión."
+    },
+    {
+      "problem": "La punta no coincide con las casillas",
+      "cause": "Cambió el montaje o la transformación aplicada no coincide con el borrador o las medidas.",
+      "solution": "Comprueba centrado al bajar Z y compara calibración aplicada/borrador. Repite las cuatro esquinas si moviste el tablero. h1 calculada requiere comprobación física."
+    },
+    {
+      "problem": "La siguiente captura está bloqueada",
+      "cause": "El punto de entrega sigue ocupado o pendiente de inspección.",
+      "solution": "Espera al final del movimiento, retira la pieza y pulsa Retiré la pieza · liberar entrega. No confirmes si sigue allí."
+    },
+    {
+      "problem": "Se interrumpió una transferencia",
+      "cause": "Fallo de lectura, comunicación, trayectoria o estado.",
+      "solution": "Inspecciona dónde quedó la pieza y usa Recuperar sin repetir la transferencia. Completa manualmente lo indicado y verifica por cámara; no reenvíes la misma jugada a ciegas."
+    },
+    {
+      "problem": "La cámara deja de actualizar",
+      "cause": "El proceso de captura puede estar pendiente o reiniciándose.",
+      "solution": "Espera una imagen nueva y revisa Diagnóstico. Una foto antigua no valida jugadas. Revisa la conexión de cámara con la alimentación apagada si fuera necesario."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "SCARA",
+      "definition": "Un brazo con dos articulaciones para moverse sobre un plano y un eje vertical para subir/bajar."
+    },
+    {
+      "term": "ADC",
+      "definition": "Lectura digital de una tensión. Aquí ayuda a calcular el ángulo de base y codo."
+    },
+    {
+      "term": "PWM / pulso",
+      "definition": "Señal de control que recibe el servo. La señal no mide por sí sola la posición real."
+    },
+    {
+      "term": "ArUco",
+      "definition": "Patrón cuadrado que la cámara puede identificar; cada pieza tiene un ID permanente."
+    },
+    {
+      "term": "QR del manual",
+      "definition": "Código que abre el sitio de documentación 3D; no identifica piezas para el robot."
+    },
+    {
+      "term": "Calibrar",
+      "definition": "Relacionar una lectura o modelo con referencias del montaje real."
+    },
+    {
+      "term": "Estacionar",
+      "definition": "Retirar el brazo a base −90° y codo 90°, con Z arriba, para despejar el tablero."
+    },
+    {
+      "term": "Stockfish",
+      "definition": "Motor de ajedrez que calcula la respuesta del robot."
+    },
+    {
+      "term": "FEN / PGN",
+      "definition": "Formatos que guardan una posición y una partida de ajedrez, respectivamente."
+    },
+    {
+      "term": "RAM",
+      "definition": "Memoria temporal que se borra al apagar o reiniciar la placa."
+    }
+  ],
+  "limitations": [
+    "Las imágenes artísticas no son planos metrológicos; las dimensiones de fabricación están en los archivos CAD y láminas originales.",
+    "El modelo 3D representa R03. El montaje físico y sus ajustes pueden haber evolucionado; comprueba la versión antes de fabricar.",
+    "No se dispone de sensor de altura Z ni de agarre del electroimán. Los estados electrónicos tienen límites explícitos.",
+    "Los ensayos de simulación, DRC, ERC y colisiones CAD no certifican precisión, resistencia o una partida física sin fallos.",
+    "La cuadrícula actual incorpora h1 estimada; requiere comprobación independiente.",
+    "El diagnóstico motor del 12 de octubre dejó inspecciones pendientes. No se corrigió hardware ni firmware al preparar este manual."
+  ],
+  "credits": {
+    "original": "EduSCARA: Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf.",
+    "adaptation": "Proyecto escolar JaqueBot · Colegio Carlos Julio Torrado Peñaranda · Grado 11C · 2026.",
+    "assistance": "Diseño, programación y documentación asistidos por ChatGPT Codex, con decisiones y comprobaciones humanas.",
+    "software": [
+      "Autodesk Fusion",
+      "Python",
+      "STM32/C",
+      "HTML, CSS, JavaScript",
+      "Raspberry Pi OS",
+      "OpenCV/ArUco",
+      "Picamera2/libcamera",
+      "python-chess",
+      "Stockfish",
+      "KiCad"
+    ]
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Interfaz actual de control manual",
+      "path": "Control Visual/static/index.html"
+    },
+    {
+      "id": "S02",
+      "title": "Interfaz actual de JaqueBot Ajedrez",
+      "path": "jaquebot/app/ui/index.html"
+    },
+    {
+      "id": "S03",
+      "title": "Guía de JaqueBot y arquitectura",
+      "path": "jaquebot/README.md"
+    },
+    {
+      "id": "S04",
+      "title": "Visión y marcadores",
+      "path": "jaquebot/docs/VISION.md"
+    },
+    {
+      "id": "S05",
+      "title": "Hardware y límites de lectura",
+      "path": "jaquebot/docs/HARDWARE.md"
+    },
+    {
+      "id": "S06",
+      "title": "Configuración leída de Raspberry el 12 de octubre",
+      "path": "manual-interactivo/content/verified-runtime.json"
+    },
+    {
+      "id": "S07",
+      "title": "Pines documentados de NUCLEO",
+      "path": "output/conexiones/NUCLEO_F446RE_pines_EduSCARA.json"
+    },
+    {
+      "id": "S08",
+      "title": "Guía de fabricación PCB R03",
+      "path": "PCB JaqueBot R03 KiCad/LEER_PRIMERO_FABRICANTE.md"
+    },
+    {
+      "id": "S09",
+      "title": "Guía de ingeniería R03",
+      "path": "Diseno Ajedrez R03/LEEME_INGENIERIA.md"
+    },
+    {
+      "id": "S10",
+      "title": "Diagnóstico pendiente de potenciómetro",
+      "path": "_registro/potenciometro_codo_20261012/review.json"
+    },
+    {
+      "id": "S11",
+      "title": "Manifiesto de firmware vigente",
+      "path": "Firmware Revision App/build/manifest.json"
+    },
+    {
+      "id": "S12",
+      "title": "Registro de identificadores ArUco",
+      "path": "jaquebot/config/aruco_map.json"
+    },
+    {
+      "id": "S13",
+      "title": "Artículo original EduSCARA",
+      "url": "https://doi.org/10.1016/j.ohx.2026.e00761"
+    },
+    {
+      "id": "S14",
+      "title": "Datos y diseños originales v3",
+      "url": "https://doi.org/10.17632/m46jnn2cmb.3"
+    }
+  ],
+  "assets": [
+    {
+      "id": "calibration-real",
+      "title": "Pantalla real de calibración instalada",
+      "path": "_registro/centros64_20261011/raspberry_calibracion_instalada.jpg",
+      "note": "Registro del 11 de octubre; los valores en pantalla pueden ser históricos."
+    },
+    {
+      "id": "connection-ui",
+      "title": "Diagnóstico STM32 con Desconectar",
+      "path": "_registro/desconectar_stm32_20261012/ui/deteccion-1024.png",
+      "note": "Captura de verificación de interfaz."
+    },
+    {
+      "id": "magnet-ui",
+      "title": "Interfaz del control automático de imán",
+      "path": "_registro/control_manual_z_20261010/ui_magnet/magnet-1024.png",
+      "note": "Captura de prueba de interfaz; no prueba física."
+    }
+  ],
+  "robotGuide": [
+    {
+      "title": "Antes de empezar",
+      "body": "Uso supervisado en el montaje real.",
+      "steps": [
+        "Trabaja con supervisión del docente y mantén manos, cabello y cables fuera del recorrido.",
+        "El corte físico de 5 V de los servos debe estar al alcance. Bloquear o Detener en pantalla no garantiza detener al instante un XY ya enviado.",
+        "No confirmes referencias Z, espacio libre o retirada de capturas sin comprobarlo físicamente.",
+        "No uses los demos históricos como prueba de conexión; pueden mover el brazo.",
+        "La calibración motora desplaza base/codo y exige recorrido despejado y Z abajo a 90° según el diálogo actual.",
+        "Los voltajes de señales, servos y bobina son diferentes. Consulta la tabla de la placa que realmente está instalada."
+      ],
+      "warnings": []
+    },
+    {
+      "title": "Construir y montar el conjunto R03",
+      "body": "Consulta el F3D y los planos con cotas para fabricar. Las ilustraciones artísticas explican el conjunto; no sustituyen las medidas ni los patrones ArUco.",
+      "steps": [
+        "Imprime cada archivo de STL_Impresion de forma individual; no escales el conjunto.",
+        "Monta el robot original conservando los designadores BA, L1, L2, ZR, ZP y SH.",
+        "Fija el tablero R03 sobre una superficie plana y une su pie mediante dos M4 × 12.",
+        "Inserta el tramo inferior del mástil, manguito y tramo superior; monta escuadras y travesaño.",
+        "Monta cámara y presillas, fija su placa y el bastidor desde arriba; verifica cables y nivelación.",
+        "Fija el imán al adaptador y el adaptador a ZP_0; revisa tornillería y alivio del cable.",
+        "Inserta y retén los discos de acero; pega las etiquetas actuales después de comprobar su escala.",
+        "Realiza las comprobaciones físicas y calibraciones antes de permitir partidas."
+      ],
+      "warnings": [
+        "Cantidades para el soporte R03 documentado; no incluyen toda la tornillería del robot original.",
+        "La fijación de la carcasa real usa otros dos M3 de longitud por verificar; su envolvente inicial era provisional.",
+        "El perfil PETG propuesto: capa 0,20 mm, 6 paredes, 6 capas superior/inferior, 40% de relleno; no es un perfil ensayado ni una garantía de resistencia.",
+        "El ancho nominal de cama de la Hi Combo es 260 × 260 × 300 mm; comprueba el perfil real de la impresora y el laminado."
+      ]
+    }
+  ]
+}
