@@ -3,12 +3,13 @@
     "title": "JaqueBot · Manual interactivo",
     "subtitle": "Conoce, construye y utiliza nuestro robot de ajedrez",
     "language": "es-CO",
-    "version": "Manual R01 · documentación revisada el 12 de octubre de 2026",
+    "version": "Manual R02 · edición ampliada el 16 de octubre de 2026",
     "verifiedAt": "2026-10-12T18:34:58.459835-05:00",
     "school": "Colegio Carlos Julio Torrado Peñaranda",
     "class": "Proyecto Grado 11C · 2026",
     "scope": "Manual educativo y de operación supervisada. Modelo CAD R03, aplicaciones vigentes y conexiones documentadas.",
-    "evidenceNote": "Se revisaron código, documentación y registros locales, y se consultó la Raspberry en modo de solo lectura. No se enviaron movimientos, no se conectó la sesión STM32 y no se modificó firmware."
+    "evidenceNote": "Última comprobación de la Raspberry: 12 de octubre de 2026, en modo de solo lectura. Ampliación editorial del 16 de octubre basada en código, registros y guía EduSCARA. La Raspberry no estuvo accesible durante esta ampliación; no se enviaron movimientos ni se cambió firmware.",
+    "editedAt": "2026-10-16"
   },
   "overview": {
     "title": "Un robot que ve el tablero y mueve sus piezas",
@@ -1061,6 +1062,46 @@
     {
       "term": "RAM",
       "definition": "Memoria temporal que se borra al apagar o reiniciar la placa."
+    },
+    {
+      "term": "Servo",
+      "meaning": "Motor con una salida que puede colocarse en un ángulo solicitado.",
+      "definition": "Motor con una salida que puede colocarse en un ángulo solicitado."
+    },
+    {
+      "term": "Brazo de salida o horn",
+      "meaning": "Pequeño acoplador fijado al eje del servo; transmite su movimiento a una pieza mayor.",
+      "definition": "Pequeño acoplador fijado al eje del servo; transmite su movimiento a una pieza mayor."
+    },
+    {
+      "term": "Eslabón",
+      "meaning": "Tramo rígido del brazo entre dos articulaciones.",
+      "definition": "Tramo rígido del brazo entre dos articulaciones."
+    },
+    {
+      "term": "Potenciómetro",
+      "meaning": "Sensor giratorio cuya señal ayuda a conocer el ángulo de base o codo.",
+      "definition": "Sensor giratorio cuya señal ayuda a conocer el ángulo de base o codo."
+    },
+    {
+      "term": "Piñón y cremallera",
+      "meaning": "Rueda dentada y barra dentada que convierten giro en desplazamiento vertical.",
+      "definition": "Rueda dentada y barra dentada que convierten giro en desplazamiento vertical."
+    },
+    {
+      "term": "M2 ×12",
+      "meaning": "Tornillo de rosca métrica de 2 mm de diámetro y 12 mm de largo bajo la cabeza.",
+      "definition": "Tornillo de rosca métrica de 2 mm de diámetro y 12 mm de largo bajo la cabeza."
+    },
+    {
+      "term": "Manga trenzada",
+      "meaning": "Funda flexible que reúne los cables y acompaña el movimiento.",
+      "definition": "Funda flexible que reúne los cables y acompaña el movimiento."
+    },
+    {
+      "term": "MOSFET",
+      "meaning": "Interruptor electrónico que permite controlar la bobina con una señal pequeña sin pasar su corriente por el pin del controlador.",
+      "definition": "Interruptor electrónico que permite controlar la bobina con una señal pequeña sin pasar su corriente por el pin del controlador."
     }
   ],
   "limitations": [
@@ -1158,6 +1199,35 @@
       "id": "S14",
       "title": "Datos y diseños originales v3",
       "url": "https://doi.org/10.17632/m46jnn2cmb.3"
+    },
+    {
+      "id": "dataset",
+      "title": "EduSCARA — archivos originales, Mendeley Data, versión 3",
+      "url": "https://data.mendeley.com/datasets/m46jnn2cmb/3",
+      "note": "Alex Clark y Tareq Assaf, EduSCARA, Mendeley Data, V3, 2026, DOI: 10.17632/m46jnn2cmb.3. · CC BY 4.0"
+    },
+    {
+      "id": "bath",
+      "title": "Registro institucional de la publicación, University of Bath",
+      "url": "https://researchportal.bath.ac.uk/en/publications/eduscara-an-open-source-rrpr-educational-scara-platform/",
+      "note": "Registro bibliográfico; publicación con licencia CC BY"
+    },
+    {
+      "id": "camera",
+      "title": "Raspberry Pi AI Camera — documentación oficial",
+      "url": "https://www.raspberrypi.com/products/ai-camera/",
+      "note": ""
+    },
+    {
+      "id": "magnet-dimensions",
+      "title": "NH-P13/27 — referencia dimensional de Nian Hung",
+      "url": "https://www.nianhung.com/product_d.php?id=1508&lang=en&tb=5",
+      "note": ""
+    },
+    {
+      "title": "Raspberry Pi 5 · el computador",
+      "url": "https://www.raspberrypi.com/news/introducing-raspberry-pi-5/",
+      "note": "Referencia de producto: Raspberry Pi Ltd. Adaptación visual en tinta para JaqueBot, 16 de octubre de 2026."
     }
   ],
   "assets": [
@@ -1214,5 +1284,3597 @@
         "El ancho nominal de cama de la Hi Combo es 260 × 260 × 300 mm; comprueba el perfil real de la impresora y el laminado."
       ]
     }
-  ]
+  ],
+  "learningGuide": {
+    "assembly": {
+      "version": "2.0",
+      "title": "Cómo se construye JaqueBot: de EduSCARA al ajedrez",
+      "language": "es",
+      "sources": [
+        {
+          "id": "paper",
+          "title": "EduSCARA: An open-source RRPR educational SCARA platform",
+          "authors": [
+            "Alex Clark",
+            "Uriel Martinez-Hernandez",
+            "Tareq Assaf"
+          ],
+          "url": "https://doi.org/10.1016/j.ohx.2026.e00761",
+          "alternateUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13014973/",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "section": "5.1, pasos 1–26; secciones 3–5; tablas 2–4",
+          "evidence": "Artículo completo y láminas oficiales conservados previamente en el proyecto."
+        },
+        {
+          "id": "paper-table3",
+          "title": "EduSCARA, tabla 3: materiales del manipulador",
+          "url": "https://doi.org/10.1016/j.ohx.2026.e00761",
+          "license": "CC BY 4.0",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0."
+        },
+        {
+          "id": "paper-table4",
+          "title": "EduSCARA, tabla 4: materiales del controlador original",
+          "url": "https://doi.org/10.1016/j.ohx.2026.e00761",
+          "license": "CC BY 4.0",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0."
+        },
+        {
+          "id": "dataset",
+          "title": "EduSCARA — archivos originales, Mendeley Data, versión 3",
+          "authors": [
+            "Alex Clark",
+            "Tareq Assaf"
+          ],
+          "url": "https://data.mendeley.com/datasets/m46jnn2cmb/3",
+          "doi": "10.17632/m46jnn2cmb.3",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "credit": "Alex Clark y Tareq Assaf, EduSCARA, Mendeley Data, V3, 2026, DOI: 10.17632/m46jnn2cmb.3."
+        },
+        {
+          "id": "bath",
+          "title": "Registro institucional de la publicación, University of Bath",
+          "url": "https://researchportal.bath.ac.uk/en/publications/eduscara-an-open-source-rrpr-educational-scara-platform/",
+          "license": "Registro bibliográfico; publicación con licencia CC BY"
+        },
+        {
+          "id": "jaquebot-r03",
+          "title": "Diseño Ajedrez R03 — memoria de ingeniería y archivos CAD del proyecto",
+          "document": "Diseno Ajedrez R03/LEEME_INGENIERIA.md; EduSCARA_Ajedrez_R03.f3d; STL_Impresion",
+          "license": "Adaptación local: conservar la atribución de EduSCARA. Este manual no asigna una licencia nueva al proyecto."
+        },
+        {
+          "id": "jaquebot-hardware",
+          "title": "JaqueBot — hardware y operación instalados",
+          "document": "jaquebot/docs/HARDWARE.md; Raspberry Pi/LEEME.md; manual-interactivo/content/project-content.json",
+          "license": "Documentación local del proyecto"
+        },
+        {
+          "id": "jaquebot-tags",
+          "title": "Mapa vigente de etiquetas y tablero",
+          "document": "jaquebot/config/aruco_map.json; jaquebot/config/board.json",
+          "license": "Documentación local del proyecto"
+        },
+        {
+          "id": "pcb-r03",
+          "title": "PCB JaqueBot R03 — lista de ensamble",
+          "document": "PCB JaqueBot R03 KiCad/BOM_ensamble.csv",
+          "license": "Diseño local; fabricación y validación pendientes"
+        },
+        {
+          "id": "camera",
+          "title": "Raspberry Pi AI Camera — documentación oficial",
+          "url": "https://www.raspberrypi.com/products/ai-camera/",
+          "document": "Dimensiones consultadas y registradas en la memoria R03"
+        },
+        {
+          "id": "magnet-dimensions",
+          "title": "NH-P13/27 — referencia dimensional de Nian Hung",
+          "url": "https://www.nianhung.com/product_d.php?id=1508&lang=en&tb=5",
+          "document": "Referencia dimensional citada en R03; no acredita por sí sola la tensión de la bobina instalada."
+        }
+      ],
+      "intro": "JaqueBot parte del brazo abierto EduSCARA, publicado por Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf. El colegio adapta ese brazo para jugar ajedrez: añade un tablero pequeño, piezas con etiquetas, cámara, Raspberry Pi y electroimán, y desarrolla las aplicaciones con apoyo de ChatGPT Codex. Aquí se explica primero la construcción original del brazo y después los accesorios y conexiones propios de JaqueBot.",
+      "importantDistinctions": [
+        "Los pasos 1–26 pertenecen a la guía original EduSCARA. Las explicaciones en español son una adaptación educativa para este manual; las imágenes se reproducen completas y sin cambiar su geometría.",
+        "Montar y modificar piezas con las fuentes de servos e imán desconectadas. Cuando una etapa necesite indexar un servo, hacerlo por separado, con el controlador vigente y el mecanismo libre; retirar la potencia antes de fijar el brazo de salida. No girar a la fuerza un servo alimentado ni trasladar órdenes antiguas del artículo a las apps actuales.",
+        "Los 0° y 90° escritos en las láminas son referencias de instalación de los brazos de salida. No son una orden para mover el robot ya montado. En JaqueBot se verifica la referencia nominal de 90° abajo y se usa 180° arriba para transporte. La altura de toma se enseña y guarda físicamente para este ejemplar; no se debe copiar un ángulo histórico. Ninguno de estos valores es una medición de altura en milímetros.",
+        "Axis 0 es base; Axis 1 es codo; Axis 2 es giro de herramienta; Axis 3 es altura Z. El prototipo original tiene cuatro servos, aunque la operación de ajedrez coaxial no necesita orientar lateralmente el imán.",
+        "Las cantidades del brazo original provienen de las tablas 3 y 4 del artículo, no de una auditoría de lo comprado por el colegio. Las cantidades R03 corresponden al diseño de accesorios. Lo pendiente de medir o adquirir se identifica expresamente.",
+        "La PCB KiCad R03 es un diseño para sustituir la placa actual y necesita fabricación y comprobación. La documentación vigente usa un módulo MOSFET externo; no sumar ambos como si fueran dos etapas instaladas.",
+        "El modelo interactivo R03 conserva las etiquetas históricas de su CAD. Para las apps se usa el PDF vigente DICT_4X4_1000: referencias del tablero 100–103 y mapa actual de piezas. No imprimir los dibujos ArUco históricos del CAD como etiquetas de operación.",
+        "El paso 19 de la lámina original indica S_M3x20 ×4, aunque muestra una sola unión central y la tabla 3 declara 7 tornillos M3×20 para todo el brazo. Se conserva la figura y se señala la discrepancia; no perforar ni añadir tres fijaciones por interpretar ese rótulo literalmente."
+      ],
+      "tools": [
+        {
+          "name": "Llaves Allen métricas",
+          "function": "Apretar la tornillería del manipulador."
+        },
+        {
+          "name": "Destornilladores pequeño plano y Phillips",
+          "function": "Montar tornillos y borneras."
+        },
+        {
+          "name": "Herramienta de desbarbado o cúter, con supervisión",
+          "function": "Retirar rebabas y soportes de impresión sin cambiar el ajuste de las piezas."
+        },
+        {
+          "name": "Tijeras",
+          "function": "Cortar la manga trenzada al recorrido necesario."
+        },
+        {
+          "name": "Soldador y materiales de soldadura, con supervisión",
+          "function": "Montar el shield original si se construye desde cero."
+        },
+        {
+          "name": "Calibrador y regla",
+          "function": "Comprobar diámetros, largos de tornillo, casillas, holguras y posición del soporte."
+        },
+        {
+          "name": "Multímetro",
+          "function": "Revisar polaridad, continuidad y tensiones antes de conectar placas y motores."
+        }
+      ],
+      "printing": {
+        "original": "El artículo imprimió las 26 piezas del brazo en PLA, con Bambu Lab A1, boquilla de 0,4 mm y cama PEI texturada. Es una referencia reproducible del diseño original, no una obligación de comprar esa impresora.",
+        "supports": [
+          "BA_4",
+          "SH_0",
+          "L1_0",
+          "L2_1",
+          "SH_1",
+          "ZP_2"
+        ],
+        "settings": "BambuStudio: orden de paredes interior/exterior/interior, soportes de árbol automáticos cuando corresponda y brim solo exterior. Revisar orientación y extracción de soportes antes de imprimir.",
+        "jaquebot": "R03 proporciona 52 archivos STL de accesorios orientados en STL_Impresion. El archivo Casillas_oscuras_32 contiene 32 cuerpos; contar archivos no equivale a contar piezas físicas. Los STL de la carpeta STL conservan coordenadas de ensamblaje.",
+        "verification": "Limpiar apoyos, comprobar que engranajes y cremallera se muevan sin atascarse y ensayar primero ajustes de pasadores, manguitos y tuercas. No escalar todo el conjunto para corregir un ajuste local."
+      },
+      "materials": {
+        "eduscaraManipulator": [
+          {
+            "id": "SER_24",
+            "name": "Servomotor de base y codo",
+            "model": "AGFRC B53DHS, 24 kg·cm",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Mueve las dos articulaciones grandes que sitúan el extremo del brazo sobre el tablero.",
+            "function": "Mueve las dos articulaciones grandes que sitúan el extremo del brazo sobre el tablero.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "SER_9G",
+            "name": "Servomotor pequeño",
+            "model": "AGFRC B11DLS, 2,8 kg·cm",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Uno gira el eje de la herramienta y el otro hace subir y bajar la cremallera.",
+            "function": "Uno gira el eje de la herramienta y el otro hace subir y bajar la cremallera.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "POT_5K",
+            "name": "Potenciómetro angular",
+            "model": "RV24YN20F B502, 5 kΩ",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Permite estimar el ángulo real de base y codo; el controlador compara esa lectura con el movimiento pedido.",
+            "function": "Permite estimar el ángulo real de base y codo; el controlador compara esa lectura con el movimiento pedido.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M2x6",
+            "name": "Tornillo M2 × 6 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M2x8",
+            "name": "Tornillo M2 × 8 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 17,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M2x12",
+            "name": "Tornillo M2 × 12 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 17,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M2x16",
+            "name": "Tornillo M2 × 16 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 7,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M3x16",
+            "name": "Tornillo M3 × 16 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M3x20",
+            "name": "Tornillo M3 × 20 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 7,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Cantidad de la tabla 3. Ver la discrepancia editorial del paso 19.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M4x12",
+            "name": "Tornillo M4 × 12 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 8,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M4x16",
+            "name": "Tornillo M4 × 16 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 6,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "S_M4x20",
+            "name": "Tornillo M4 × 20 mm",
+            "model": "Cabeza abombada con hexágono interior; genérico",
+            "quantity": 4,
+            "unit": "unidades",
+            "role": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "function": "Fija las piezas impresas y los actuadores; cada paso indica el diámetro y el largo que le corresponden.",
+            "sourceId": "paper-table3",
+            "note": "Longitud medida desde debajo de la cabeza; no sustituir por un tornillo más largo sin comprobar el espacio.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "N_M2",
+            "name": "Tuerca M2",
+            "model": "Genérica",
+            "quantity": 4,
+            "unit": "unidades",
+            "role": "Cierra las cuatro fijaciones de la carcasa del mecanismo vertical.",
+            "function": "Cierra las cuatro fijaciones de la carcasa del mecanismo vertical.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "WT_1250",
+            "name": "Contrapeso de hierro",
+            "model": "1,25 kg; Ø máximo 140 mm; espesor máximo 20 mm",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Da estabilidad a la base y queda encerrado entre BA_0 y BA_1.",
+            "function": "Da estabilidad a la base y queda encerrado entre BA_0 y BA_1.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "JR_EXT",
+            "name": "Extensión de cable de servo",
+            "model": "Conector compatible con los servos",
+            "quantity": 10,
+            "unit": "unidades",
+            "role": "Alarga los cables de los servos y de los sensores para llegar a la placa de control.",
+            "function": "Alarga los cables de los servos y de los sensores para llegar a la placa de control.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "SLV_12",
+            "name": "Manga trenzada para cables",
+            "model": "Diámetro 12–20 mm",
+            "quantity": 0.25,
+            "unit": "m",
+            "role": "Agrupa los cables en un arco flexible entre base y brazo.",
+            "function": "Agrupa los cables en un arco flexible entre base y brazo.",
+            "sourceId": "paper-table3",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "FIL_PLA",
+            "name": "Filamento para el robot original",
+            "model": "PLA; en el artículo Bambu Lab PLA Basic",
+            "quantity": 527.97,
+            "unit": "g",
+            "role": "Forma los eslabones, soportes, engranajes y cubiertas impresos.",
+            "function": "Forma los eslabones, soportes, engranajes y cubiertas impresos.",
+            "sourceId": "paper-table3",
+            "note": "Consumo publicado para el diseño original; no incluye tablero, mástil, piezas de ajedrez ni margen de impresión. No es una pesada del robot escolar.",
+            "status": "documentado en la lista original"
+          }
+        ],
+        "eduscaraController": [
+          {
+            "id": "NUC_F4",
+            "name": "Placa de control de movimiento",
+            "model": "ST NUCLEO-F446RE",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Recibe órdenes por USB, lee los potenciómetros y genera las señales de los servos.",
+            "function": "Recibe órdenes por USB, lee los potenciómetros y genera las señales de los servos.",
+            "sourceId": "paper-table4",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "PRO_R3",
+            "name": "Shield de prototipos",
+            "model": "Compatible con Arduino Uno R3",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Sostiene las borneras y el cableado del controlador original.",
+            "function": "Sostiene las borneras y el cableado del controlador original.",
+            "sourceId": "paper-table4",
+            "note": "Es una placa de prototipos, no otro microcontrolador Arduino; se monta sobre la NUCLEO.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "TER_2P",
+            "name": "Bornera de 2 polos",
+            "model": "Para montaje en PCB",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Recibe la alimentación externa de los servos.",
+            "function": "Recibe la alimentación externa de los servos.",
+            "sourceId": "paper-table4",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "TER_3P",
+            "name": "Bornera de 3 polos",
+            "model": "Para montaje en PCB",
+            "quantity": 6,
+            "unit": "unidades",
+            "role": "Permite conectar cuatro servos y dos potenciómetros.",
+            "function": "Permite conectar cuatro servos y dos potenciómetros.",
+            "sourceId": "paper-table4",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "CAP_100u",
+            "name": "Condensador electrolítico",
+            "model": "100 µF, 50 V",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Ayuda a estabilizar la alimentación en la placa original.",
+            "function": "Ayuda a estabilizar la alimentación en la placa original.",
+            "sourceId": "paper-table4",
+            "note": "Es polarizado: revisar + y − en el esquema antes de soldar.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "POW_5V",
+            "name": "Fuente externa de los servos",
+            "model": "Salida 5 V CC, 15 W / 3 A",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Aporta la corriente de los motores sin exigirla al USB.",
+            "function": "Aporta la corriente de los motores sin exigirla al USB.",
+            "sourceId": "paper-table4",
+            "note": "El artículo cita una entrada de 230 V CA. En el colegio elegir una fuente certificada cuya entrada sea compatible con la red local; la salida documentada es 5 V CC.",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "DUP_MM",
+            "name": "Cables Dupont macho–macho",
+            "model": "Genéricos",
+            "quantity": 20,
+            "unit": "unidades",
+            "role": "Une señales y alimentación dentro del controlador original.",
+            "function": "Une señales y alimentación dentro del controlador original.",
+            "sourceId": "paper-table4",
+            "note": "",
+            "status": "documentado en la lista original"
+          },
+          {
+            "id": "DUP_FM",
+            "name": "Cables Dupont hembra–macho",
+            "model": "Genéricos",
+            "quantity": 9,
+            "unit": "unidades",
+            "role": "Completa las conexiones entre pines y shield original.",
+            "function": "Completa las conexiones entre pines y shield original.",
+            "sourceId": "paper-table4",
+            "note": "",
+            "status": "documentado en la lista original"
+          }
+        ],
+        "jaquebot": [
+          {
+            "id": "PI5",
+            "name": "Computador del proyecto",
+            "model": "Raspberry Pi 5",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Ejecuta JaqueBot y JaqueBot Ajedrez, procesa imágenes y coordina la partida.",
+            "function": "Ejecuta JaqueBot y JaqueBot Ajedrez, procesa imágenes y coordina la partida.",
+            "sourceId": "jaquebot-hardware",
+            "note": "Capacidad de RAM no fijada en estas fuentes.",
+            "status": "documentado en el proyecto"
+          },
+          {
+            "id": "PI_POWER",
+            "name": "Alimentación de Raspberry Pi",
+            "model": "Fuente compatible con la Raspberry Pi 5 instalada",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Alimenta el computador de forma independiente de servos e imán.",
+            "function": "Alimenta el computador de forma independiente de servos e imán.",
+            "sourceId": "jaquebot-hardware",
+            "note": "Verificar el modelo y la corriente de la fuente real; no inferidos de una foto.",
+            "status": "necesaria; modelo por comprobar"
+          },
+          {
+            "id": "AI_CAMERA",
+            "name": "Cámara del tablero",
+            "model": "Raspberry Pi AI Camera, sensor IMX500",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Observa las etiquetas para reconocer qué pieza está en cada casilla.",
+            "function": "Observa las etiquetas para reconocer qué pieza está en cada casilla.",
+            "sourceId": "jaquebot-r03",
+            "note": "Envolvente documental 25 × 24 × 11,9 mm; patrón de agujeros 21 × 12,5 mm, Ø2,2.",
+            "status": "documentado"
+          },
+          {
+            "id": "CAMERA_CABLE",
+            "name": "Cable de cámara",
+            "model": "Cable plano CSI compatible con Pi 5 y AI Camera",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Lleva alimentación y datos entre cámara y Raspberry.",
+            "function": "Lleva alimentación y datos entre cámara y Raspberry.",
+            "sourceId": "jaquebot-r03",
+            "note": "La foto documentada indicaba 200 mm; verificar longitud, conectores y recorrido reales antes de comprar.",
+            "status": "modelo exacto por comprobar"
+          },
+          {
+            "id": "PI_CASE",
+            "name": "Carcasa y refrigeración de la Raspberry",
+            "model": "Carcasa RasTech del proyecto",
+            "quantity": 1,
+            "unit": "conjunto",
+            "role": "Protege la placa y mantiene espacio para disipación y conectores.",
+            "function": "Protege la placa y mantiene espacio para disipación y conectores.",
+            "sourceId": "jaquebot-r03",
+            "note": "R03 usó una envolvente provisional 100 × 75 × 35 mm y un bastidor ranurado; esas cifras no son medidas verificadas de la carcasa adquirida.",
+            "status": "carcasa documentada; ajuste R03 por comprobar"
+          },
+          {
+            "id": "USB_DATA",
+            "name": "Cable de datos al controlador",
+            "model": "USB compatible con ST-LINK de la NUCLEO-F446RE",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Permite que la Raspberry envíe órdenes y reciba estados de la STM32.",
+            "function": "Permite que la Raspberry envíe órdenes y reciba estados de la STM32.",
+            "sourceId": "jaquebot-hardware",
+            "note": "Debe transmitir datos; un cable solo de carga no sirve.",
+            "status": "documentado"
+          },
+          {
+            "id": "MAGNET",
+            "name": "Electroimán de toma",
+            "model": "Geometría P13/27: Ø13 × 27 mm; fijación M3; bobina instalada documentada de 12 V",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Atrae el inserto de acero de cada pieza para transportarla.",
+            "function": "Atrae el inserto de acero de cada pieza para transportarla.",
+            "sourceId": "jaquebot-hardware",
+            "note": "P13/27 describe el tamaño, no la tensión. La alimentación de 12 V procede de la documentación eléctrica actual, no del nombre comercial. Profundidad roscada y variante real deben comprobarse.",
+            "status": "12 V documentados; geometría CAD de referencia"
+          },
+          {
+            "id": "MAGNET_POWER",
+            "name": "Fuente del electroimán",
+            "model": "12 V CC independiente",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Entrega la energía que necesita la bobina para atraer la pieza.",
+            "function": "Entrega la energía que necesita la bobina para atraer la pieza.",
+            "sourceId": "jaquebot-hardware",
+            "note": "Corriente y modelo de fuente no confirmados en estas fuentes.",
+            "status": "tensión documentada; modelo por comprobar"
+          },
+          {
+            "id": "MOSFET_MODULE",
+            "name": "Etapa de potencia del imán",
+            "model": "Módulo MOSFET externo instalado",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Usa la señal PB5/D4 de la NUCLEO para conmutar la bobina de 12 V.",
+            "function": "Usa la señal PB5/D4 de la NUCLEO para conmutar la bobina de 12 V.",
+            "sourceId": "jaquebot-hardware",
+            "note": "La referencia comercial del módulo externo no está verificada. B8 transporta señal y GND; la bobina no se conecta directamente a un GPIO.",
+            "status": "montaje vigente documentado"
+          },
+          {
+            "id": "ADAPTER",
+            "name": "Adaptador de la herramienta",
+            "model": "Adaptador_ZP0_P13_27.stl",
+            "quantity": 1,
+            "unit": "pieza impresa",
+            "role": "Centra el electroimán debajo de ZP_0 sin desplazarlo a un lado.",
+            "function": "Centra el electroimán debajo de ZP_0 sin desplazarlo a un lado.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cuatro fijaciones M2 y una M3 central; largos según enganche real.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "ADAPTER_M2",
+            "name": "Fijación superior del adaptador",
+            "model": "M2, largo por medir",
+            "quantity": 4,
+            "unit": "unidades",
+            "role": "Une el adaptador con los cuatro agujeros de la brida ZP_0.",
+            "function": "Une el adaptador con los cuatro agujeros de la brida ZP_0.",
+            "sourceId": "jaquebot-r03",
+            "note": "Los agujeros originales Ø2,1 mm no se presuponen roscados. Verificar forma de sujeción y profundidad.",
+            "status": "cantidad CAD; largo pendiente"
+          },
+          {
+            "id": "MAGNET_M3",
+            "name": "Fijación central del imán",
+            "model": "M3, largo por medir",
+            "quantity": 1,
+            "unit": "unidad",
+            "role": "Retiene la bobina en el fondo del adaptador.",
+            "function": "Retiene la bobina en el fondo del adaptador.",
+            "sourceId": "jaquebot-r03",
+            "note": "No tocar el fondo de la rosca ni dañar la bobina.",
+            "status": "cantidad CAD; largo pendiente"
+          },
+          {
+            "id": "BOARD",
+            "name": "Tablero modular",
+            "model": "Tablero_modulo_11/12/21/22.stl",
+            "quantity": 4,
+            "unit": "módulos impresos",
+            "role": "Proporciona las 64 casillas y las superficies para las referencias de cámara.",
+            "function": "Proporciona las 64 casillas y las superficies para las referencias de cámara.",
+            "sourceId": "jaquebot-r03",
+            "note": "Campo R03 108 × 108 mm; casilla nominal 13,5 mm. Medir la casilla impresa antes de calibrar.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "BOARD_DARK",
+            "name": "Casillas oscuras",
+            "model": "Casillas_oscuras_32.stl",
+            "quantity": 32,
+            "unit": "insertos en un archivo STL",
+            "role": "Da el patrón alternado claro y oscuro del tablero.",
+            "function": "Da el patrón alternado claro y oscuro del tablero.",
+            "sourceId": "jaquebot-r03",
+            "note": "Diseño nominal 13,3 × 13,3 × 0,78 mm por casilla.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "BOARD_M2",
+            "name": "Unión de los cuatro módulos",
+            "model": "Tornillo M2, largo según espesor impreso",
+            "quantity": 8,
+            "unit": "unidades",
+            "role": "Cierra las uniones de media madera de los módulos.",
+            "function": "Cierra las uniones de media madera de los módulos.",
+            "sourceId": "jaquebot-r03",
+            "note": "Comprobar que no sobresalgan por debajo.",
+            "status": "cantidad documentada; largo pendiente"
+          },
+          {
+            "id": "BOARD_N2",
+            "name": "Tuerca cautiva de unión de tablero",
+            "model": "M2",
+            "quantity": 8,
+            "unit": "unidades",
+            "role": "Sujeta los tornillos de unión entre módulos.",
+            "function": "Sujeta los tornillos de unión entre módulos.",
+            "sourceId": "jaquebot-r03",
+            "note": "",
+            "status": "diseño R03"
+          },
+          {
+            "id": "BOARD_ANCHOR",
+            "name": "Fijación del tablero a la base",
+            "model": "Compatible con los dos agujeros frontales Ø4 de BA_0",
+            "quantity": 2,
+            "unit": "puntos de fijación",
+            "role": "Mantiene fija la relación entre tablero y robot.",
+            "function": "Mantiene fija la relación entre tablero y robot.",
+            "sourceId": "jaquebot-r03",
+            "note": "No es una lista de dos tornillos nuevos confirmados: revisar el anclaje existente; las orejas R03 añaden 3 mm al agarre. El tablero debe apoyar en la misma mesa.",
+            "status": "interfaz CAD; tornillería real por comprobar"
+          },
+          {
+            "id": "CHESS",
+            "name": "Piezas de ajedrez",
+            "model": "STL identificados 00–31, 16 blancas y 16 negras",
+            "quantity": 32,
+            "unit": "piezas impresas",
+            "role": "Son las piezas que detecta la cámara y mueve el robot.",
+            "function": "Son las piezas que detecta la cámara y mueve el robot.",
+            "sourceId": "jaquebot-r03",
+            "note": "R03: Ø12 y altura 22 mm; las etiquetas vigentes se imprimen aparte.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "STEEL",
+            "name": "Insertos para atracción magnética",
+            "model": "Acero de bajo carbono, propuesta Ø11 × 1 mm",
+            "quantity": 32,
+            "unit": "unidades",
+            "role": "Ofrece una superficie que el electroimán puede atraer en cada pieza.",
+            "function": "Ofrece una superficie que el electroimán puede atraer en cada pieza.",
+            "sourceId": "jaquebot-r03",
+            "note": "Dimensiones propuestas, no existencia ni compra confirmada; comprobar agarre y liberación con el conjunto real.",
+            "status": "propuesta de diseño"
+          },
+          {
+            "id": "TAGS",
+            "name": "Etiquetas ArUco vigentes",
+            "model": "DICT_4X4_1000",
+            "quantity": 40,
+            "unit": "etiquetas en el PDF vigente",
+            "role": "Da una identidad a piezas y referencias del tablero.",
+            "function": "Da una identidad a piezas y referencias del tablero.",
+            "sourceId": "jaquebot-tags",
+            "note": "Se usan 32 etiquetas de piezas y 4 referencias 100–103 para el tablero; el PDF incluye otras 4 etiquetas. No sustituirlas por los marcadores históricos dibujados en R03.",
+            "status": "esquema actual"
+          },
+          {
+            "id": "MAST",
+            "name": "Soporte de cámara impreso",
+            "model": "Pie, 2 tramos de 200 mm, manguito, travesaño, 2 escuadras, portacámara, 2 presillas, bastidor, 2 separadores y clip",
+            "quantity": 14,
+            "unit": "piezas impresas",
+            "role": "Mantiene la cámara elevada y sujeta el computador y el cableado.",
+            "function": "Mantiene la cámara elevada y sujeta el computador y el cableado.",
+            "sourceId": "jaquebot-r03",
+            "note": "Mástil R03 400 mm; cámara a 360 mm nominales sobre el tablero. No requiere perfiles de aluminio ni tuercas T.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "MAST_M4_50",
+            "name": "Tornillería del soporte",
+            "model": "M4 × 50 mm",
+            "quantity": 8,
+            "unit": "unidades",
+            "role": "Une pie, tramos, manguito y escuadras.",
+            "function": "Une pie, tramos, manguito y escuadras.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "MAST_M4_35",
+            "name": "Tornillería del soporte",
+            "model": "M4 × 35 mm",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Fija el portacámara al travesaño.",
+            "function": "Fija el portacámara al travesaño.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "MAST_M4_40",
+            "name": "Tornillería del soporte",
+            "model": "M4 × 40 mm",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Fija el bastidor de carcasa al travesaño.",
+            "function": "Fija el bastidor de carcasa al travesaño.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "MAST_M4_12",
+            "name": "Tornillería del soporte",
+            "model": "M4 × 12 mm",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Une el pie del mástil a las orejas del tablero.",
+            "function": "Une el pie del mástil a las orejas del tablero.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "CAMERA_M2_5",
+            "name": "Tornillería del soporte",
+            "model": "M2 × 5 mm",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Sujeta las presillas que retienen los bordes de la cámara.",
+            "function": "Sujeta las presillas que retienen los bordes de la cámara.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "MAST_N4",
+            "name": "Tornillería del soporte",
+            "model": "Tuerca hexagonal M4, llave 7 mm, altura 3,2 mm",
+            "quantity": 14,
+            "unit": "unidades",
+            "role": "Cierra las uniones del soporte.",
+            "function": "Cierra las uniones del soporte.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "MAST_WASHER",
+            "name": "Tornillería del soporte",
+            "model": "Arandela DIN 433 M4, 4,3 × 8 × 0,5 mm",
+            "quantity": 26,
+            "unit": "unidades",
+            "role": "Reparte el apriete sin invadir las presillas de cámara.",
+            "function": "Reparte el apriete sin invadir las presillas de cámara.",
+            "sourceId": "jaquebot-r03",
+            "note": "Cantidades adicionales a los tornillos del robot original; conservar revisión R03 de las piezas de contacto.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "CASE_M3",
+            "name": "Tornillería del soporte",
+            "model": "Tornillo M3 con arandela y tuerca, largo por medir",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Sujeta la carcasa real al bastidor ranurado.",
+            "function": "Sujeta la carcasa real al bastidor ranurado.",
+            "sourceId": "jaquebot-r03",
+            "note": "Largo de M3 pendiente de medir en la carcasa real.",
+            "status": "diseño R03"
+          },
+          {
+            "id": "ACCESSORY_FILAMENT",
+            "name": "Filamento de accesorios",
+            "model": "Material según función; PETG propuesto para el mástil",
+            "quantity": null,
+            "unit": "g",
+            "role": "Forma tablero, piezas, adaptador y soporte de cámara.",
+            "function": "Forma tablero, piezas, adaptador y soporte de cámara.",
+            "sourceId": "jaquebot-r03",
+            "note": "Masa total no documentada. La memoria propone para el soporte boquilla 0,4 mm, capa 0,20 mm, 6 paredes, 6 capas superior/inferior y 40 % de relleno; es un punto de partida que exige revisar el laminado y ensayar ajustes.",
+            "status": "cantidad pendiente de laminado"
+          }
+        ],
+        "pcbR03Proposed": [
+          {
+            "id": "B1 B8 B9",
+            "name": "MCV 0,5/2-G-2,54 P20 THR R24",
+            "model": "Phoenix Contact 1821397",
+            "quantity": 3,
+            "unit": "unidades",
+            "role": "Conecta alimentación o señal en grupos de dos polos; el esquema asigna la función exacta de cada bornera.",
+            "function": "Conecta alimentación o señal en grupos de dos polos; el esquema asigna la función exacta de cada bornera.",
+            "sourceId": "pcb-r03",
+            "note": "Bases PCB de 2 polos, paso 2.54mm",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "B2 B3 B4 B5 B6 B7",
+            "name": "MCV 0,5/3-G-2,54 P20 THR R24",
+            "model": "Phoenix Contact 1821407",
+            "quantity": 6,
+            "unit": "unidades",
+            "role": "Conecta los cuatro servos y los dos sensores en grupos de tres polos.",
+            "function": "Conecta los cuatro servos y los dos sensores en grupos de tres polos.",
+            "sourceId": "pcb-r03",
+            "note": "Bases PCB de 3 polos, paso 2.54mm",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "Enchufes B1 B8 B9",
+            "name": "FMC 0,5/2-ST-2,54",
+            "model": "Phoenix Contact 1821096",
+            "quantity": 3,
+            "unit": "unidades",
+            "role": "Permite retirar los cables de las borneras de dos polos sin desoldar la placa.",
+            "function": "Permite retirar los cables de las borneras de dos polos sin desoldar la placa.",
+            "sourceId": "pcb-r03",
+            "note": "Entregar sueltos para insertar cables; pareja de 1821397",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "Enchufes B2 B3 B4 B5 B6 B7",
+            "name": "FMC 0,5/3-ST-2,54",
+            "model": "Phoenix Contact 1821106",
+            "quantity": 6,
+            "unit": "unidades",
+            "role": "Permite retirar los cables de servo o sensor de sus bases de tres polos.",
+            "function": "Permite retirar los cables de servo o sensor de sus bases de tres polos.",
+            "sourceId": "pcb-r03",
+            "note": "Entregar sueltos para insertar cables; pareja de 1821407",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "CN5",
+            "name": "Macho 1x10, paso 2.54mm",
+            "model": "Samtec TSW-110-07-G-S",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Acopla la placa de conexión con los pines correspondientes de la NUCLEO.",
+            "function": "Acopla la placa de conexión con los pines correspondientes de la NUCLEO.",
+            "sourceId": "pcb-r03",
+            "note": "Poste de acoplamiento 5.84mm hacia Nucleo; cuerpo 2.54mm",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "CN6 CN9",
+            "name": "Macho 1x8, paso 2.54mm",
+            "model": "Samtec TSW-108-07-G-S",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Acopla la placa con la NUCLEO; la configuración de CN6 requiere retirar el pin indicado en el plano.",
+            "function": "Acopla la placa con la NUCLEO; la configuración de CN6 requiere retirar el pin indicado en el plano.",
+            "sourceId": "pcb-r03",
+            "note": "CN6: extraer pin5 antes de montar. CN9 completo.",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "CN8",
+            "name": "Macho 1x6, paso 2.54mm",
+            "model": "Samtec TSW-106-07-G-S",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Completa la conexión de señales entre la placa y la NUCLEO.",
+            "function": "Completa la conexión de señales entre la placa y la NUCLEO.",
+            "sourceId": "pcb-r03",
+            "note": "Poste de acoplamiento hacia Nucleo",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "CN10",
+            "name": "Hembra 2x19, paso 2.54mm",
+            "model": "Samtec SSW-119-01-G-D",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Recibe la tira Morpho y lleva las señales de la NUCLEO a la placa.",
+            "function": "Recibe la tira Morpho y lleva las señales de la NUCLEO a la placa.",
+            "sourceId": "pcb-r03",
+            "note": "Boca hacia Nucleo; altura cuerpo8.51mm; verificar pin1 y contacto de ambas hileras",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "F1",
+            "name": "Fusible rapido 4A 32V",
+            "model": "Littelfuse 0466004.NR",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Protege la rama de alimentación de servos prevista en el diseño.",
+            "function": "Protege la rama de alimentación de servos prevista en el diseño.",
+            "sourceId": "pcb-r03",
+            "note": "Para fuente limitada a 5V/3A; valor considera derating de operacion continua",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "F2",
+            "name": "Fusible rapido 250mA 125V",
+            "model": "Littelfuse 0466.250NR",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Protege la rama de alimentación del electroimán prevista en el diseño.",
+            "function": "Protege la rama de alimentación del electroimán prevista en el diseño.",
+            "sourceId": "pcb-r03",
+            "note": "Rama electroiman 12V/101ohm, nominal119mA",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "C1",
+            "name": "100uF 25V",
+            "model": "Panasonic EEUFR1E101",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Ayuda a estabilizar la alimentación de la placa.",
+            "function": "Ayuda a estabilizar la alimentación de la placa.",
+            "sourceId": "pcb-r03",
+            "note": "Polarizado; diametro6.3mm, paso2.5mm; positivo pad1",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "C2 C3",
+            "name": "100nF 50V X7R 10%",
+            "model": "KEMET C0805C104K5RACTU",
+            "quantity": 2,
+            "unit": "unidades",
+            "role": "Filtra perturbaciones rápidas en las ramas de 5 V y 12 V.",
+            "function": "Filtra perturbaciones rápidas en las ramas de 5 V y 12 V.",
+            "sourceId": "pcb-r03",
+            "note": "No polarizado; C2 en5V, C3 en12V protegido",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "Q1",
+            "name": "MOSFET N 30V",
+            "model": "Alpha & Omega Semiconductor AO3400A",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Conmuta la corriente de la bobina al recibir la señal de mando.",
+            "function": "Conmuta la corriente de la bobina al recibir la señal de mando.",
+            "sourceId": "pcb-r03",
+            "note": "G=1 S=2 D=3; pin1 puerta marcado por orientacion en plano",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "R1",
+            "name": "100ohm 1% 0.125W",
+            "model": "Vishay CRCW0805100RFKEA",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Limita transitorios de corriente en la puerta del MOSFET.",
+            "function": "Limita transitorios de corriente en la puerta del MOSFET.",
+            "sourceId": "pcb-r03",
+            "note": "Resistencia serie de puerta",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "R2",
+            "name": "100kohm 1% 0.125W",
+            "model": "Vishay CRCW0805100KFKEA",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Mantiene el MOSFET apagado cuando no hay señal de mando.",
+            "function": "Mantiene el MOSFET apagado cuando no hay señal de mando.",
+            "sourceId": "pcb-r03",
+            "note": "Pull-down para electroiman apagado sin mando",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          },
+          {
+            "id": "D1",
+            "name": "Diodo rectificador 1A",
+            "model": "Vishay 1N4007-E3/54",
+            "quantity": 1,
+            "unit": "unidades",
+            "role": "Proporciona un camino a la corriente de la bobina cuando se apaga el electroimán.",
+            "function": "Proporciona un camino a la corriente de la bobina cuando se apaga el electroimán.",
+            "sourceId": "pcb-r03",
+            "note": "Catodo/banda=pad1 a+12V_MAG; anodo=pad2 aMAG_SW; paso10.16mm",
+            "status": "BOM de diseño; fabricación y validación pendientes"
+          }
+        ]
+      },
+      "printedParts": [
+        {
+          "designator": "BA_0",
+          "file": "base_0.step",
+          "name": "Alojamiento del contrapeso",
+          "function": "Contiene la pesa y ofrece agujeros para fijar la base.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_021"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "BA_1",
+          "file": "base_1.step",
+          "name": "Tapa del contrapeso",
+          "function": "Cierra BA_0 y sostiene el robot por encima de la pesa.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_022"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "BA_2",
+          "file": "base_2.step",
+          "name": "Base del robot",
+          "function": "Recibe el servo de base y sostiene la primera articulación.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_023"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "BA_3",
+          "file": "base_3.step",
+          "name": "Abrazadera del servo de base",
+          "function": "Retiene el servo grande dentro de BA_2.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_024"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "BA_4",
+          "file": "base_4.step",
+          "name": "Alojamiento del sensor de base",
+          "function": "Coloca el potenciómetro sobre el eje de base.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_025"
+          ],
+          "requiresTreeSupport": true
+        },
+        {
+          "designator": "BA_5",
+          "file": "base_5.step",
+          "name": "Tapa del sensor de base",
+          "function": "Protege el sensor y deja salida al cableado.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_026"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "BA_6",
+          "file": "base_6.step",
+          "name": "Soporte de la manga, base",
+          "function": "Retiene la manga trenzada en la salida de la base.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_027"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "L1_0",
+          "file": "link1_0.step",
+          "name": "Primer eslabón",
+          "function": "Conecta base y codo; longitud nominal entre ejes 125 mm.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_002"
+          ],
+          "requiresTreeSupport": true
+        },
+        {
+          "designator": "L1_1",
+          "file": "link1_1.step",
+          "name": "Acople del sensor de base",
+          "function": "Transmite el ángulo de la articulación al eje del potenciómetro 0.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_003"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "L1_2",
+          "file": "link1_2.step",
+          "name": "Acople del sensor de codo",
+          "function": "Transmite el ángulo del codo al eje del potenciómetro 1.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_004"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "L2_0",
+          "file": "link2_0.step",
+          "name": "Tapa del sensor de codo",
+          "function": "Cierra el alojamiento y protege sus cables.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_056"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "L2_1",
+          "file": "link2_1.step",
+          "name": "Alojamiento del sensor de codo",
+          "function": "Mantiene el potenciómetro coaxial con la articulación.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_057"
+          ],
+          "requiresTreeSupport": true
+        },
+        {
+          "designator": "L2_2",
+          "file": "link2_2.step",
+          "name": "Segundo eslabón",
+          "function": "Conecta codo y herramienta; longitud nominal entre ejes 100 mm.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_058"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "L2_3",
+          "file": "link2_3.step",
+          "name": "Abrazadera del servo de codo",
+          "function": "Retiene el servo de la segunda articulación.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_059"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "L2_4",
+          "file": "link2_4.step",
+          "name": "Soporte de engranajes Z",
+          "function": "Mantiene los engranajes del giro de la herramienta en posición.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_060"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZR_0",
+          "file": "zrot_0.step",
+          "name": "Engranaje motor del giro",
+          "function": "Transmite la salida del servo de muñeca al engranaje del eje Z.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_106"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZR_1",
+          "file": "zrot_1.step",
+          "name": "Engranaje de giro del eje",
+          "function": "Hace rotar ZP_0 sin impedir que se desplace verticalmente.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_107"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZR_2",
+          "file": "zrot_2.step",
+          "name": "Plataforma del mecanismo vertical",
+          "function": "Sostiene la guía de la cremallera sobre el eslabón 2.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_084"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZP_0",
+          "file": "zpos_0.step",
+          "name": "Eje de la herramienta",
+          "function": "Baja y sube la herramienta; su brida inferior recibe el adaptador del electroimán.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_108"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZP_1",
+          "file": "zpos_1.step",
+          "name": "Cremallera vertical",
+          "function": "Convierte el giro del piñón en movimiento de subida y bajada.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_109"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZP_2",
+          "file": "zpos_2.step",
+          "name": "Guía de cremallera",
+          "function": "Mantiene el movimiento vertical alineado.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_085"
+          ],
+          "requiresTreeSupport": true
+        },
+        {
+          "designator": "ZP_3",
+          "file": "zpos_3.step",
+          "name": "Soporte del servo de elevación",
+          "function": "Retiene el servo pequeño que mueve el piñón.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_086"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "ZP_4",
+          "file": "zpos_4.step",
+          "name": "Piñón de elevación",
+          "function": "Engrana con ZP_1 para mover el eje en altura.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_087"
+          ],
+          "requiresTreeSupport": false
+        },
+        {
+          "designator": "SH_0",
+          "file": "shell_0.step",
+          "name": "Cubierta del segundo eslabón",
+          "function": "Oculta y protege el cableado y parte de la transmisión Z.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_094"
+          ],
+          "requiresTreeSupport": true
+        },
+        {
+          "designator": "SH_1",
+          "file": "shell_1.step",
+          "name": "Cubierta del piñón",
+          "function": "Cubre el conjunto del piñón y el cableado de la zona vertical.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_095"
+          ],
+          "requiresTreeSupport": true
+        },
+        {
+          "designator": "SH_2",
+          "file": "shell_2.step",
+          "name": "Soporte de la manga, brazo",
+          "function": "Retiene la manga trenzada en la salida del eslabón 2.",
+          "quantity": 1,
+          "unit": "pieza",
+          "sourceId": "dataset",
+          "viewerPartIds": [
+            "part_096"
+          ],
+          "requiresTreeSupport": false
+        }
+      ],
+      "assembly": [
+        {
+          "number": 1,
+          "title": "Colocar el servo del codo en el segundo eslabón",
+          "parts": [
+            {
+              "ref": "SER_24",
+              "quantity": 1,
+              "name": "Servomotor de base y codo"
+            },
+            {
+              "ref": "L2_2",
+              "quantity": 1,
+              "name": "Segundo eslabón"
+            },
+            {
+              "ref": "S_M4x12",
+              "quantity": 2,
+              "name": "Tornillo M4 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Reconoce L2_2: es la pieza grande del segundo brazo, con la zona circular del codo en un extremo y el paso de Z en el otro.",
+            "Asienta un servo grande en la zona circular, orientado como en la imagen, y fíjalo con dos M4 ×12. Mantén el cable libre."
+          ],
+          "checks": [
+            "La carcasa del servo apoya en su alojamiento.",
+            "Los tornillos sujetan sin doblar la pieza impresa ni aprisionar el cable."
+          ],
+          "figureId": "fx4",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_051",
+            "part_058"
+          ],
+          "note": ""
+        },
+        {
+          "number": 2,
+          "title": "Cerrar la sujeción del servo del codo",
+          "parts": [
+            {
+              "ref": "L2_3",
+              "quantity": 1,
+              "name": "Abrazadera del servo de codo"
+            },
+            {
+              "ref": "S_M4x16",
+              "quantity": 2,
+              "name": "Tornillo M4 × 16 mm"
+            }
+          ],
+          "actions": [
+            "Coloca L2_3 contra el servo del paso 1. Esta abrazadera completa su apoyo.",
+            "Aprieta los dos M4 ×16 de manera alternada y gradual."
+          ],
+          "checks": [
+            "El servo queda retenido sin holgura visible.",
+            "El eslabón no presenta grietas ni zonas deformadas."
+          ],
+          "figureId": "fx4",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_059"
+          ],
+          "note": ""
+        },
+        {
+          "number": 3,
+          "title": "Instalar el servo pequeño de giro",
+          "parts": [
+            {
+              "ref": "SER_9G",
+              "quantity": 1,
+              "name": "Servomotor pequeño"
+            },
+            {
+              "ref": "S_M2x12",
+              "quantity": 2,
+              "name": "Tornillo M2 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Coloca un servo pequeño en la abertura rectangular de L2_2 próxima a la zona Z.",
+            "Fíjalo con dos M2 ×12 y orienta la salida de cable para que no toque los engranajes."
+          ],
+          "checks": [
+            "El eje de salida queda alineado con el paso previsto para el engranaje.",
+            "El cable puede llegar al interior sin quedar bajo la abrazadera."
+          ],
+          "figureId": "fx5",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_052",
+            "part_058"
+          ],
+          "note": ""
+        },
+        {
+          "number": 4,
+          "title": "Acoplar el engranaje motor del giro",
+          "parts": [
+            {
+              "ref": "SER_9G_HORN",
+              "quantity": 1,
+              "name": "Brazo de salida del servo pequeño, incluido con el servo"
+            },
+            {
+              "ref": "ZR_0",
+              "quantity": 1,
+              "name": "Engranaje motor del giro"
+            }
+          ],
+          "actions": [
+            "Une ZR_0 al brazo de salida del servo con los tornillos autorroscantes incluidos con ese servo.",
+            "La guía original sitúa ese brazo de salida hacia delante cuando el servo está en su referencia de 0°. Verifica esa referencia por separado con el controlador correspondiente y corta la potencia antes de fijarlo."
+          ],
+          "checks": [
+            "El engranaje está centrado y no roza L2_2.",
+            "La posición de montaje no se confunde con la referencia de altura Z de JaqueBot."
+          ],
+          "figureId": "fx5",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_106"
+          ],
+          "note": "La lámina no da diámetro ni cantidad de los tornillos suministrados con el servo; no se sustituyen aquí por medidas inventadas."
+        },
+        {
+          "number": 5,
+          "title": "Añadir el soporte inferior de engranajes",
+          "parts": [
+            {
+              "ref": "L2_4",
+              "quantity": 1,
+              "name": "Soporte de engranajes Z"
+            },
+            {
+              "ref": "S_M2x12",
+              "quantity": 3,
+              "name": "Tornillo M2 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Coloca L2_4 debajo del extremo de L2_2, alineando sus pasos con el conjunto de giro.",
+            "Fíjalo con tres M2 ×12."
+          ],
+          "checks": [
+            "El soporte apoya plano.",
+            "El engranaje motor sigue girando libremente dentro de su recorrido mecánico."
+          ],
+          "figureId": "fx6",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_060"
+          ],
+          "note": ""
+        },
+        {
+          "number": 6,
+          "title": "Montar el engranaje de salida y la plataforma",
+          "parts": [
+            {
+              "ref": "ZR_1",
+              "quantity": 1,
+              "name": "Engranaje de giro del eje"
+            },
+            {
+              "ref": "ZR_2",
+              "quantity": 1,
+              "name": "Plataforma del mecanismo vertical"
+            },
+            {
+              "ref": "S_M2x16",
+              "quantity": 4,
+              "name": "Tornillo M2 × 16 mm"
+            }
+          ],
+          "actions": [
+            "Inserta ZR_1 en su alojamiento para que engrane con ZR_0.",
+            "Coloca encima la plataforma ZR_2 y fija sus cuatro apoyos con M2 ×16."
+          ],
+          "checks": [
+            "Los dientes engranan sin saltar ni trabarse.",
+            "La plataforma queda apoyada en sus separadores; el apriete no inmoviliza los engranajes."
+          ],
+          "figureId": "fx6",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_107",
+            "part_084"
+          ],
+          "note": ""
+        },
+        {
+          "number": 7,
+          "title": "Unir el eje vertical con la cremallera",
+          "parts": [
+            {
+              "ref": "ZP_0",
+              "quantity": 1,
+              "name": "Eje de la herramienta"
+            },
+            {
+              "ref": "ZP_1",
+              "quantity": 1,
+              "name": "Cremallera vertical"
+            },
+            {
+              "ref": "S_M3x20",
+              "quantity": 1,
+              "name": "Tornillo M3 × 20 mm"
+            }
+          ],
+          "actions": [
+            "Introduce ZP_0 por los pasos centrales del mecanismo. Su brida de herramienta queda debajo del brazo.",
+            "Acopla arriba ZP_1 y coloca el M3 ×20 de unión."
+          ],
+          "checks": [
+            "ZP_0 puede girar respecto de ZP_1: la unión no debe quedar bloqueada por exceso de apriete.",
+            "El eje permanece recto y centrado."
+          ],
+          "figureId": "fx7",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_108",
+            "part_109"
+          ],
+          "note": "La independencia entre giro y altura es deliberada en el diseño original."
+        },
+        {
+          "number": 8,
+          "title": "Cerrar la guía del movimiento vertical",
+          "parts": [
+            {
+              "ref": "ZP_2",
+              "quantity": 1,
+              "name": "Guía de cremallera"
+            },
+            {
+              "ref": "S_M2x12",
+              "quantity": 4,
+              "name": "Tornillo M2 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Presenta ZP_2 alrededor de la cremallera como muestra la figura.",
+            "Fija la guía a ZR_2 con cuatro M2 ×12."
+          ],
+          "checks": [
+            "La cremallera se desliza dentro de la guía sin atascarse.",
+            "Se retiraron soportes de impresión y rebabas de las superficies deslizantes."
+          ],
+          "figureId": "fx7",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_085"
+          ],
+          "note": ""
+        },
+        {
+          "number": 9,
+          "title": "Instalar el servo y el piñón de elevación",
+          "parts": [
+            {
+              "ref": "SER_9G",
+              "quantity": 1,
+              "name": "Servomotor pequeño"
+            },
+            {
+              "ref": "ZP_3",
+              "quantity": 1,
+              "name": "Soporte del servo de elevación"
+            },
+            {
+              "ref": "ZP_4",
+              "quantity": 1,
+              "name": "Piñón de elevación"
+            },
+            {
+              "ref": "S_M2x6",
+              "quantity": 2,
+              "name": "Tornillo M2 × 6 mm"
+            }
+          ],
+          "actions": [
+            "Coloca el segundo servo pequeño en ZP_3 y completa la sujeción con los dos M2 ×6 indicados.",
+            "Une ZP_4 al brazo de salida usando los tornillos incluidos con el servo. La guía original orienta ese brazo hacia delante en la referencia de 90°, con Z extendido.",
+            "Comprueba el indexado de dientes y la referencia del controlador antes de cerrar la cubierta; instala y aprieta con la potencia retirada."
+          ],
+          "checks": [
+            "Piñón y cremallera engranan a lo ancho de sus dientes.",
+            "El mecanismo no empuja contra un tope al situarlo en la referencia de montaje."
+          ],
+          "figureId": "fx8",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_054",
+            "part_085",
+            "part_086",
+            "part_087",
+            "part_109"
+          ],
+          "note": "El segundo SER_9G es visible en esta lámina aunque su cabecera enumera ZP_3, ZP_4 y dos tornillos. Los 90° son la referencia de la guía original; no autorizan un movimiento automático del montaje actual."
+        },
+        {
+          "number": 10,
+          "title": "Colocar la cubierta del piñón",
+          "parts": [
+            {
+              "ref": "SH_1",
+              "quantity": 1,
+              "name": "Cubierta del piñón"
+            },
+            {
+              "ref": "S_M2x16",
+              "quantity": 3,
+              "name": "Tornillo M2 × 16 mm"
+            },
+            {
+              "ref": "S_M2x12",
+              "quantity": 1,
+              "name": "Tornillo M2 × 12 mm"
+            },
+            {
+              "ref": "N_M2",
+              "quantity": 4,
+              "name": "Tuerca M2"
+            }
+          ],
+          "actions": [
+            "Coloca SH_1 sin meter cables entre la cubierta y las piezas de apoyo.",
+            "Usa tres M2 ×16 y el M2 ×12 en la posición inferior indicada; cierra las cuatro fijaciones con tuercas M2."
+          ],
+          "checks": [
+            "Cada largo corresponde a su agujero de la figura.",
+            "La cubierta no toca el piñón, la cremallera ni los cables durante el recorrido."
+          ],
+          "figureId": "fx8",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_095"
+          ],
+          "note": ""
+        },
+        {
+          "number": 11,
+          "title": "Preparar el extremo de codo del primer eslabón",
+          "parts": [
+            {
+              "ref": "SER_24_HORN",
+              "quantity": 1,
+              "name": "Brazo de salida del servo grande, incluido con el servo"
+            },
+            {
+              "ref": "L1_0",
+              "quantity": 1,
+              "name": "Primer eslabón"
+            },
+            {
+              "ref": "S_M3x16",
+              "quantity": 1,
+              "name": "Tornillo M3 × 16 mm"
+            },
+            {
+              "ref": "S_M3x20",
+              "quantity": 1,
+              "name": "Tornillo M3 × 20 mm"
+            }
+          ],
+          "actions": [
+            "Identifica el extremo de L1_0 que se unirá al codo y presenta el brazo de salida del servo grande con su M3 ×16.",
+            "La guía usa temporalmente un M3 ×20 para liberar el paso en el PLA y permitir ajustar después la compresión de la articulación. Retíralo tras esa preparación."
+          ],
+          "checks": [
+            "Se distingue el paso de plástico de la rosca metálica del servo.",
+            "La pieza no se ha agrietado y el paso queda preparado para el tornillo central de la unión."
+          ],
+          "figureId": "fx9",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_002"
+          ],
+          "note": "La instrucción original pide que el tornillo temporal desgaste la rosca del PLA. Es un detalle intencional del diseño, no una indicación de forzar la rosca del servo. Hacer este ajuste con supervisión; no seguir apretando si la impresión se deforma."
+        },
+        {
+          "number": 12,
+          "title": "Preparar el extremo de base del primer eslabón",
+          "parts": [
+            {
+              "ref": "SER_24_HORN",
+              "quantity": 1,
+              "name": "Brazo de salida del servo grande, incluido con el servo"
+            },
+            {
+              "ref": "S_M3x16",
+              "quantity": 1,
+              "name": "Tornillo M3 × 16 mm"
+            },
+            {
+              "ref": "S_M3x20",
+              "quantity": 1,
+              "name": "Tornillo M3 × 20 mm"
+            }
+          ],
+          "actions": [
+            "Repite en el otro extremo de L1_0 la colocación del segundo brazo de salida grande y el M3 ×16.",
+            "Prepara y retira el M3 ×20 temporal de la misma manera que en el paso 11."
+          ],
+          "checks": [
+            "Ambos extremos tienen el acoplador orientado como en la imagen.",
+            "Los tornillos temporales no se cuentan como fijaciones adicionales permanentes."
+          ],
+          "figureId": "fx9",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_000",
+            "part_001",
+            "part_002"
+          ],
+          "note": "Los M3 ×20 de los pasos 11–12 se usan para preparar el paso. La tabla original declara siete M3 ×20 para el conjunto, no nueve."
+        },
+        {
+          "number": 13,
+          "title": "Unir los dos eslabones en el codo",
+          "parts": [
+            {
+              "ref": "S_M3x20",
+              "quantity": 1,
+              "name": "Tornillo M3 × 20 mm"
+            }
+          ],
+          "actions": [
+            "La guía acopla el brazo de salida al servo del codo formando un ángulo recto cuando ese servo está en su referencia de 0°. Establece la referencia por separado y retira la potencia antes de montar.",
+            "Introduce el M3 ×20 por el paso preparado hasta la rosca del eje del servo y ajusta gradualmente la compresión de la articulación."
+          ],
+          "checks": [
+            "El codo queda unido, con giro libre dentro de su recorrido.",
+            "El ajuste evita tanto el juego excesivo como el bloqueo por apriete."
+          ],
+          "figureId": "fx10",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_002",
+            "part_051",
+            "part_058"
+          ],
+          "note": ""
+        },
+        {
+          "number": 14,
+          "title": "Añadir el acople del potenciómetro del codo",
+          "parts": [
+            {
+              "ref": "L1_2",
+              "quantity": 1,
+              "name": "Acople del sensor de codo"
+            },
+            {
+              "ref": "S_M2x8",
+              "quantity": 4,
+              "name": "Tornillo M2 × 8 mm"
+            }
+          ],
+          "actions": [
+            "Coloca L1_2 en la cara de la articulación indicada en la lámina.",
+            "Fíjalo con cuatro M2 ×8 dejando accesible la zona que recibirá el eje del sensor."
+          ],
+          "checks": [
+            "El acople está centrado con el eje de la articulación.",
+            "El paso del eje del potenciómetro no está obstruido."
+          ],
+          "figureId": "fx10",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_004"
+          ],
+          "note": ""
+        },
+        {
+          "number": 15,
+          "title": "Instalar la carcasa del sensor de codo",
+          "parts": [
+            {
+              "ref": "L2_1",
+              "quantity": 1,
+              "name": "Alojamiento del sensor de codo"
+            },
+            {
+              "ref": "S_M2x12",
+              "quantity": 3,
+              "name": "Tornillo M2 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Presenta L2_1 alrededor del codo desde el lado indicado.",
+            "Asegura la carcasa con tres M2 ×12 y dirige el futuro cableado hacia el interior del brazo."
+          ],
+          "checks": [
+            "El alojamiento queda firme y alineado con L1_2.",
+            "No limita el giro del codo."
+          ],
+          "figureId": "fx11",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_057"
+          ],
+          "note": ""
+        },
+        {
+          "number": 16,
+          "title": "Colocar el potenciómetro y cerrar su tapa",
+          "parts": [
+            {
+              "ref": "POT_5K",
+              "quantity": 1,
+              "name": "Potenciómetro angular"
+            },
+            {
+              "ref": "L2_0",
+              "quantity": 1,
+              "name": "Tapa del sensor de codo"
+            },
+            {
+              "ref": "S_M2x8",
+              "quantity": 3,
+              "name": "Tornillo M2 × 8 mm"
+            }
+          ],
+          "actions": [
+            "Introduce un potenciómetro en L2_1 haciendo coincidir su eje con el acople L1_2.",
+            "Coloca L2_0 y sus tres M2 ×8; deja los cables en la salida prevista, sin atraparlos."
+          ],
+          "checks": [
+            "El sensor está asentado y sus terminales no quedan forzados.",
+            "El eje del sensor aún puede ajustarse antes de bloquearlo en el paso 17."
+          ],
+          "figureId": "fx11",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_055",
+            "part_056",
+            "part_057",
+            "part_004"
+          ],
+          "note": ""
+        },
+        {
+          "number": 17,
+          "title": "Fijar el eje del sensor del codo",
+          "parts": [
+            {
+              "ref": "S_M4x12",
+              "quantity": 1,
+              "name": "Tornillo M4 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Con la potencia retirada, orienta suavemente el codo para acceder al tornillo lateral mostrado.",
+            "Usa un M4 ×12 para sujetar el eje del potenciómetro en su acople."
+          ],
+          "checks": [
+            "El sensor acompaña al codo sin patinar.",
+            "El recorrido útil del codo no fuerza el tope interno del potenciómetro; su lectura se calibrará después."
+          ],
+          "figureId": "fx12",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_004",
+            "part_055"
+          ],
+          "note": ""
+        },
+        {
+          "number": 18,
+          "title": "Preparar la base motorizada",
+          "parts": [
+            {
+              "ref": "SER_24",
+              "quantity": 1,
+              "name": "Servomotor de base y codo"
+            },
+            {
+              "ref": "BA_2",
+              "quantity": 1,
+              "name": "Base del robot"
+            },
+            {
+              "ref": "BA_3",
+              "quantity": 1,
+              "name": "Abrazadera del servo de base"
+            },
+            {
+              "ref": "S_M4x12",
+              "quantity": 4,
+              "name": "Tornillo M4 × 12 mm"
+            },
+            {
+              "ref": "S_M4x20",
+              "quantity": 4,
+              "name": "Tornillo M4 × 20 mm"
+            }
+          ],
+          "actions": [
+            "Asienta el segundo servo grande en BA_2.",
+            "Completa la sujeción con BA_3 y los ocho tornillos indicados: cuatro M4 ×12 y cuatro M4 ×20, respetando las posiciones de la lámina."
+          ],
+          "checks": [
+            "El servo apoya sin deformación.",
+            "Su cable sale por el espacio previsto y queda libre del mecanismo."
+          ],
+          "figureId": "fx12",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_019",
+            "part_023",
+            "part_024"
+          ],
+          "note": ""
+        },
+        {
+          "number": 19,
+          "title": "Unir el brazo a la base",
+          "parts": [
+            {
+              "ref": "S_M3x20",
+              "quantity": null,
+              "publishedQuantity": 4,
+              "observedCentralFixings": 1,
+              "quantityStatus": "discrepancia entre rótulo, imagen y total del artículo",
+              "name": "Tornillo M3 × 20 mm"
+            }
+          ],
+          "actions": [
+            "La guía coloca el brazo de salida mirando hacia delante cuando el servo de base está en la referencia de 0°. Establece esa referencia por separado y retira la potencia.",
+            "Une el extremo de base de L1_0 al servo mediante la fijación central dibujada y ajusta la compresión como en el codo."
+          ],
+          "checks": [
+            "La base puede girar dentro del recorrido previsto sin rozar la carcasa.",
+            "La unión está retenida y no se han añadido agujeros a la pieza impresa."
+          ],
+          "figureId": "fx13",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_019",
+            "part_002",
+            "part_023"
+          ],
+          "note": "Discrepancia editorial: la cabecera dice S_M3x20 ×4; la lámina muestra una fijación central y la tabla 3 declara 7 M3×20 para el robot completo. La cantidad de este paso se deja sin resolver; consultar el CAD y la unión real, sin interpretar ×4 como cuatro agujeros nuevos."
+        },
+        {
+          "number": 20,
+          "title": "Montar acople y alojamiento del sensor de base",
+          "parts": [
+            {
+              "ref": "L1_1",
+              "quantity": 1,
+              "name": "Acople del sensor de base"
+            },
+            {
+              "ref": "BA_4",
+              "quantity": 1,
+              "name": "Alojamiento del sensor de base"
+            },
+            {
+              "ref": "S_M2x8",
+              "quantity": 4,
+              "name": "Tornillo M2 × 8 mm"
+            },
+            {
+              "ref": "S_M2x12",
+              "quantity": 4,
+              "name": "Tornillo M2 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Monta L1_1 sobre la articulación de base con cuatro M2 ×8.",
+            "Coloca BA_4 alrededor del acople y fíjalo con cuatro M2 ×12."
+          ],
+          "checks": [
+            "Acople y alojamiento comparten el eje de giro.",
+            "La base sigue moviéndose sin rozar la nueva carcasa."
+          ],
+          "figureId": "fx13",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_003",
+            "part_025"
+          ],
+          "note": ""
+        },
+        {
+          "number": 21,
+          "title": "Instalar el sensor de base y su tapa",
+          "parts": [
+            {
+              "ref": "POT_5K",
+              "quantity": 1,
+              "name": "Potenciómetro angular"
+            },
+            {
+              "ref": "BA_5",
+              "quantity": 1,
+              "name": "Tapa del sensor de base"
+            },
+            {
+              "ref": "S_M2x8",
+              "quantity": 2,
+              "name": "Tornillo M2 × 8 mm"
+            }
+          ],
+          "actions": [
+            "Introduce el segundo potenciómetro en BA_4, alineado con L1_1.",
+            "Cierra BA_5 con dos M2 ×8 y guía los cables hacia la salida."
+          ],
+          "checks": [
+            "Terminales y cables quedan protegidos.",
+            "El eje está colocado sin forzar sus extremos de recorrido."
+          ],
+          "figureId": "fx14",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_020",
+            "part_003",
+            "part_025",
+            "part_026"
+          ],
+          "note": ""
+        },
+        {
+          "number": 22,
+          "title": "Fijar el eje del sensor de base",
+          "parts": [
+            {
+              "ref": "S_M4x12",
+              "quantity": 1,
+              "name": "Tornillo M4 × 12 mm"
+            }
+          ],
+          "actions": [
+            "Accede al tornillo lateral del acople de base.",
+            "Sujeta el eje del potenciómetro con el M4 ×12 indicado."
+          ],
+          "checks": [
+            "La lectura del sensor cambiará con la articulación, sin deslizamiento del acople.",
+            "El tope interno del sensor no limita forzadamente el recorrido del brazo; la calibración eléctrica se hace después."
+          ],
+          "figureId": "fx14",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_020",
+            "part_003"
+          ],
+          "note": ""
+        },
+        {
+          "number": 23,
+          "title": "Cerrar el brazo y colocar las salidas de manga",
+          "parts": [
+            {
+              "ref": "BA_6",
+              "quantity": 1,
+              "name": "Soporte de la manga, base"
+            },
+            {
+              "ref": "SH_0",
+              "quantity": 1,
+              "name": "Cubierta del segundo eslabón"
+            },
+            {
+              "ref": "SH_2",
+              "quantity": 1,
+              "name": "Soporte de la manga, brazo"
+            },
+            {
+              "ref": "S_M2x8",
+              "quantity": 4,
+              "name": "Tornillo M2 × 8 mm"
+            }
+          ],
+          "actions": [
+            "Coloca SH_0 sobre el segundo eslabón y fija con cuatro M2 ×8. Revisa el recorrido de los cables antes de cerrar.",
+            "Inserta BA_6 en BA_5 y SH_2 en SH_0; son los dos soportes de la manga trenzada."
+          ],
+          "checks": [
+            "Las cubiertas no pellizcan cables.",
+            "Los soportes de manga encajan por ajuste sin agrietar las tapas."
+          ],
+          "figureId": "fx15",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_027",
+            "part_094",
+            "part_096"
+          ],
+          "note": ""
+        },
+        {
+          "number": 24,
+          "title": "Montar el contrapeso y cerrar la base",
+          "parts": [
+            {
+              "ref": "BA_0",
+              "quantity": 1,
+              "name": "Alojamiento del contrapeso"
+            },
+            {
+              "ref": "BA_1",
+              "quantity": 1,
+              "name": "Tapa del contrapeso"
+            },
+            {
+              "ref": "WT_1250",
+              "quantity": 1,
+              "name": "Contrapeso de hierro"
+            },
+            {
+              "ref": "S_M4x16",
+              "quantity": 4,
+              "name": "Tornillo M4 × 16 mm"
+            },
+            {
+              "ref": "S_M3x20",
+              "quantity": 4,
+              "name": "Tornillo M3 × 20 mm"
+            }
+          ],
+          "actions": [
+            "Introduce la pesa de 1,25 kg en BA_0 y coloca BA_1 como tapa.",
+            "Une la base del robot a la tapa con los cuatro M4 ×16, y cierra la tapa con los cuatro M3 ×20 en las posiciones representadas."
+          ],
+          "checks": [
+            "La pesa cabe en el alojamiento y no queda suelta.",
+            "La base descansa plana y el conjunto es estable antes de añadir tablero o accesorios."
+          ],
+          "figureId": "fx15",
+          "sourceId": "paper",
+          "viewerPartIds": [
+            "part_021",
+            "part_022",
+            "part_050"
+          ],
+          "note": ""
+        },
+        {
+          "number": 25,
+          "title": "Tender y proteger el cableado",
+          "parts": [
+            {
+              "ref": "SLV_12",
+              "quantity": 1,
+              "name": "Manga trenzada para cables"
+            }
+          ],
+          "actions": [
+            "Extiende los cables de servos y potenciómetros con los diez JR_EXT indicados para alcanzar la placa. Etiqueta cada extremo antes de introducirlo en la manga.",
+            "Pasa el conjunto por SLV_12, desde el brazo hasta la base, formando un arco amplio y sin tensión."
+          ],
+          "checks": [
+            "El cableado acompaña todo el recorrido previsto sin engancharse en dientes ni articulaciones.",
+            "Las uniones mantienen su polaridad y quedan protegidas."
+          ],
+          "figureId": "fx16",
+          "sourceId": "paper",
+          "viewerPartIds": [],
+          "note": "La tabla original especifica 0,25 m de manga; comprobar el recorrido real antes de cortarla. Los diez prolongadores son los mismos que aparecen en el paso 26, no diez unidades adicionales."
+        },
+        {
+          "number": 26,
+          "title": "Identificar cables y conectar al controlador",
+          "parts": [
+            {
+              "ref": "JR_EXT",
+              "quantity": 10,
+              "name": "Extensión de cable de servo"
+            },
+            {
+              "ref": "NUC_F4",
+              "quantity": 1,
+              "name": "Placa de control de movimiento"
+            },
+            {
+              "ref": "PRO_R3",
+              "quantity": 1,
+              "name": "Shield de prototipos"
+            }
+          ],
+          "actions": [
+            "Identifica los seis grupos: Axis 0 base, Axis 1 codo, Axis 2 giro, Axis 3 altura, Pot 0 base y Pot 1 codo.",
+            "Conecta cada grupo de acuerdo con el esquema eléctrico vigente del proyecto. La fotografía oficial muestra el controlador original con shield; sirve para reconocer el conjunto, no para copiar posiciones de pines a otra revisión.",
+            "Antes de alimentar revisa continuidad, polaridad y ausencia de cortocircuitos. Alimenta y prueba cada subsistema por separado siguiendo la sección de conexiones y las apps actuales."
+          ],
+          "checks": [
+            "Las etiquetas de cable coinciden con la función mecánica.",
+            "La lógica USB, los servos de 5 V y la bobina de 12 V se conectan a sus circuitos correspondientes."
+          ],
+          "figureId": "fx16",
+          "sourceId": "paper",
+          "viewerPartIds": [],
+          "note": "El montaje mecánico termina aquí; la calibración y el permiso de movimiento son procedimientos separados. No ejecutar automáticamente los ejemplos antiguos de calibración del artículo."
+        }
+      ],
+      "figures": [
+        {
+          "id": "fx4",
+          "asset": "assets/assembly/fx4.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx4.jpg",
+          "steps": [
+            1,
+            2
+          ],
+          "caption": "Pasos 1–2: Colocar el servo del codo en el segundo eslabón; cerrar la sujeción del servo del codo.",
+          "alt": "Pasos 1–2: Colocar el servo del codo en el segundo eslabón; cerrar la sujeción del servo del codo. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "ac2cfed9e3ab24195d1efd4d25fa3c3d1859c024b6f95feb155cc91a2471c02a"
+        },
+        {
+          "id": "fx5",
+          "asset": "assets/assembly/fx5.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx5.jpg",
+          "steps": [
+            3,
+            4
+          ],
+          "caption": "Pasos 3–4: Instalar el servo pequeño de giro; acoplar el engranaje motor del giro.",
+          "alt": "Pasos 3–4: Instalar el servo pequeño de giro; acoplar el engranaje motor del giro. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "d9f7f7799b2b5c3770ef510fb6a2ee87fd3422b0a84cd4a196322af42ec28b12"
+        },
+        {
+          "id": "fx6",
+          "asset": "assets/assembly/fx6.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx6.jpg",
+          "steps": [
+            5,
+            6
+          ],
+          "caption": "Pasos 5–6: Añadir el soporte inferior de engranajes; montar el engranaje de salida y la plataforma.",
+          "alt": "Pasos 5–6: Añadir el soporte inferior de engranajes; montar el engranaje de salida y la plataforma. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "69f5ed81f8a8a0f80d5777cddc3a0485c30e4117978a74d355deaba6965b7c16"
+        },
+        {
+          "id": "fx7",
+          "asset": "assets/assembly/fx7.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx7.jpg",
+          "steps": [
+            7,
+            8
+          ],
+          "caption": "Pasos 7–8: Unir el eje vertical con la cremallera; cerrar la guía del movimiento vertical.",
+          "alt": "Pasos 7–8: Unir el eje vertical con la cremallera; cerrar la guía del movimiento vertical. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "e0c0fed58dd271592d82d38c4e8894e39f19799d50381a5461e9becf9d57e1a3"
+        },
+        {
+          "id": "fx8",
+          "asset": "assets/assembly/fx8.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx8.jpg",
+          "steps": [
+            9,
+            10
+          ],
+          "caption": "Pasos 9–10: Instalar el servo y el piñón de elevación; colocar la cubierta del piñón.",
+          "alt": "Pasos 9–10: Instalar el servo y el piñón de elevación; colocar la cubierta del piñón. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "0494eb86e98b0b9641ff256e46a448005d11a4fe5774d45baec48505f7a235a2"
+        },
+        {
+          "id": "fx9",
+          "asset": "assets/assembly/fx9.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx9.jpg",
+          "steps": [
+            11,
+            12
+          ],
+          "caption": "Pasos 11–12: Preparar el extremo de codo del primer eslabón; preparar el extremo de base del primer eslabón.",
+          "alt": "Pasos 11–12: Preparar el extremo de codo del primer eslabón; preparar el extremo de base del primer eslabón. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "597c28093414e7279bc045f84f7059725a8087973ef9be25f9c92e3d6061d1e5"
+        },
+        {
+          "id": "fx10",
+          "asset": "assets/assembly/fx10.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx10.jpg",
+          "steps": [
+            13,
+            14
+          ],
+          "caption": "Pasos 13–14: Unir los dos eslabones en el codo; añadir el acople del potenciómetro del codo.",
+          "alt": "Pasos 13–14: Unir los dos eslabones en el codo; añadir el acople del potenciómetro del codo. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "c2770fef8b19226d703e220603f32ea39bdd5886520031794b788116031f986a"
+        },
+        {
+          "id": "fx11",
+          "asset": "assets/assembly/fx11.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx11.jpg",
+          "steps": [
+            15,
+            16
+          ],
+          "caption": "Pasos 15–16: Instalar la carcasa del sensor de codo; colocar el potenciómetro y cerrar su tapa.",
+          "alt": "Pasos 15–16: Instalar la carcasa del sensor de codo; colocar el potenciómetro y cerrar su tapa. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "973b507f3c57087110029eae4c8adbf9e88f74e22f46f607fe96de940b844d50"
+        },
+        {
+          "id": "fx12",
+          "asset": "assets/assembly/fx12.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx12.jpg",
+          "steps": [
+            17,
+            18
+          ],
+          "caption": "Pasos 17–18: Fijar el eje del sensor del codo; preparar la base motorizada.",
+          "alt": "Pasos 17–18: Fijar el eje del sensor del codo; preparar la base motorizada. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "295f391d32dfd92ae5ec3d349354f04c800f6d1611a5f62a03fd5d33d7eb879c"
+        },
+        {
+          "id": "fx13",
+          "asset": "assets/assembly/fx13.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx13.jpg",
+          "steps": [
+            19,
+            20
+          ],
+          "caption": "Pasos 19–20: Unir el brazo a la base; montar acople y alojamiento del sensor de base.",
+          "alt": "Pasos 19–20: Unir el brazo a la base; montar acople y alojamiento del sensor de base. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "5915b5745e4a4c2bdc55bd22209eeb18754124db90094b97731262cc1048fff7"
+        },
+        {
+          "id": "fx14",
+          "asset": "assets/assembly/fx14.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx14.jpg",
+          "steps": [
+            21,
+            22
+          ],
+          "caption": "Pasos 21–22: Instalar el sensor de base y su tapa; fijar el eje del sensor de base.",
+          "alt": "Pasos 21–22: Instalar el sensor de base y su tapa; fijar el eje del sensor de base. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "035a6083e756388c6ea5f76aa125d911c9bde0ee514cec841f35a625ebdc934f"
+        },
+        {
+          "id": "fx15",
+          "asset": "assets/assembly/fx15.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx15.jpg",
+          "steps": [
+            23,
+            24
+          ],
+          "caption": "Pasos 23–24: Cerrar el brazo y colocar las salidas de manga; montar el contrapeso y cerrar la base.",
+          "alt": "Pasos 23–24: Cerrar el brazo y colocar las salidas de manga; montar el contrapeso y cerrar la base. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "138923978a4b4a6930b973ced9a20a42abbba20195b121314249bc93446bd704"
+        },
+        {
+          "id": "fx16",
+          "asset": "assets/assembly/fx16.jpg",
+          "stagedAsset": "assets-staging/assembly-v2/fx16.jpg",
+          "steps": [
+            25,
+            26
+          ],
+          "caption": "Pasos 25–26: Tender y proteger el cableado; identificar cables y conectar al controlador.",
+          "alt": "Pasos 25–26: Tender y proteger el cableado; identificar cables y conectar al controlador. Lámina original de EduSCARA con las piezas y la tornillería señaladas.",
+          "sourceId": "paper",
+          "credit": "Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "changes": "Imagen original completa, sin modificaciones. Leyenda y explicación españolas añadidas por JaqueBot; no son texto de los autores originales.",
+          "sha256": "d6e64935058a61671440dff59162224e0593f873d4bda2a23d76155d5e07e8fe"
+        }
+      ],
+      "jaquebotAssembly": [
+        {
+          "number": 1,
+          "title": "Elegir una revisión y preparar las impresiones",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "BOARD",
+            "BOARD_DARK",
+            "CHESS",
+            "ADAPTER",
+            "MAST"
+          ],
+          "actions": [
+            "Usa juntos los archivos de la revisión R03 que aparece en el visor. Clasifica tablero, herramienta y soporte; separa la tornillería del brazo original de la nueva.",
+            "Para imprimir, parte de STL_Impresion. Revisa cada orientación, los soportes removibles, las zonas de tuerca cautiva y los agujeros antes de enviar el trabajo a la impresora.",
+            "Retira soportes y rebabas; comprueba en seco un módulo de tablero, un pasador de cámara y la unión de un tramo con su manguito."
+          ],
+          "checks": [
+            "No se mezclan pie y módulos de tablero de revisiones incompatibles.",
+            "Los apoyos están planos y los taladros están libres."
+          ],
+          "note": "Los accesorios R03 son una adaptación local del proyecto; las dimensiones nominales de CAD no sustituyen una comprobación física.",
+          "viewerPartIds": []
+        },
+        {
+          "number": 2,
+          "title": "Armar el tablero modular",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "BOARD",
+            "BOARD_M2",
+            "BOARD_N2",
+            "BOARD_DARK"
+          ],
+          "actions": [
+            "Une Tablero_modulo_11, 12, 21 y 22 por sus rebajes de media madera, respetando la posición del brazo y de las plataformas de referencia.",
+            "Coloca las ocho tuercas M2 cautivas y los ocho tornillos M2; determina el largo con el módulo real para que las puntas no sobresalgan debajo.",
+            "Asienta las 32 casillas oscuras sin cubrir accesos a tornillos; comprueba un patrón 8 ×8 alternado."
+          ],
+          "checks": [
+            "El tablero apoya completo en una superficie plana y no cabecea.",
+            "Mide el tamaño real de una casilla. R03 diseña 13,5 mm; la calibración usa la medida de la impresión."
+          ],
+          "note": "",
+          "viewerPartIds": []
+        },
+        {
+          "number": 3,
+          "title": "Fijar tablero y base en una misma superficie",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "BOARD_ANCHOR"
+          ],
+          "actions": [
+            "Apoya base y tablero en la misma mesa. Lleva las dos orejas del tablero hasta los agujeros frontales existentes de BA_0.",
+            "Revisa el anclaje que ya tiene la base y el largo de sus fijaciones: las orejas R03 añaden 3 mm de espesor. Fija sin levantar ni torcer el tablero."
+          ],
+          "checks": [
+            "Base y tablero permanecen inmóviles entre sí.",
+            "El tablero tiene apoyo continuo: las orejas no se usan para sostenerlo en voladizo."
+          ],
+          "note": "",
+          "viewerPartIds": [
+            "part_021"
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Preparar las piezas y sus etiquetas",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "CHESS",
+            "STEEL",
+            "TAGS"
+          ],
+          "actions": [
+            "Organiza las 32 piezas: por color, ocho peones, dos torres, dos caballos, dos alfiles, una reina y un rey.",
+            "Coloca los insertos magnéticos previstos y verifica una unión firme. El material debe ser atraído por el imán; la propuesta R03 es acero de bajo carbono Ø11 ×1 mm. Comprueba el ajuste de los insertos realmente adquiridos.",
+            "Imprime el PDF vigente de 40 etiquetas al 100 %, comprueba su regla de escala y coloca las 32 identidades de pieza y las cuatro referencias 100–103 según el mapa actual. Mantén superficies planas, legibles y sin brillos."
+          ],
+          "checks": [
+            "Cada pieza tiene el ID que le corresponde; no se repiten etiquetas por confundir dos peones.",
+            "La etiqueta no impide el contacto magnético y el conjunto permite sujetar y soltar la pieza en una prueba separada."
+          ],
+          "note": "La compra y dimensiones reales de insertos no se deducen del CAD. No usar como etiquetas vigentes los antiguos marcadores DICT_4X4_50 incluidos en la escena R03.",
+          "viewerPartIds": []
+        },
+        {
+          "number": 5,
+          "title": "Instalar el adaptador y el electroimán",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "ADAPTER",
+            "ADAPTER_M2",
+            "MAGNET",
+            "MAGNET_M3"
+          ],
+          "actions": [
+            "Con las fuentes desconectadas, presenta Adaptador_ZP0_P13_27 contra la brida inferior de ZP_0 y alinea los cuatro pasos en cruz.",
+            "Elige las cuatro fijaciones M2 según el enganche real de la brida; fija sin inclinar el adaptador. Los agujeros CAD Ø2,1 mm no prueban que exista una rosca utilizable.",
+            "Sujeta el imán por su fijación central M3, con un largo que no llegue al fondo de la bobina. Saca el cable por una ventana lateral y déjalo libre de dientes y apoyos."
+          ],
+          "checks": [
+            "El centro del imán coincide con el eje vertical ZP_0.",
+            "La bobina está retenida; su cable no se tensa durante el movimiento."
+          ],
+          "note": "La caída nominal R03 es 38 mm de adaptador más 27 mm de imán: 65 mm. El dato sirve para reconocer el diseño, no para fijar la toma física sin medir.",
+          "viewerPartIds": [
+            "part_108",
+            "part_147",
+            "part_148"
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Levantar el mástil desde el pie",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "MAST",
+            "MAST_M4_12",
+            "MAST_M4_50",
+            "MAST_N4",
+            "MAST_WASHER"
+          ],
+          "actions": [
+            "Une Pie_mastil_30 a las dos orejas del tablero con dos M4 ×12, arandelas y las tuercas alojadas debajo. No alargues estos tornillos: su punta debe quedar por encima de la mesa.",
+            "Introduce el tramo inferior de 200 mm en el pie y sujétalo con dos M4 ×50.",
+            "Monta el manguito con 35 mm de solape sobre cada tramo, introduce el tramo superior y fija la unión con dos M4 ×50."
+          ],
+          "checks": [
+            "El pie apoya sin balancearse y los tornillos no tocan la mesa.",
+            "Los tramos están alineados y el manguito no abre las paredes por exceso de apriete."
+          ],
+          "note": "",
+          "viewerPartIds": [
+            "part_1263",
+            "part_1264",
+            "part_1265",
+            "part_1266"
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Colocar travesaño y cámara",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "MAST",
+            "MAST_M4_50",
+            "MAST_M4_35",
+            "CAMERA_M2_5",
+            "AI_CAMERA"
+          ],
+          "actions": [
+            "Une las dos escuadras y el travesaño con los cuatro M4 ×50 restantes de esa medida.",
+            "Antes de fijar el portacámara al travesaño, coloca la cámara en sus cuatro pasadores y las dos presillas de borde. Fija las presillas con dos M2 ×5, sin presionar componentes electrónicos.",
+            "Instala el portacámara desde arriba con dos M4 ×35. Mantén las arandelas de diámetro exterior máximo 8 mm y orienta las caras planas de las tuercas para no invadir las presillas."
+          ],
+          "checks": [
+            "La cámara no puede salir de los pasadores, pero su placa no está doblada.",
+            "La óptica apunta al tablero y los 360 mm nominales de altura se comprueban sobre el montaje real."
+          ],
+          "note": "Nivelar la cámara y verificar rigidez, vibración y holgura con el brazo antes de operar; la comprobación digital de R03 no acredita esos resultados físicos.",
+          "viewerPartIds": [
+            "part_1267",
+            "part_1268",
+            "part_1269",
+            "part_1270",
+            "part_1271",
+            "part_1272",
+            "part_1273"
+          ]
+        },
+        {
+          "number": 8,
+          "title": "Montar Raspberry, carcasa y cables",
+          "sourceId": "jaquebot-r03",
+          "materialRefs": [
+            "PI5",
+            "PI_CASE",
+            "PI_POWER",
+            "MAST_M4_40",
+            "CASE_M3",
+            "CAMERA_CABLE",
+            "USB_DATA"
+          ],
+          "actions": [
+            "Fija el bastidor ranurado al travesaño con dos M4 ×40 desde arriba.",
+            "Presenta la carcasa real con sus dos separadores y mide el largo de los dos M3 de retención. Comprueba ranuras, ventilación y distancia de los tornillos a la electrónica antes de apretar.",
+            "Con Raspberry apagada, conecta el cable CSI compatible sin doblarlo de forma aguda. Ordena el cable y el USB con el clip dejando acceso a puertos y un recorrido libre del robot."
+          ],
+          "checks": [
+            "La carcasa está retenida y los conectores no soportan el peso del cableado.",
+            "Nada bloquea la ventilación ni cuelga dentro del recorrido del brazo o de la cremallera."
+          ],
+          "note": "La envolvente de carcasa R03 fue provisional. Si se usa un soporte de una revisión posterior, seguir sus medidas y tornillería; no trasladar automáticamente el largo de los tornillos.",
+          "viewerPartIds": [
+            "part_1274",
+            "part_1275",
+            "part_1276",
+            "part_1277"
+          ]
+        },
+        {
+          "number": 9,
+          "title": "Conectar control y potencia por funciones",
+          "sourceId": "jaquebot-hardware",
+          "materialRefs": [
+            "NUC_F4",
+            "USB_DATA",
+            "PI_POWER",
+            "POW_5V",
+            "MAGNET_POWER",
+            "MOSFET_MODULE"
+          ],
+          "actions": [
+            "Identifica primero el montaje presente: shield y módulo externo del prototipo o una PCB posterior que haya sido fabricada y verificada. Usa su esquema correspondiente.",
+            "Con todo apagado, conecta Raspberry–ST-LINK por USB para comunicación. Mantén la alimentación de servos de 5 V y la del imán de 12 V en sus circuitos previstos, con el GND de referencia según el esquema.",
+            "En el montaje documentado, PB5 / D4 / CN10-29 llega por B8 a la entrada de mando del módulo MOSFET. B8 conduce señal y GND de control; la corriente de la bobina pasa por la etapa de potencia.",
+            "Comprueba polaridad, continuidad y tensiones antes de unir las cargas. No intercambies los conectores de servo y sensor por tener ambos tres hilos."
+          ],
+          "checks": [
+            "Los cuatro servos y los dos potenciómetros conservan sus etiquetas de eje.",
+            "Una orden de imán ON/OFF puede verificarse lógicamente, pero solo una prueba física demuestra atracción y liberación."
+          ],
+          "note": "El diseño PCB R03 integra una etapa de potencia diferente. Su lista de componentes se ofrece como diseño propuesto, no como montaje ya validado.",
+          "viewerPartIds": []
+        },
+        {
+          "number": 10,
+          "title": "Comprobar el conjunto antes de una partida",
+          "sourceId": "jaquebot-hardware",
+          "materialRefs": [
+            "PI5",
+            "AI_CAMERA",
+            "MAGNET",
+            "CHESS"
+          ],
+          "actions": [
+            "Abre JaqueBot y comprueba conexión, lecturas angulares y estado del imán sin iniciar una rutina antigua de autocalibración.",
+            "Sigue la preparación actual de motores y la referencia Z. En este proyecto se confirma Z físicamente abajo a 90° nominales y el transporte usa 180°. Enseña y guarda la altura de toma real con la app; usa después esa consigna del ejemplar. La confirmación visual no es un sensor de altura.",
+            "Revisa con la cámara las cuatro referencias de tablero y las 32 piezas. Calibra por separado la visión y la relación entre casillas y brazo; mide también los lugares de captura.",
+            "Comprueba agarre, elevación, traslado y liberación con una sola pieza y supervisión antes de habilitar una partida física. Repite las verificaciones si se mueve base, tablero o cámara."
+          ],
+          "checks": [
+            "El recorrido queda libre de cámara, cables, piezas altas y topes.",
+            "JaqueBot Ajedrez satisface sus requisitos de preparación; detectar 32/32 piezas no basta para autorizar motores."
+          ],
+          "note": "Esta guía explica el montaje. Los procedimientos de operación y recuperación de las dos apps se mantienen en su sección del manual.",
+          "viewerPartIds": []
+        }
+      ],
+      "pcbR03Note": "No comprar esta tabla como complemento obligatorio del shield original: corresponde a una placa alternativa R03. Se requiere además la PCB fabricada y su validación eléctrica. La etapa MOSFET integrada propuesta no acredita que se haya sustituido el módulo externo del prototipo.",
+      "glossary": [
+        {
+          "term": "Servo",
+          "meaning": "Motor con una salida que puede colocarse en un ángulo solicitado."
+        },
+        {
+          "term": "Brazo de salida o horn",
+          "meaning": "Pequeño acoplador fijado al eje del servo; transmite su movimiento a una pieza mayor."
+        },
+        {
+          "term": "Eslabón",
+          "meaning": "Tramo rígido del brazo entre dos articulaciones."
+        },
+        {
+          "term": "Potenciómetro",
+          "meaning": "Sensor giratorio cuya señal ayuda a conocer el ángulo de base o codo."
+        },
+        {
+          "term": "Piñón y cremallera",
+          "meaning": "Rueda dentada y barra dentada que convierten giro en desplazamiento vertical."
+        },
+        {
+          "term": "M2 ×12",
+          "meaning": "Tornillo de rosca métrica de 2 mm de diámetro y 12 mm de largo bajo la cabeza."
+        },
+        {
+          "term": "Manga trenzada",
+          "meaning": "Funda flexible que reúne los cables y acompaña el movimiento."
+        },
+        {
+          "term": "ArUco",
+          "meaning": "Etiqueta de cuadrados negros y blancos que la cámara reconoce como una identidad."
+        },
+        {
+          "term": "MOSFET",
+          "meaning": "Interruptor electrónico que permite controlar la bobina con una señal pequeña sin pasar su corriente por el pin del controlador."
+        }
+      ],
+      "readingOrder": [
+        "Identificar original y adaptación",
+        "Reunir y comprobar materiales",
+        "Imprimir y preparar piezas",
+        "Montar EduSCARA: pasos 1–26",
+        "Añadir tablero, herramienta y cámara: pasos JaqueBot 1–10",
+        "Revisar conexiones y preparar las apps"
+      ],
+      "illustrationProposals": [
+        {
+          "title": "Cómo se transforma el giro en subida",
+          "parts": [
+            "ZP_1",
+            "ZP_2",
+            "ZP_3",
+            "ZP_4"
+          ],
+          "description": "Usar la lámina oficial de los pasos 9–10 y el visor con selección de cremallera, guía y piñón; la animación sería ilustrativa, no una prueba de recorrido."
+        },
+        {
+          "title": "Del robot original al robot de ajedrez",
+          "description": "Usar vista isométrica del modelo R03 con llamadas numeradas a tablero, adaptador, imán, mástil, cámara y soporte Raspberry; conservar las láminas oficiales a color para el montaje preciso."
+        },
+        {
+          "title": "Tres alimentaciones y una cadena de control",
+          "description": "Diagrama conceptual: Raspberry → USB → NUCLEO → servos / MOSFET → imán; alimentación Raspberry, 5 V servos y 12 V bobina separadas y asociadas a sus circuitos. Remitir a esquema real para pines y polaridad."
+        },
+        {
+          "title": "Mapa de piezas por designador",
+          "description": "Tabla BA/L1/L2/ZR/ZP/SH junto al visor; seleccionar cada pieza mediante viewerPartIds y mostrar su nombre cotidiano y función."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "paper",
+          "title": "EduSCARA: An open-source RRPR educational SCARA platform",
+          "url": "https://doi.org/10.1016/j.ohx.2026.e00761",
+          "document": null
+        },
+        {
+          "sourceId": "paper-table3",
+          "title": "EduSCARA, tabla 3: materiales del manipulador",
+          "url": "https://doi.org/10.1016/j.ohx.2026.e00761",
+          "document": null
+        },
+        {
+          "sourceId": "paper-table4",
+          "title": "EduSCARA, tabla 4: materiales del controlador original",
+          "url": "https://doi.org/10.1016/j.ohx.2026.e00761",
+          "document": null
+        },
+        {
+          "sourceId": "dataset",
+          "title": "EduSCARA — archivos originales, Mendeley Data, versión 3",
+          "url": "https://data.mendeley.com/datasets/m46jnn2cmb/3",
+          "document": null
+        },
+        {
+          "sourceId": "bath",
+          "title": "Registro institucional de la publicación, University of Bath",
+          "url": "https://researchportal.bath.ac.uk/en/publications/eduscara-an-open-source-rrpr-educational-scara-platform/",
+          "document": null
+        },
+        {
+          "sourceId": "jaquebot-r03",
+          "title": "Diseño Ajedrez R03 — memoria de ingeniería y archivos CAD del proyecto",
+          "url": null,
+          "document": "Diseno Ajedrez R03/LEEME_INGENIERIA.md; EduSCARA_Ajedrez_R03.f3d; STL_Impresion"
+        },
+        {
+          "sourceId": "jaquebot-hardware",
+          "title": "JaqueBot — hardware y operación instalados",
+          "url": null,
+          "document": "jaquebot/docs/HARDWARE.md; Raspberry Pi/LEEME.md; manual-interactivo/content/project-content.json"
+        },
+        {
+          "sourceId": "jaquebot-tags",
+          "title": "Mapa vigente de etiquetas y tablero",
+          "url": null,
+          "document": "jaquebot/config/aruco_map.json; jaquebot/config/board.json"
+        },
+        {
+          "sourceId": "pcb-r03",
+          "title": "PCB JaqueBot R03 — lista de ensamble",
+          "url": null,
+          "document": "PCB JaqueBot R03 KiCad/BOM_ensamble.csv"
+        },
+        {
+          "sourceId": "camera",
+          "title": "Raspberry Pi AI Camera — documentación oficial",
+          "url": "https://www.raspberrypi.com/products/ai-camera/",
+          "document": "Dimensiones consultadas y registradas en la memoria R03"
+        },
+        {
+          "sourceId": "magnet-dimensions",
+          "title": "NH-P13/27 — referencia dimensional de Nian Hung",
+          "url": "https://www.nianhung.com/product_d.php?id=1508&lang=en&tb=5",
+          "document": "Referencia dimensional citada en R03; no acredita por sí sola la tensión de la bobina instalada."
+        }
+      ],
+      "editorialNotes": {
+        "assembly": "Redacción educativa original en español basada en las láminas y las tablas oficiales; reproduce el orden 1–26. El texto distingue instrucciones publicadas, verificaciones de montaje y cambios locales.",
+        "figures": "Las trece láminas se reproducen desde copias locales preexistentes del artículo, sin recorte ni estilización. No se descargaron imágenes para sortear un bloqueo de acceso.",
+        "scope": "No se inventan referencias comerciales, largos pendientes, cantidad de filamento adicional ni una validación física de materiales que solo están documentados en CAD."
+      }
+    },
+    "apps": [
+      {
+        "id": "manual",
+        "title": "JaqueBot manual",
+        "applicationName": "JaqueBot",
+        "purpose": "Controlar base, codo, Z y electroimán; preparar y revisar la sesión del robot.",
+        "port": 8766,
+        "address": "http://127.0.0.1:8766",
+        "where": "En el navegador o acceso de escritorio de la propia Raspberry.",
+        "screenshotId": "manual-home",
+        "screenGuide": [
+          {
+            "number": 1,
+            "title": "Estado y conexión",
+            "whatYouSee": "Arriba están el nombre JaqueBot, el estado de conexión, el selector de puerto y Conectar/Desconectar.",
+            "whatToDo": "Empieza aquí. Comprueba que estás en la app manual y conecta la placa solo después de revisar el montaje.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.0,
+              "width": 0.94,
+              "height": 0.112
+            }
+          },
+          {
+            "number": 2,
+            "title": "Prepara la sesión",
+            "whatYouSee": "Usar calibración actual y Reinicié la placa aparecen cuando aún falta preparar los motores.",
+            "whatToDo": "Elige según lo que ocurrió realmente con la NUCLEO. Si fue reiniciada, no puede conservarse su calibración motora en RAM.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.114,
+              "width": 0.94,
+              "height": 0.048
+            }
+          },
+          {
+            "number": 3,
+            "title": "Posición actual",
+            "whatYouSee": "El dibujo superior representa base, codo y punta. Debajo aparecen X/Y y los ángulos leídos.",
+            "whatToDo": "Arrastra para preparar un destino y revisa el dibujo. Pulsa Mover solo cuando quieras ejecutar; × descarta.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.166,
+              "width": 0.94,
+              "height": 0.376
+            }
+          },
+          {
+            "number": 4,
+            "title": "Base y codo",
+            "whatYouSee": "Paso, Velocidad, botones +/− y campos de destino controlan las articulaciones horizontales.",
+            "whatToDo": "Da una orden pequeña cada vez y espera su resultado. No interpretes un número escrito como una orden ya enviada.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.545,
+              "width": 0.94,
+              "height": 0.146
+            }
+          },
+          {
+            "number": 5,
+            "title": "Altura Z",
+            "whatYouSee": "La referencia, el paso, la velocidad, Subir, Bajar y Detener Z están agrupados en el mismo bloque.",
+            "whatToDo": "Confirma la posición física antes de usarlo. La barra muestra recorrido ordenado y no una altura medida.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.691,
+              "width": 0.94,
+              "height": 0.18
+            }
+          },
+          {
+            "number": 6,
+            "title": "Electroimán y bloqueo",
+            "whatYouSee": "El bloque final permite Activar/Desactivar el imán. Al pie se ve el estado de la orden y Bloquear controles.",
+            "whatToDo": "Comprueba agarre/liberación con una pieza apoyada. Bloquear evita órdenes nuevas; el corte de 5 V es el recurso físico para base/codo.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.871,
+              "width": 0.94,
+              "height": 0.129
+            }
+          }
+        ],
+        "screenGuideNote": "Las zonas se refieren a la captura real histórica del 9 de octubre. La disposición se adapta al tamaño de la ventana.",
+        "sections": [
+          {
+            "title": "Abrir JaqueBot manual",
+            "body": "Esta es la aplicación para aprender a controlar el brazo y comprobar sus partes. Se usa desde la Raspberry conectada al robot.",
+            "steps": [
+              "Enciende la Raspberry y espera a que aparezca su escritorio.",
+              "Abre el acceso JaqueBot. Si ya está abierto, recupera su ventana; no hace falta abrir otra copia.",
+              "Si usas el navegador de esa misma Raspberry, escribe http://127.0.0.1:8766.",
+              "Comprueba que el título sea Control del brazo. Al abrir la pantalla no se inicia un movimiento ni una calibración."
+            ],
+            "warnings": [
+              "127.0.0.1 significa este mismo computador. Escribir esa dirección en el teléfono o en otro computador no abre la Raspberry. El acceso desde otro equipo requiere la conexión local configurada por el docente."
+            ]
+          },
+          {
+            "title": "Antes de conectar",
+            "body": "Conectar la aplicación y alimentar los servos son tareas diferentes: el USB permite hablar con la placa; la fuente de 5 V permite que se muevan los motores.",
+            "steps": [
+              "Trabaja con el docente. Revisa que el robot esté firme, el recorrido libre y el corte físico de 5 V al alcance.",
+              "Confirma que ninguna pieza quede suspendida del electroimán. Durante la conexión se solicita apagar su señal.",
+              "Si JaqueBot Ajedrez tiene la STM32 conectada, libérala allí con Diagnóstico → Desconectar STM32. Espera a que termine.",
+              "Comprueba el cable USB entre la Raspberry y el conector ST-LINK de la NUCLEO."
+            ],
+            "warnings": [
+              "No cambies cables ni posiciones de conectores con el equipo alimentado. Solo una aplicación puede poseer el USB del robot a la vez."
+            ]
+          },
+          {
+            "title": "Conectar y preparar los motores",
+            "body": "La preparación comprueba si la placa conserva una calibración motora válida. No debe confundirse con enseñar las casillas del tablero.",
+            "steps": [
+              "Pulsa ↻ junto al selector de puerto. Elige el dispositivo NUCLEO que aparezca y pulsa Conectar ↗.",
+              "Espera el estado Conectado. Esto confirma comunicación, pero todavía puede faltar preparar los motores.",
+              "Si la placa ya fue calibrada y no se apagó ni reinició, pulsa Usar calibración actual. La aplicación lee su estado y acepta la sesión solo si la calibración sigue válida.",
+              "Si la placa se reinició, el docente debe usar Reinicié la placa. En el diálogo se comprueban recorrido despejado y Z físicamente abajo a 90° antes de iniciar el barrido.",
+              "Espera el resultado. Continúa únicamente cuando la app indique que la sesión está lista."
+            ],
+            "warnings": [
+              "La calibración motora mueve base y codo y necesita 5 V. No se debe iniciar con piezas u objetos en su recorrido.",
+              "Usar calibración actual no corrige una calibración incompleta. Los fallos de calibración registrados en el proyecto no se dan por resueltos en este manual."
+            ]
+          },
+          {
+            "title": "Uso diario: elegir, revisar y mover",
+            "body": "El panel permite movimientos pequeños por articulación y destinos X/Y. Preparar un valor no es lo mismo que enviarlo.",
+            "steps": [
+              "Comprueba la altura física de la herramienta antes de mover horizontalmente. La app manual no aplica la subida automática de Z del panel de Ajedrez.",
+              "Elige Paso y Velocidad. Para aprender, usa pasos pequeños y la velocidad baja que indique el docente.",
+              "Pulsa + o − para un paso de Base o Codo. También puedes escribir un ángulo y pulsar su botón ↗.",
+              "Para un destino en el dibujo, elige Punta o Codo, arrastra y revisa la previsualización. Solo Mover ↗ envía el destino preparado.",
+              "Espera a que termine cada orden y revisa las lecturas antes de enviar la siguiente."
+            ],
+            "warnings": [
+              "Base admite destinos de −90° a 90° y codo de 0° a 120°. No fuerces el mecanismo para alcanzar un valor.",
+              "La vista superior y X/Y se calculan con los ángulos de los potenciómetros; no son una medición externa de la punta."
+            ]
+          },
+          {
+            "title": "Usar Z y el electroimán",
+            "body": "Z sube o baja la herramienta. El electroimán tiene dos botones independientes: Activar y Desactivar.",
+            "steps": [
+              "Para Z, comprueba visualmente que está abajo a 90° y marca Z está abajo · servo a 90°. Esa confirmación registra la referencia; no mueve el eje.",
+              "Elige Paso Z y Velocidad Z. Pulsa Subir o Bajar y observa el movimiento real. El intervalo utilizado es 90°–180° nominales.",
+              "Detener Z interrumpe la orden vertical. Si moviste Z a mano o se perdió la referencia, vuelve a confirmarla en la posición indicada.",
+              "Con el brazo quieto y la NUCLEO conectada, prueba el imán con Activar y Desactivar. La bobina requiere la fuente independiente de 12 V.",
+              "Comprueba físicamente que una pieza se sujete y se libere; termina con el imán desactivado."
+            ],
+            "warnings": [
+              "El ángulo de Z es una consigna electrónica: no hay sensor de altura. El indicador del imán es una lectura de su señal, no una medición de fuerza ni de corriente."
+            ]
+          },
+          {
+            "title": "Ejemplo guiado: un paso pequeño de base",
+            "body": "Este ejercicio se realiza con el docente después de preparar la sesión y dejar libre el recorrido. Sirve para relacionar un botón con un cambio de ángulo.",
+            "steps": [
+              "Lee el ángulo de Base y comprueba que haya margen para un paso de 1° en el sentido elegido.",
+              "Elige Paso = 1°. Mantén la velocidad baja aprobada por el docente y la herramienta a una altura física libre de obstáculos.",
+              "Pulsa una sola vez + o − en Base. Espera a que finalice la orden.",
+              "Compara el ángulo antes y después. Si aparece un error o la lectura no es coherente, detén el ejercicio y revísalo; no pulses repetidamente para compensar.",
+              "Para practicar sin accionar el robot, arrastra un punto en Posición actual, observa el destino y descártalo con ×, sin pulsar Mover."
+            ],
+            "warnings": []
+          },
+          {
+            "title": "Terminar y cerrar",
+            "body": "Cerrar una ventana no equivale a apagar la Raspberry ni a liberar de forma comprobada el USB. Termina primero la sesión de control.",
+            "steps": [
+              "Espera a que el robot esté quieto y cualquier pieza quede apoyada.",
+              "Pulsa Desactivar en Electroimán y revisa la confirmación disponible.",
+              "Pulsa Desconectar y espera a que la pantalla muestre Sin conectar. Entonces puedes cerrar la ventana o conectar desde JaqueBot Ajedrez.",
+              "Si vas a guardar el equipo, sigue con el docente el apagado de las fuentes y el apagado normal de la Raspberry."
+            ],
+            "warnings": [
+              "Bloquear controles impide nuevas órdenes; no detiene al instante una orden de base/codo ya enviada. Ante una situación que requiera detener físicamente esos motores, utiliza el corte de 5 V previsto."
+            ]
+          }
+        ],
+        "firstSession": [
+          "Pulsa ↻ junto al selector de puerto. Elige el dispositivo NUCLEO que aparezca y pulsa Conectar ↗.",
+          "Espera el estado Conectado. Esto confirma comunicación, pero todavía puede faltar preparar los motores.",
+          "Si la placa ya fue calibrada y no se apagó ni reinició, pulsa Usar calibración actual. La aplicación lee su estado y acepta la sesión solo si la calibración sigue válida.",
+          "Si la placa se reinició, el docente debe usar Reinicié la placa. En el diálogo se comprueban recorrido despejado y Z físicamente abajo a 90° antes de iniciar el barrido.",
+          "Espera el resultado. Continúa únicamente cuando la app indique que la sesión está lista."
+        ],
+        "dailyRecipe": [
+          "Comprueba la altura física de la herramienta antes de mover horizontalmente. La app manual no aplica la subida automática de Z del panel de Ajedrez.",
+          "Elige Paso y Velocidad. Para aprender, usa pasos pequeños y la velocidad baja que indique el docente.",
+          "Pulsa + o − para un paso de Base o Codo. También puedes escribir un ángulo y pulsar su botón ↗.",
+          "Para un destino en el dibujo, elige Punta o Codo, arrastra y revisa la previsualización. Solo Mover ↗ envía el destino preparado.",
+          "Espera a que termine cada orden y revisa las lecturas antes de enviar la siguiente."
+        ],
+        "example": {
+          "title": "Ejemplo guiado: un paso pequeño de base",
+          "body": "Este ejercicio se realiza con el docente después de preparar la sesión y dejar libre el recorrido. Sirve para relacionar un botón con un cambio de ángulo.",
+          "steps": [
+            "Lee el ángulo de Base y comprueba que haya margen para un paso de 1° en el sentido elegido.",
+            "Elige Paso = 1°. Mantén la velocidad baja aprobada por el docente y la herramienta a una altura física libre de obstáculos.",
+            "Pulsa una sola vez + o − en Base. Espera a que finalice la orden.",
+            "Compara el ángulo antes y después. Si aparece un error o la lectura no es coherente, detén el ejercicio y revísalo; no pulses repetidamente para compensar.",
+            "Para practicar sin accionar el robot, arrastra un punto en Posición actual, observa el destino y descártalo con ×, sin pulsar Mover."
+          ],
+          "warnings": []
+        },
+        "closing": {
+          "title": "Terminar y cerrar",
+          "body": "Cerrar una ventana no equivale a apagar la Raspberry ni a liberar de forma comprobada el USB. Termina primero la sesión de control.",
+          "steps": [
+            "Espera a que el robot esté quieto y cualquier pieza quede apoyada.",
+            "Pulsa Desactivar en Electroimán y revisa la confirmación disponible.",
+            "Pulsa Desconectar y espera a que la pantalla muestre Sin conectar. Entonces puedes cerrar la ventana o conectar desde JaqueBot Ajedrez.",
+            "Si vas a guardar el equipo, sigue con el docente el apagado de las fuentes y el apagado normal de la Raspberry."
+          ],
+          "warnings": [
+            "Bloquear controles impide nuevas órdenes; no detiene al instante una orden de base/codo ya enviada. Ante una situación que requiera detener físicamente esos motores, utiliza el corte de 5 V previsto."
+          ]
+        },
+        "troubleshooting": [
+          {
+            "problem": "No abre la pantalla",
+            "solution": "Confirma que estás usando la Raspberry y su acceso JaqueBot. Si el navegador muestra conexión rechazada, pide al docente revisar el servicio; no reinstales ni cambies puertos por ensayo."
+          },
+          {
+            "problem": "No aparece el puerto",
+            "solution": "Revisa el cable USB ST-LINK y pulsa ↻. El nombre del dispositivo puede cambiar al reconectar."
+          },
+          {
+            "problem": "El puerto está ocupado",
+            "solution": "Desconecta desde JaqueBot Ajedrez y vuelve a conectar en manual. No abras las dos sesiones a la vez."
+          },
+          {
+            "problem": "Conectado, pero no se mueve",
+            "solution": "La comunicación USB no alimenta los servos. Revisa 5 V, estado de preparación y mensajes de bloqueo con el docente."
+          },
+          {
+            "problem": "Calibración motora incompleta",
+            "solution": "No la eludas con Usar calibración actual. Detén el ejercicio y revisa mecanismo, alimentación y lecturas del sensor; el proyecto tiene una inspección pendiente documentada."
+          },
+          {
+            "problem": "El imán está activo y no agarra",
+            "solution": "La señal no prueba fuerza. Con el robot quieto comprueba fuente de 12 V, contacto e inserto metálico; no alteres voltajes de control."
+          }
+        ],
+        "screenshot": {
+          "id": "manual-home",
+          "app": "manual",
+          "title": "Pantalla inicial real de JaqueBot manual",
+          "path": "assets/reference/jaquebot-manual-inicio-real-2026-10-09.png",
+          "date": "2026-10-09",
+          "width": 688,
+          "height": 2095,
+          "caption": "JaqueBot manual · pantalla principal real registrada el 9 de octubre de 2026. Los ángulos y estados visibles son los de esa sesión histórica.",
+          "alt": "Pantalla principal de JaqueBot manual con conexión, preparación, vista superior, controles de base y codo, elevación Z y electroimán.",
+          "historical": true,
+          "kind": "original_real_screenshot",
+          "notices": [
+            "El estado conectado de esta imagen no describe el estado del robot el 16 de octubre.",
+            "Se conserva la imagen original, sin cambiar lecturas ni botones."
+          ]
+        }
+      },
+      {
+        "id": "chess",
+        "title": "JaqueBot Ajedrez",
+        "applicationName": "JaqueBot Ajedrez",
+        "purpose": "Preparar el tablero, reconocer piezas con cámara, jugar contra Stockfish y verificar cada movimiento.",
+        "port": 8770,
+        "address": "http://127.0.0.1:8770",
+        "where": "En el navegador o acceso de escritorio de la propia Raspberry.",
+        "screenshotId": "chess-home",
+        "screenGuide": [
+          {
+            "number": 1,
+            "title": "Cabecera y herramientas",
+            "whatYouSee": "Mover robot, Diagnóstico y Calibración están arriba. El título Preparemos el tablero identifica la portada.",
+            "whatToDo": "Usa estas herramientas cuando debas preparar el sistema y vuelve a la portada para jugar.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.0,
+              "width": 0.94,
+              "height": 0.095
+            }
+          },
+          {
+            "number": 2,
+            "title": "Estado de componentes",
+            "whatYouSee": "La fila de Cámara, Tablero, STM32 y Stockfish resume si cada componente está disponible.",
+            "whatToDo": "Si hay un aviso, entra a Diagnóstico. No basta con que la cámara funcione para habilitar movimiento.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.098,
+              "width": 0.94,
+              "height": 0.063
+            }
+          },
+          {
+            "number": 3,
+            "title": "Preparar robot",
+            "whatYouSee": "La tarjeta muestra conectar, preparar motores, confirmar Z, verificar, estacionar y despejar cámara.",
+            "whatToDo": "Sigue el siguiente paso pendiente y confirma solo condiciones comprobadas en el equipo real.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.167,
+              "width": 0.94,
+              "height": 0.115
+            }
+          },
+          {
+            "number": 4,
+            "title": "Tu tablero digital",
+            "whatYouSee": "A la izquierda se representa la posición de las piezas y su identidad detectada; debajo aparecen letras y números de casilla.",
+            "whatToDo": "Compara esta vista con el tablero físico. La guía inicial es una ayuda distinta de las detecciones.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.288,
+              "width": 0.51,
+              "height": 0.363
+            }
+          },
+          {
+            "number": 5,
+            "title": "Cámara en vivo",
+            "whatYouSee": "A la derecha está la imagen real con opciones Etiquetas, Cuadrícula y Enfocar tablero.",
+            "whatToDo": "Comprueba que se vea el tablero y que las etiquetas estén despejadas. Aparta las manos al validar.",
+            "imageRegion": {
+              "x": 0.56,
+              "y": 0.288,
+              "width": 0.41,
+              "height": 0.363
+            }
+          },
+          {
+            "number": 6,
+            "title": "Acomoda tus piezas e inicio",
+            "whatYouSee": "El contador 32/32 y los botones ACOMODAR TABLERO e INICIAR PARTIDA guían el inicio.",
+            "whatToDo": "Corrige las identidades pendientes y revisa los requisitos antes de pulsar iniciar.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.658,
+              "width": 0.51,
+              "height": 0.192
+            }
+          },
+          {
+            "number": 7,
+            "title": "Reiniciar, pendientes y actividad",
+            "whatYouSee": "La parte inferior reúne reinicio de partida, piezas por acomodar y el registro de actividad.",
+            "whatToDo": "Lee la causa de un bloqueo o consulta qué ocurrió. Reiniciar no recoloca piezas ni arregla una calibración.",
+            "imageRegion": {
+              "x": 0.03,
+              "y": 0.658,
+              "width": 0.94,
+              "height": 0.32
+            }
+          }
+        ],
+        "screenGuideNote": "Las zonas se refieren a la pantalla principal real del 11 de octubre. Los estados y números que aparecen son históricos.",
+        "sections": [
+          {
+            "title": "Abrir JaqueBot Ajedrez",
+            "body": "Esta aplicación une la cámara, el tablero digital, las reglas del juego y los movimientos del robot.",
+            "steps": [
+              "En el escritorio de la Raspberry abre JaqueBot Ajedrez. En su navegador también puedes usar http://127.0.0.1:8770.",
+              "Comprueba que veas Preparemos el tablero, Tu tablero digital y Cámara en vivo en la pantalla principal.",
+              "Si necesitas conectar o revisar componentes, usa Diagnóstico. Mover robot y Calibración son herramientas de preparación; no sustituyen la portada de juego.",
+              "Abrir la app no conecta ni mueve automáticamente la STM32."
+            ],
+            "warnings": [
+              "La dirección 127.0.0.1 funciona en la Raspberry. Desde otro dispositivo necesitas el acceso configurado por el docente."
+            ]
+          },
+          {
+            "title": "Primera sesión: conectar y preparar",
+            "body": "La tarjeta Preparar robot ordena los pasos pendientes. Completa cada uno con el docente y no marques comprobaciones que no hayas realizado.",
+            "steps": [
+              "Desconecta la STM32 desde JaqueBot manual si está ocupada allí.",
+              "Abre Diagnóstico → STM32 / EduSCARA. Pulsa Detectar STM32, selecciona el puerto y pulsa Conectar.",
+              "Si la NUCLEO conserva una calibración motora válida, usa Usar calibración actual · sin mover. Si se reinició, usa la calibración motora supervisada con recorrido libre y Z físicamente abajo a 90°.",
+              "Comprueba la posición real de Z. En Mover robot puedes confirmar abajo a 90° o completamente arriba a 180°, según su posición física.",
+              "Revisa calibración del tablero, altura de toma, prueba de agarre/liberación y espacio de trabajo. Si faltan, sigue sus procedimientos antes de continuar.",
+              "Pulsa Estacionar robot. Espera a que termine; comprueba el tablero visible y confirma la cámara despejada."
+            ],
+            "warnings": [
+              "Estacionar sí mueve el robot: ordena imán apagado, Z arriba y base/codo a la posición configurada. No lo pulses con objetos o manos en el recorrido.",
+              "Una calibración motora incompleta requiere revisar su causa. Esta ampliación documental no certifica que el fallo previo se haya resuelto."
+            ]
+          },
+          {
+            "title": "Acomodar las piezas y empezar",
+            "body": "La cámara debe identificar cada pieza, no solamente ver que hay 32 objetos sobre el tablero.",
+            "steps": [
+              "Pulsa ACOMODAR TABLERO y coloca las piezas siguiendo sus identidades y la guía de casillas.",
+              "Comprueba las cuatro referencias ArUco del tablero y que las etiquetas superiores estén visibles, sin manos ni reflejos.",
+              "Revisa Acomoda tus piezas: ✓ indica correcta, ✕ incorrecta, → destino y ? ausente. Corrige hasta tener 32/32 identidades correctas.",
+              "Lee los requisitos pendientes junto al inicio. Cuando tablero y robot estén preparados se habilita INICIAR PARTIDA.",
+              "Pulsa INICIAR PARTIDA y espera la nueva comprobación de cámara."
+            ],
+            "warnings": [
+              "Ver guía de posición inicial es una ayuda gráfica; no convierte piezas ausentes en piezas detectadas.",
+              "32/32 no garantiza por sí solo la preparación del robot. Se requieren también los diagnósticos y las confirmaciones físicas."
+            ]
+          },
+          {
+            "title": "Tu turno, paso a paso",
+            "body": "La pantalla separa la jugada humana, el cálculo de Stockfish y la acción del robot. Respeta esa secuencia.",
+            "steps": [
+              "Espera a que la app indique tu turno.",
+              "Mueve físicamente tu pieza en el tablero. Si capturas una pieza rival, retírala del tablero y aparta las manos.",
+              "Pulsa TERMINÉ MI JUGADA. La cámara busca una posición estable y la app comprueba que corresponda a una jugada legal.",
+              "Si la jugada es aceptada, espera la respuesta de Stockfish y el movimiento del robot. No ajustes piezas durante esa acción.",
+              "El robot se retira y la cámara comprueba el resultado. Continúa cuando la app vuelva a darte el turno."
+            ],
+            "warnings": [
+              "Si aparece una diferencia, restaura o completa lo que indique la app antes de verificar. No repitas automáticamente una transferencia física."
+            ]
+          },
+          {
+            "title": "Ejemplo de una primera jugada: e2 a e4",
+            "body": "Es un ejemplo para practicar el flujo desde la posición inicial: tú juegas con blancas y JaqueBot responde con negras.",
+            "steps": [
+              "Con la partida iniciada y tu turno activo, localiza el peón blanco de e2.",
+              "Muévelo a e4 y aparta las manos para que se vea la etiqueta.",
+              "Pulsa TERMINÉ MI JUGADA y espera la validación.",
+              "Observa la jugada elegida por Stockfish. No se promete una respuesta fija: depende del cálculo del motor.",
+              "Espera el movimiento y la verificación final. Solo después prepara tu siguiente jugada."
+            ],
+            "warnings": []
+          },
+          {
+            "title": "Cuando el robot captura o hay una jugada especial",
+            "body": "El robot retira primero la pieza capturada. Algunas situaciones requieren que la persona intervenga.",
+            "steps": [
+              "El punto de entrega configurado para las capturas está fuera del tablero, en base −90° y codo 90°.",
+              "En la versión documentada, tras depositar la captura el robot continúa su jugada. Espera a que termine el movimiento, retira la pieza y pulsa Retiré la pieza · liberar entrega antes de otra captura.",
+              "En enroque el robot hace dos transferencias: rey y torre. En captura al paso retira el peón de su casilla correspondiente.",
+              "En promoción, sigue la elección y la intervención manual que pide la app. No existe un almacén automático de piezas de promoción."
+            ],
+            "warnings": [
+              "La cámara no confirma la retirada del punto de entrega. No lo marques libre mientras siga ocupado."
+            ]
+          },
+          {
+            "title": "Si algo falla durante una jugada",
+            "body": "La prioridad es saber dónde están realmente el brazo y las piezas. Los mensajes de recuperación evitan enviar dos veces una transferencia.",
+            "steps": [
+              "Espera a que el brazo esté quieto y lee el mensaje de error. Identifica cualquier pieza que siga sujeta.",
+              "Con supervisión, utiliza Leer y aceptar posición actual · sin mover para consultar el estado cuando el flujo lo permita.",
+              "Si quedó una transferencia a medias, sigue Recuperar sin repetir la transferencia: retira una pieza sostenida y completa manualmente la jugada indicada.",
+              "Recupera la referencia física Z, estaciona cuando sea seguro y verifica las piezas por cámara según las instrucciones de pantalla.",
+              "Si se reinició la NUCLEO o la calibración motora falló, no fuerces la continuación: vuelve al proceso de preparación indicado por el diagnóstico."
+            ],
+            "warnings": []
+          },
+          {
+            "title": "Terminar la partida y cerrar",
+            "body": "La finalización normal retira el brazo para observar el tablero. Cerrar el navegador por sí solo no equivale a desconectar el servicio que sigue ejecutándose en la Raspberry.",
+            "steps": [
+              "Para terminar una partida activa usa la opción correspondiente, por ejemplo Rendirse, y espera el estacionamiento y la vista final.",
+              "Si vas a iniciar otra partida, usa NUEVA PARTIDA o Reiniciar partida. Confirma que recolocarás físicamente las 32 piezas y acomódalas tú.",
+              "Para salir o pasar al control manual, espera a que no haya operación ni partida activa y entra en Diagnóstico → Desconectar STM32.",
+              "Comprueba que el USB quedó liberado y cierra la ventana. Si guardarás el equipo, completa con el docente el apagado de las fuentes y la Raspberry."
+            ],
+            "warnings": [
+              "Reiniciar partida descarta la partida lógica; no coloca físicamente las piezas. Las calibraciones y la altura Z guardada se conservan."
+            ]
+          }
+        ],
+        "firstSession": [
+          "Desconecta la STM32 desde JaqueBot manual si está ocupada allí.",
+          "Abre Diagnóstico → STM32 / EduSCARA. Pulsa Detectar STM32, selecciona el puerto y pulsa Conectar.",
+          "Si la NUCLEO conserva una calibración motora válida, usa Usar calibración actual · sin mover. Si se reinició, usa la calibración motora supervisada con recorrido libre y Z físicamente abajo a 90°.",
+          "Comprueba la posición real de Z. En Mover robot puedes confirmar abajo a 90° o completamente arriba a 180°, según su posición física.",
+          "Revisa calibración del tablero, altura de toma, prueba de agarre/liberación y espacio de trabajo. Si faltan, sigue sus procedimientos antes de continuar.",
+          "Pulsa Estacionar robot. Espera a que termine; comprueba el tablero visible y confirma la cámara despejada."
+        ],
+        "dailyRecipe": [
+          "Espera a que la app indique tu turno.",
+          "Mueve físicamente tu pieza en el tablero. Si capturas una pieza rival, retírala del tablero y aparta las manos.",
+          "Pulsa TERMINÉ MI JUGADA. La cámara busca una posición estable y la app comprueba que corresponda a una jugada legal.",
+          "Si la jugada es aceptada, espera la respuesta de Stockfish y el movimiento del robot. No ajustes piezas durante esa acción.",
+          "El robot se retira y la cámara comprueba el resultado. Continúa cuando la app vuelva a darte el turno."
+        ],
+        "example": {
+          "title": "Ejemplo de una primera jugada: e2 a e4",
+          "body": "Es un ejemplo para practicar el flujo desde la posición inicial: tú juegas con blancas y JaqueBot responde con negras.",
+          "steps": [
+            "Con la partida iniciada y tu turno activo, localiza el peón blanco de e2.",
+            "Muévelo a e4 y aparta las manos para que se vea la etiqueta.",
+            "Pulsa TERMINÉ MI JUGADA y espera la validación.",
+            "Observa la jugada elegida por Stockfish. No se promete una respuesta fija: depende del cálculo del motor.",
+            "Espera el movimiento y la verificación final. Solo después prepara tu siguiente jugada."
+          ],
+          "warnings": []
+        },
+        "closing": {
+          "title": "Terminar la partida y cerrar",
+          "body": "La finalización normal retira el brazo para observar el tablero. Cerrar el navegador por sí solo no equivale a desconectar el servicio que sigue ejecutándose en la Raspberry.",
+          "steps": [
+            "Para terminar una partida activa usa la opción correspondiente, por ejemplo Rendirse, y espera el estacionamiento y la vista final.",
+            "Si vas a iniciar otra partida, usa NUEVA PARTIDA o Reiniciar partida. Confirma que recolocarás físicamente las 32 piezas y acomódalas tú.",
+            "Para salir o pasar al control manual, espera a que no haya operación ni partida activa y entra en Diagnóstico → Desconectar STM32.",
+            "Comprueba que el USB quedó liberado y cierra la ventana. Si guardarás el equipo, completa con el docente el apagado de las fuentes y la Raspberry."
+          ],
+          "warnings": [
+            "Reiniciar partida descarta la partida lógica; no coloca físicamente las piezas. Las calibraciones y la altura Z guardada se conservan."
+          ]
+        },
+        "troubleshooting": [
+          {
+            "problem": "Hay 32 piezas, pero el contador no llega a 32/32",
+            "solution": "Revisa identidad, casilla y visibilidad de cada etiqueta. Deben ser los marcadores actuales DICT_4X4_1000, no los antiguos del CAD."
+          },
+          {
+            "problem": "El inicio sigue deshabilitado",
+            "solution": "Lee Antes de iniciar y Preparar robot. Puede faltar STM32, calibración motora, referencia Z, altura de toma, estacionamiento o confirmación de cámara."
+          },
+          {
+            "problem": "La cámara ve una casilla distinta",
+            "solution": "Revisa orientación, cuatro referencias y calibración. Si moviste cámara o tablero, hace falta comprobar la geometría; no corrijas con un desplazamiento supuesto."
+          },
+          {
+            "problem": "Una captura está bloqueada",
+            "solution": "Espera a que el brazo termine. Retira físicamente la pieza del punto de entrega y confirma su liberación."
+          },
+          {
+            "problem": "La jugada quedó incompleta",
+            "solution": "Inspecciona la posición real y sigue Recuperar sin repetir la transferencia. No vuelvas a enviar el movimiento completo sin comprobar qué parte se ejecutó."
+          },
+          {
+            "problem": "No permite Desconectar STM32",
+            "solution": "Espera a que no haya operación ni partida activa. Finaliza el flujo que indique la app antes de cambiar al control manual."
+          }
+        ],
+        "screenshot": {
+          "id": "chess-home",
+          "app": "chess",
+          "title": "Pantalla inicial real de JaqueBot Ajedrez",
+          "path": "assets/reference/jaquebot-ajedrez-inicio-real-2026-10-11.jpg",
+          "date": "2026-10-11",
+          "width": 1102,
+          "height": 1925,
+          "caption": "JaqueBot Ajedrez · pantalla principal real registrada el 11 de octubre de 2026. Muestra preparación, tablero digital, cámara y botones de inicio.",
+          "alt": "Portada Preparemos el tablero de JaqueBot Ajedrez: preparación del robot, tablero digital de 32 piezas, cámara real y botones Acomodar tablero e Iniciar partida.",
+          "historical": true,
+          "kind": "original_real_screenshot",
+          "notices": [
+            "El mensaje Tablero listo pertenece a esa sesión; no certifica el estado actual ni una calibración resuelta.",
+            "Los 36 marcadores visibles son 32 piezas y 4 referencias principales. La lámina vigente contiene 40 porque incluye otras 4 referencias reservadas."
+          ]
+        }
+      }
+    ],
+    "programming": {
+      "title": "De EduSCARA a dos aplicaciones: cómo lo programamos con ChatGPT Codex",
+      "intro": "El equipo cuenta que pidió a ChatGPT Codex ayuda para implementar el código original de EduSCARA y adaptarlo a este proyecto. Primero necesitábamos controlar el brazo de forma comprensible; después, integrar una cámara y una partida de ajedrez. Los archivos del proyecto permiten seguir esa evolución.",
+      "userAccount": "Pedimos a Codex implementar el código de EduSCARA y adaptarlo a nuestras necesidades: una aplicación para controlar el robot y otra para jugar ajedrez con visión.",
+      "userAccountLabel": "Relato del equipo, expresado en lenguaje sencillo. No se presenta como una cita literal recuperada del historial.",
+      "chapters": [
+        {
+          "title": "1. Empezamos por un proyecto que ya existía",
+          "body": "EduSCARA aportó el diseño del brazo, el firmware de la STM32 y una API de Python. Una API es un conjunto de instrucciones que permite a otro programa comunicarse con el robot. No partimos de un robot inventado desde cero.",
+          "steps": [
+            "Se conservaron los archivos publicados en Manipulator, Motion Controller y Python API.",
+            "El registro del proyecto documenta recuperación de los archivos oficiales y comprobaciones de integridad.",
+            "La puesta en marcha necesitó configurar el ejemplar real: cableado, alimentación y lecturas de los potenciómetros."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "2. Pedimos ayuda para poner esa base a funcionar",
+          "body": "El trabajo con Codex combinó instrucciones del docente, revisión del código, compilación y pruebas. Cuando el programa necesitaba saber dónde estaba una articulación, la referencia física tuvo que aportarla una persona en el robot.",
+          "steps": [
+            "Codex ayudó a interpretar la API y el firmware, localizar problemas y preparar cambios comprobables.",
+            "El docente y los estudiantes aportaron las posiciones, medidas y observaciones del montaje.",
+            "El README conserva pruebas del demo original y también problemas posteriores. Una prueba que pasó en una fecha no garantiza que todo cambio futuro quede validado."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "3. Convertimos instrucciones de programación en botones",
+          "body": "El siguiente paso fue JaqueBot manual. En lugar de escribir una orden de Python para cada movimiento, el usuario puede elegir un puerto, preparar motores, ajustar ángulos y pulsar Mover. La pantalla web está hecha con HTML, CSS y JavaScript; el controlador que recibe las acciones está escrito en Python.",
+          "steps": [
+            "Control Visual/control.py importa la API del robot desde Python API.",
+            "Control Visual/server.py entrega la interfaz y pasa las acciones al controlador.",
+            "La separación permite que el estudiante vea botones claros sin tener que editar el firmware para cada ejercicio."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "4. Añadimos la aplicación de ajedrez sobre el mismo control",
+          "body": "JaqueBot Ajedrez no necesita un segundo programa independiente para hablar con los servos. Su adaptador carga el mismo controlador de la aplicación manual. Así reutiliza la comunicación USB y las comprobaciones de movimiento.",
+          "steps": [
+            "jaquebot/robot/stm32.py carga Control Visual/control.py mediante un adaptador.",
+            "Solo un proceso puede poseer el USB de la NUCLEO. Por eso hay que desconectar una app antes de conectar la otra.",
+            "Las dos interfaces tienen objetivos distintos, pero comparten el control del mismo robot."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "5. Enseñamos al programa a entender el tablero",
+          "body": "La cámara entrega una imagen. OpenCV reconoce las etiquetas ArUco y las relaciona con casillas. python-chess comprueba las reglas; Stockfish elige la respuesta. La aplicación reúne esos resultados y decide cuándo puede pedir una transferencia al brazo.",
+          "steps": [
+            "Cada pieza tiene una identidad, por eso la preparación exige 32/32 piezas correctas.",
+            "La app espera la confirmación TERMINÉ MI JUGADA antes de aceptar el turno humano.",
+            "Después del movimiento del robot, una nueva captura comprueba el resultado antes de actualizar la partida."
+          ],
+          "warnings": []
+        },
+        {
+          "title": "6. Probamos y mejoramos por partes",
+          "body": "Se añadieron pruebas de software para visión, reglas, controles y recuperación de errores. También se registraron ensayos físicos y se conservaron respaldos. Esto permitió distinguir un error de la pantalla, un problema de comunicación y una diferencia del montaje real.",
+          "steps": [
+            "Los archivos de pruebas comprueban comportamientos concretos; la simulación permite ensayar el flujo sin motores.",
+            "Los ajustes de Z, el electroimán, las capturas y la calibración de casillas evolucionaron con observaciones del equipo.",
+            "La inspección pendiente de calibración motora y la comprobación física de h1 siguen siendo condiciones que el manual debe comunicar."
+          ],
+          "warnings": []
+        }
+      ],
+      "roles": [
+        {
+          "title": "Docente y estudiantes",
+          "body": "Definieron qué debía hacer el proyecto, montaron y observaron el equipo, aportaron medidas y confirmaron condiciones físicas."
+        },
+        {
+          "title": "ChatGPT Codex",
+          "body": "Ayudó a comprender código, escribir y revisar cambios, preparar pruebas, interfaces y documentación. El código por sí solo no puede confirmar una medida o un contacto mecánico."
+        },
+        {
+          "title": "Código original EduSCARA",
+          "body": "Aporta la plataforma base, la comunicación y el control inicial sobre los que se desarrollaron las adaptaciones."
+        },
+        {
+          "title": "Programas durante una partida",
+          "body": "OpenCV identifica las etiquetas, python-chess valida el ajedrez, Stockfish calcula y el controlador STM32 ejecuta las órdenes. ChatGPT no decide las jugadas de esta implementación."
+        }
+      ],
+      "architecture": [
+        {
+          "from": "Persona",
+          "to": "Aplicación web",
+          "label": "Pulsa un botón o confirma un turno"
+        },
+        {
+          "from": "Aplicación web",
+          "to": "Python en Raspberry",
+          "label": "Valida la acción y coordina la secuencia"
+        },
+        {
+          "from": "Cámara",
+          "to": "OpenCV / ArUco",
+          "label": "Entrega la imagen e identifica piezas"
+        },
+        {
+          "from": "Estado de piezas",
+          "to": "python-chess + Stockfish",
+          "label": "Comprueba reglas y calcula respuesta"
+        },
+        {
+          "from": "Controlador compartido",
+          "to": "STM32 por USB",
+          "label": "Envía la orden al firmware"
+        },
+        {
+          "from": "STM32",
+          "to": "Servos y señal del electroimán",
+          "label": "Ejecuta control y devuelve lecturas"
+        },
+        {
+          "from": "Cámara",
+          "to": "Aplicación de ajedrez",
+          "label": "Comprueba el tablero después del movimiento"
+        }
+      ],
+      "evidenceNote": "La descripción de cómo el equipo pidió ayuda procede de su relato. La reutilización de la API, la separación de las interfaces y los módulos de visión/ajedrez se verificaron directamente en archivos del proyecto. No se inventan mensajes literales del historial ni se atribuyen al código medidas físicas no realizadas.",
+      "attribution": "JaqueBot es la adaptación escolar. La plataforma EduSCARA original se atribuye a sus autores y a los archivos publicados en Mendeley Data; la adaptación no debe presentarse como un diseño avalado por ellos."
+    },
+    "hardwareIllustrations": [
+      {
+        "title": "Raspberry Pi 5 · el computador",
+        "path": "assets/illustrations/raspberry-pi-5-ink.png",
+        "alt": "Raspberry Pi 5 en perspectiva, ilustrada con tinta negra, líneas finas y tramas sobre papel claro.",
+        "body": "Aquí funcionan las dos aplicaciones. Recibe las imágenes de la cámara, reconoce el tablero, ejecuta Stockfish y envía órdenes a la placa STM32 por USB. Su fuente es independiente de la alimentación de los motores.",
+        "caption": "Ilustración a partir de fotografía oficial de Raspberry Pi Ltd. Vista de referencia; no acredita la memoria RAM instalada. Los detalles artísticos no son un mapa de conexiones.",
+        "sourceUrl": "https://www.raspberrypi.com/news/introducing-raspberry-pi-5/",
+        "credit": "Referencia de producto: Raspberry Pi Ltd. Adaptación visual en tinta para JaqueBot, 16 de octubre de 2026."
+      },
+      {
+        "title": "Raspberry Pi AI Camera · los ojos",
+        "path": "assets/illustrations/raspberry-pi-ai-camera-ink.png",
+        "alt": "Módulo Raspberry Pi AI Camera con lente y cable plano, en estilo de dibujo arquitectónico monocromático.",
+        "body": "Se sujeta sobre el tablero para observar las etiquetas ArUco de las piezas y las referencias. En JaqueBot el reconocimiento lo realiza OpenCV en la Raspberry; el nombre AI Camera no implica que esta aplicación use la inteligencia del sensor IMX500.",
+        "caption": "Ilustración a partir de fotografía oficial de Raspberry Pi Ltd. La placa parcial del fondo pertenece a esa fotografía; no representa el cableado del robot. Consulta las conexiones en su sección.",
+        "sourceUrl": "https://www.raspberrypi.com/products/ai-camera/",
+        "credit": "Referencia de producto: Raspberry Pi Ltd. Adaptación visual en tinta para JaqueBot, 16 de octubre de 2026."
+      }
+    ],
+    "verification": {
+      "attemptDate": "2026-10-16",
+      "liveVerified": false,
+      "message": "La Raspberry no estuvo accesible mediante la conexión conocida durante esta revisión. No se obtuvo un nuevo estado del robot.",
+      "lastAvailableLiveCheck": "2026-10-12",
+      "lastAvailableLiveSummary": "En la última consulta conservada estaban activos ambos servicios; Ajedrez detectaba 32/32 piezas y las dos apps estaban desconectadas de la STM32. Ese dato pertenece al 12 de octubre, no al día de actualización del manual.",
+      "screenshotsPolicy": "Se usan capturas reales históricas de las pantallas principales, fechadas y sin alterar su contenido. No se utiliza una pestaña de diagnóstico como imagen principal.",
+      "pending": [
+        "No se da por corregida la calibración motora incompleta registrada.",
+        "La h1 calculada requiere comprobación física independiente.",
+        "Una actualización del manual no constituye una puesta en marcha física del equipo."
+      ]
+    },
+    "sharedRules": [
+      "Antes de usar una aplicación, libera el USB desde la otra. Una única sesión controla la STM32.",
+      "No marques una confirmación física sin mirar el equipo real. La app no mide altura Z ni fuerza del electroimán.",
+      "Conectar no calibra automáticamente. Reiniciar la NUCLEO borra la calibración motora en RAM.",
+      "El botón de parada o bloqueo no sustituye el corte físico de 5 V para base y codo.",
+      "La fotografía, la guía digital y una simulación no acreditan que el robot esté listo ahora."
+    ]
+  }
 }

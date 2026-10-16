@@ -1,0 +1,5 @@
+Alex Clark, Uriel Martinez-Hernandez y Tareq Assaf, «EduSCARA: An open-source RRPR educational SCARA platform», HardwareX 26 (2026), e00761. DOI: 10.1016/j.ohx.2026.e00761. © 2026 The Authors. CC BY 4.0.
+Licencia: https://creativecommons.org/licenses/by/4.0/
+Fuente: sección 5.1, imágenes fx4–fx16, pasos 1–26.
+Imágenes reproducidas completas y sin modificaciones. Explicación y leyendas españolas añadidas por JaqueBot; no son texto de los autores originales.
+No existe aval de los autores de EduSCARA sobre la adaptación JaqueBot.
